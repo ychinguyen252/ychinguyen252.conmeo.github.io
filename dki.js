@@ -1,11 +1,7 @@
+// chuyển tab
 function switchTab(tab) {
-    document.querySelectorAll(".form").forEach(f => {
-        f.classList.remove("active");
-    });
-
-    document.querySelectorAll(".tab").forEach(t => {
-        t.classList.remove("active");
-    });
+    document.querySelectorAll(".form").forEach(f => f.classList.remove("active"));
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
 
     document.getElementById(tab).classList.add("active");
 
@@ -16,15 +12,19 @@ function switchTab(tab) {
     }
 }
 
-// Đăng ký
+// REGISTER
 document.getElementById("register").addEventListener("submit", function(e) {
     e.preventDefault();
 
-    let inputs = this.querySelectorAll("input");
-    let name = inputs[0].value;
-    let email = inputs[1].value;
-    let pass = inputs[2].value;
-    let confirm = inputs[3].value;
+    let name = this.querySelector('[name="name"]').value;
+    let email = this.querySelector('[name="email"]').value;
+    let pass = this.querySelector('[name="pass"]').value;
+    let confirm = this.querySelector('[name="confirm"]').value;
+
+    if (!name || !email || !pass || !confirm) {
+        alert("Nhập đầy đủ!");
+        return;
+    }
 
     if (pass !== confirm) {
         alert("Mật khẩu không khớp!");
@@ -32,18 +32,16 @@ document.getElementById("register").addEventListener("submit", function(e) {
     }
 
     localStorage.setItem("user", JSON.stringify({ name, email, pass }));
-
     alert("Đăng ký thành công!");
     switchTab("login");
 });
 
-// Đăng nhập
+// LOGIN
 document.getElementById("login").addEventListener("submit", function(e) {
     e.preventDefault();
 
-    let inputs = this.querySelectorAll("input");
-    let email = inputs[0].value;
-    let pass = inputs[1].value;
+    let email = this.querySelector('[name="email"]').value;
+    let pass = this.querySelector('[name="pass"]').value;
 
     let user = JSON.parse(localStorage.getItem("user"));
 
@@ -53,7 +51,7 @@ document.getElementById("login").addEventListener("submit", function(e) {
     }
 
     if (email === user.email && pass === user.pass) {
-        document.querySelector(".auth-box").style.display = "none";
+        document.getElementById("authBox").style.display = "none";
         document.getElementById("home").style.display = "block";
         document.getElementById("username").innerText = user.name;
     } else {
@@ -61,8 +59,8 @@ document.getElementById("login").addEventListener("submit", function(e) {
     }
 });
 
-// Logout
+// LOGOUT
 function logout() {
-    document.querySelector(".auth-box").style.display = "block";
     document.getElementById("home").style.display = "none";
+    document.getElementById("authBox").style.display = "block";
 }
