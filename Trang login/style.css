@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f4ecd8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Form box */
+.form-box {
+    background: #fff8e7;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    border: 1px solid #d8c3a5;
+}
+
+/* Title */
+h2 {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 20px;
+    color: #6b4f4f;
+}
+
+/* Input group */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #5a4a42;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #c8b6a6;
+    border-radius: 6px;
+    background: #fffdf7;
+}
+
+/* Button */
+.btn {
+    width: 100%;
+    padding: 10px;
+    background: #a47148;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #8b5e3c;
+}
+
+/* Divider */
+.divider {
+    text-align: center;
+    margin: 15px 0;
+    color: #7a6a5a;
+}
+
+/* Google button */
+.google-btn {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #c8b6a6;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.google-btn img {
+    margin-right: 5px;
+}
+
+/* Link */
+p {
+    text-align: center;
+    margin-top: 10px;
+}
+
+a {
+    color: #a47148;
+    text-decoration: none;
+}
