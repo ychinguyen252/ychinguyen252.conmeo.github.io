@@ -5,8 +5,40 @@ function validateEmail(email) {
     return regex.test(email);
 }
 
-// REGISTER (ĐĂNG KÝ)
-// =====================
+// =======================================================
+// TÍNH NĂNG: ĐO ĐỘ MẠNH MẬT KHẨU (REAL-TIME KHI GÕ PHÍM)
+// =======================================================
+// Đặt phần khai báo này vào trong một hàm hoặc kiểm tra kỹ
+const passwordInput = document.getElementById("password");
+const strengthText = document.getElementById("strength-text");
+
+if (passwordInput && strengthText) {
+    passwordInput.addEventListener("input", function() {
+        const val = this.value; // Dùng this.value để lấy giá trị trực tiếp
+        
+        if (val.length === 0) {
+            strengthText.textContent = "";
+            return;
+        }
+
+        const hasLetters = /[a-zA-Z]/.test(val);
+        const hasNumbers = /[0-9]/.test(val);
+
+        if (val.length >= 8 && hasLetters && hasNumbers) {
+            strengthText.textContent = "Độ mạnh: Mạnh";
+            strengthText.style.color = "green";
+        } else if (hasLetters && hasNumbers) {
+            strengthText.textContent = "Độ mạnh: Trung bình";
+            strengthText.style.color = "orange";
+        } else {
+            strengthText.textContent = "Độ mạnh: Yếu";
+            strengthText.style.color = "red";
+        }
+    });
+}
+// =======================================================
+// TÍNH NĂNG: ĐĂNG KÝ (SUBMIT FORM)
+// =======================================================
 const registerForm = document.querySelector("h2")?.innerText.includes("Đăng ký")
     ? document.querySelector("form")
     : null;
@@ -18,7 +50,10 @@ if (registerForm) {
         const fullName = registerForm.querySelector('input[type="text"]').value.trim();
         const phone = registerForm.querySelector('input[type="tel"]').value.trim();
         const email = registerForm.querySelector('input[type="email"]').value.trim();
-        const password = registerForm.querySelector('input[type="password"]').value.trim();
+        
+        // Lấy dữ liệu từ ô password (ưu tiên lấy theo ID nếu có)
+        const passwordField = registerForm.querySelector('#password') || registerForm.querySelector('input[type="password"]');
+        const password = passwordField.value.trim();
 
         if (!fullName || !phone || !email || !password) {
             alert("Vui lòng nhập đầy đủ thông tin!");
@@ -51,8 +86,9 @@ if (registerForm) {
     });
 }
 
-// LOGIN (ĐĂNG NHẬP & CHUYỂN TRANG)
-// =====================
+// =======================================================
+// TÍNH NĂNG: ĐĂNG NHẬP (VÀ CHUYỂN TRANG)
+// =======================================================
 const loginFormElement = document.getElementById("loginForm");
 
 if (loginFormElement) {
@@ -60,7 +96,10 @@ if (loginFormElement) {
         e.preventDefault();
 
         const email = loginFormElement.querySelector('input[type="email"]').value.trim();
-        const password = loginFormElement.querySelector('input[type="password"]').value.trim();
+        
+        // Lấy dữ liệu từ ô password 
+        const passwordField = loginFormElement.querySelector('#password') || loginFormElement.querySelector('input[type="password"]');
+        const password = passwordField.value.trim();
 
         const savedUser = JSON.parse(localStorage.getItem("user"));
 
@@ -74,7 +113,7 @@ if (loginFormElement) {
             document.getElementById("loginBox").style.display = "none";
             document.getElementById("successBox").style.display = "block";
 
-            // 2. Chờ 2 giây rồi tự động chuyển sang file index.html bằng lệnh location.href
+            // 2. Chờ 2 giây rồi tự động chuyển sang file index.html
             setTimeout(function() {
                 window.location.href = "index.html";
             }, 2000);
@@ -90,6 +129,27 @@ if (loginFormElement) {
             document.getElementById("successBox").style.display = "none";
             document.getElementById("loginBox").style.display = "block";
             loginFormElement.reset(); // Xóa trắng form cũ
+            
+            // Nếu có thẻ hiển thị độ mạnh thì xóa chữ đi
+            if (strengthText) strengthText.textContent = ""; 
         });
     }
+}
+// =======================================================
+// TÍNH NĂNG: ẨN / HIỆN MẬT KHẨU
+// =======================================================
+const togglePasswordBtn = document.getElementById("togglePassword");
+// Biến passwordInput đã được khai báo ở phần Đo độ mạnh mật khẩu rồi nên ta dùng lại luôn
+
+if (togglePasswordBtn && passwordInput) {
+    togglePasswordBtn.addEventListener("click", function() {
+        // Kiểm tra xem ô input đang là dạng 'password' hay 'text'
+        const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+        
+        // Đổi thuộc tính type của ô input
+        passwordInput.setAttribute("type", type);
+        
+        // Đổi hình con mắt cho sinh động (nhắm/mở)
+        this.textContent = type === "password" ? "👁️" : "🙈";
+    });
 }

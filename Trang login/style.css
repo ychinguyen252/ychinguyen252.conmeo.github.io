@@ -117,3 +117,22 @@ a {
 #logoutBtn {
     background: #6b4f4f;
 }
+/* CSS cho tính năng Ẩn/Hiện mật khẩu */
+.input-group {
+    position: relative; /* Rất quan trọng để giữ con mắt nằm bên trong nhóm này */
+}
+
+.eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 35px; /* Căn chỉnh lại cho vừa với ô input */
+    cursor: pointer;
+    z-index: 10; /* Đảm bảo con mắt nằm trên cùng */
+}
+
+#strength-text {
+    display: block;
+    font-size: 12px;
+    margin-top: 5px;
+    font-weight: bold;
+}
