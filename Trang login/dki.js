@@ -1,4 +1,11 @@
-// REGISTER
+// VALIDATE EMAIL
+// =====================
+function validateEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
+
+// REGISTER (ĐĂNG KÝ)
 // =====================
 const registerForm = document.querySelector("h2")?.innerText.includes("Đăng ký")
     ? document.querySelector("form")
@@ -23,8 +30,10 @@ if (registerForm) {
             return;
         }
 
-        if (password.length < 6) {
-            alert("Mật khẩu phải >= 6 ký tự!");
+        // Kiểm tra mật khẩu (>= 6 ký tự và ít nhất 1 chữ in hoa)
+        const hasUpperCase = /[A-Z]/.test(password);
+        if (password.length < 6 || !hasUpperCase) {
+            alert("Mật khẩu phải lớn hơn 6 ký tự và có ít nhất 1 chữ in hoa!");
             return;
         }
 
@@ -41,18 +50,17 @@ if (registerForm) {
         window.location.href = "login.html";
     });
 }
-// LOGIN
-// =====================
-const loginForm = document.querySelector("h2")?.innerText.includes("Đăng nhập")
-    ? document.querySelector("form")
-    : null;
 
-if (loginForm) {
-    loginForm.addEventListener("submit", function (e) {
+// LOGIN (ĐĂNG NHẬP & CHUYỂN TRANG)
+// =====================
+const loginFormElement = document.getElementById("loginForm");
+
+if (loginFormElement) {
+    loginFormElement.addEventListener("submit", function (e) {
         e.preventDefault();
 
-        const email = loginForm.querySelector('input[type="email"]').value.trim();
-        const password = loginForm.querySelector('input[type="password"]').value.trim();
+        const email = loginFormElement.querySelector('input[type="email"]').value.trim();
+        const password = loginFormElement.querySelector('input[type="password"]').value.trim();
 
         const savedUser = JSON.parse(localStorage.getItem("user"));
 
@@ -62,15 +70,26 @@ if (loginForm) {
         }
 
         if (email === savedUser.email && password === savedUser.password) {
-            alert("Đăng nhập thành công!");
+            // 1. Ẩn form đăng nhập, Hiện khối thành công
+            document.getElementById("loginBox").style.display = "none";
+            document.getElementById("successBox").style.display = "block";
+
+            // 2. Chờ 2 giây rồi tự động chuyển sang file index.html bằng lệnh location.href
+            setTimeout(function() {
+                window.location.href = "index.html";
+            }, 2000);
         } else {
             alert("Sai email hoặc mật khẩu!");
         }
     });
-}
-// VALIDATE EMAIL
-// =====================
-function validateEmail(email) {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
+
+    // Xử lý nút Đăng xuất (hiện ra ở màn hình thành công)
+    const logoutBtn = document.getElementById("logoutBtn");
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", function() {
+            document.getElementById("successBox").style.display = "none";
+            document.getElementById("loginBox").style.display = "block";
+            loginFormElement.reset(); // Xóa trắng form cũ
+        });
+    }
 }

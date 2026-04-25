@@ -105,3 +105,15 @@ a {
     color: #a47148;
     text-decoration: none;
 }
+.form-box#successBox {
+    display: none;
+    text-align: center;
+}
+.chuyentrang {
+    color: #5a4a42;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+#logoutBtn {
+    background: #6b4f4f;
+}

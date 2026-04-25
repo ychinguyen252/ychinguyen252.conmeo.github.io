@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    /* Nền Galaxy Sáng: Gradient từ xanh lơ nhạt sang xanh nhạt/tím nhạt */
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+    background-attachment: fixed; /* Giữ nguyên nền khi cuộn trang */
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Thanh Header bám sát phong cách kính mờ */
+header {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+header h1 {
+    font-family: 'Playfair Display', serif;
+    color: #4a00e0;
+    font-size: 26px;
+    letter-spacing: 1px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #4a00e0;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #8e2de2;
+}
+
+.logout-link {
+    color: #d32f2f; /* Màu đỏ đô nhẹ cho nút đăng xuất */
+}
+
+/* Banner chính */
+.banner {
+    text-align: center;
+    padding: 80px 20px;
+    color: #4a00e0;
+}
+
+.banner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+.banner p {
+    font-size: 18px;
+    color: #555;
+}
+
+/* Cột nội dung */
+.content {
+    flex-grow: 1; /* Tự động đẩy footer xuống đáy trang */
+    padding: 20px 40px 60px;
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.content h2 {
+    text-align: center;
+    color: #4a00e0;
+    margin-bottom: 40px;
+    font-family: 'Playfair Display', serif;
+}
+
+.card-container {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Thẻ sự kiện Glassmorphism */
+.card {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(12px);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    width: 300px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(31, 38, 135, 0.2);
+}
+
+.card h3 {
+    color: #8e2de2;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.card p {
+    color: #555;
+    font-weight: 600;
+}
+
+/* Chân trang */
+footer {
+    background: rgba(255, 255, 255, 0.4);
+    text-align: center;
+    padding: 20px;
+    color: #4a00e0;
+    font-weight: 600;
+}

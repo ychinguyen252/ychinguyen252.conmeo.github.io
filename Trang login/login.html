@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Đăng nhập</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="container">
-    <div class="form-box">
+    <div class="form-box" id="loginBox">
         <h2>Đăng nhập</h2>
 
-        <form>
+        <form id="loginForm">
             <div class="input-group">
                 <label>Email</label>
                 <input type="email" required>
@@ -34,7 +34,14 @@
             <p>Chưa có tài khoản? <a href="register.html">Đăng ký</a></p>
         </form>
     </div>
+
+    <div class="form-box" id="successBox">
+        <h2>Thành công!</h2>
+        <p class="chuyentrang">🎉 Chúc mừng bạn đăng nhập thành công!</p>
+        <button type="button" class="btn" id="logoutBtn">Đăng xuất</button>
+    </div>
 </div>
+
 <script src="dki.js"></script>
 </body>
 </html>
