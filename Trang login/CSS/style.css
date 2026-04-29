@@ -8,7 +8,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: #f4ecd8;
+    background: linear-gradient(135deg,#BAE6FD,#F5D0FE,#ffffff);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,11 +23,11 @@ body {
 
 /* Form box */
 .form-box {
-    background: #fff8e7;
+    background:#ffddfe;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    border: 1px solid #d8c3a5;
+    border: 1px solid #febafc;
 }
 
 /* Title */
@@ -35,7 +35,7 @@ h2 {
     text-align: center;
     font-family: 'Playfair Display', serif;
     margin-bottom: 20px;
-    color: #6b4f4f;
+    color: #20074b;
 }
 
 /* Input group */
@@ -47,22 +47,22 @@ h2 {
     display: block;
     font-size: 14px;
     margin-bottom: 5px;
-    color: #5a4a42;
+    color: #430845;
 }
 
 .input-group input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #c8b6a6;
+    border: 1px solid #d49ae0;
     border-radius: 6px;
-    background: #fffdf7;
+    background: #f3ebf3;
 }
 
 /* Button */
 .btn {
     width: 100%;
     padding: 10px;
-    background: #a47148;
+    background: #ba8deb;
     color: white;
     border: none;
     border-radius: 6px;
@@ -71,21 +71,21 @@ h2 {
 }
 
 .btn:hover {
-    background: #8b5e3c;
+    background: #d2aaf9;
 }
 
 /* Divider */
 .divider {
     text-align: center;
     margin: 15px 0;
-    color: #7a6a5a;
+    color: #e3caf1;
 }
 
 /* Google button */
 .google-btn {
     width: 100%;
     padding: 10px;
-    border: 1px solid #c8b6a6;
+    border: 1px solid #d49ae0;
     background: white;
     border-radius: 6px;
     cursor: pointer;
@@ -102,7 +102,7 @@ p {
 }
 
 a {
-    color: #a47148;
+    color: linear-gradient(135deg,#BAE6FD,#F5D0FE,#ffffff);
     text-decoration: none;
 }
 .form-box#successBox {
@@ -110,12 +110,12 @@ a {
     text-align: center;
 }
 .chuyentrang {
-    color: #5a4a42;
+    color: #d4a4e1;
     margin-bottom: 25px;
     font-weight: bold;
 }
 #logoutBtn {
-    background: #6b4f4f;
+    background: linear-gradient(135deg,#BAE6FD,#F5D0FE,#ffffff);;
 }
 /* CSS cho tính năng Ẩn/Hiện mật khẩu */
 .input-group {
