@@ -279,3 +279,177 @@ h2 {
 .stat p {
     color: #64748b;
 }
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.category {
+    background: #e0f2fe;
+    color: #648ce2;
+    padding: 8px 15px;
+    border-radius: 999px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.category:hover {
+    background: #7a9de8;
+    color: white;
+}
+/* ===== EVENTS PAGE ===== */
+
+/* Search trên navbar (nếu dùng) */
+#searchInput {
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid #e2e8f0;
+    outline: none;
+    transition: 0.3s;
+}
+
+#searchInput:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+/* Filter */
+.filters {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.filter-btn {
+    padding: 6px 14px;
+    margin: 5px;
+    border: none;
+    background: #b1cbec;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.filter-btn.active {
+    background: #2563eb;
+    color: white;
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+}
+
+.filter-btn:hover {
+    background: #cbd5f5;
+}
+
+/* Grid event (dùng chung luôn) */
+.events {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Card dùng chung */
+.event-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s;
+}
+
+.event-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.15);
+}
+
+.event-card img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    transition: 0.3s;
+}
+
+.event-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Badge HOT / NEW */
+.badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #ef4444;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Nút yêu thích ❤️ */
+.fav-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.fav-btn:hover {
+    transform: scale(1.1);
+}
+
+.active-fav {
+    color: red;
+}
+
+/* ===== FAVORITES PAGE ===== */
+
+/* Link header */
+.header a {
+    text-decoration: none;
+    color: #2563eb;
+    font-weight: 500;
+}
+
+/* Nút xoá */
+.remove-btn {
+    position: absolute;
+    top: 45px;
+    right: 10px;
+    border: none;
+    background: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.remove-btn:hover {
+    background: #fee2e2;
+    transform: scale(1.1);
+}
+
+/* Empty message */
+#emptyMessage {
+    text-align: center;
+    color: #64748b;
+    margin-top: 20px;
+}
+
+/* spacing */
+#favoriteList {
+    margin-top: 20px;
+}
