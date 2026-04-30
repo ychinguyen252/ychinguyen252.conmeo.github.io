@@ -1,0 +1,134 @@
+<!DOCTYPE html> 
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Events Vietnam</title>
+
+<link rel="stylesheet" href="CSS/style1.css">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- NAV -->
+<header class="nav">
+    <div class="logo">EVENTS VIETNAM</div>
+
+    <div class="menu">
+        <a class="active" href="index.html">Trang chủ</a>
+        <a href="gioithieu.html">Giới thiệu</a>
+        <a href="hoatdong.html">Hoạt động</a>
+        <a href="dichvu.html">Dịch vụ</a>
+        <a href="lienhe.html">Liên hệ</a>
+    </div>
+
+    <div class="nav-right">
+        <input type="text" placeholder="Search...">
+        <span>❤️</span>
+        <span>🛒</span>
+        <a href="login.html" class="login-btn">Đăng nhập</a>
+    </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-left">
+        <h1>Khám phá sự kiện hot 🔥</h1>
+        <p>Khám phá – trải nghiệm – kết nối</p>
+        <button>Xem ngay</button>
+    </div>
+
+    <div class="hero-right">
+        <img src="https://picsum.photos/500/300">
+    </div>
+</section>
+
+<!-- CATEGORY -->
+<section class="category">
+    <button class="filter-btn active" data-category="all">Tất cả</button>
+    <button class="filter-btn" data-category="workshop">Workshop</button>
+    <button class="filter-btn" data-category="sport">Thể thao</button>
+    <button class="filter-btn" data-category="art">Nghệ thuật</button>
+    <button class="filter-btn" data-category="other">Khác</button>
+</section>
+
+<!-- FEATURED -->
+<section class="section">
+    <h2>Sự kiện nổi bật</h2>
+
+    <div class="grid-4">
+
+        <div class="card" data-category="workshop">
+            <img src="https://picsum.photos/300/200">
+            <h3>Sự kiện 1</h3>
+            <p>Hà tự tìm nhé</p>
+        </div>
+
+        <div class="card" data-category="sport">
+            <img src="https://picsum.photos/301/200">
+            <h3>Sự kiện 2</h3>
+            <p>Hà tự tìm nhé</p>
+        </div>
+
+        <div class="card" data-category="art">
+            <img src="https://picsum.photos/302/200">
+            <h3>Sự kiện 3</h3>
+            <p>Hà tự tìm nhé</p>
+        </div>
+
+        <div class="card" data-category="workshop">
+            <img src="https://picsum.photos/303/200">
+            <h3>Sự kiện 4</h3>
+            <p>Hà tự tìm nhé</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- TOP -->
+<section class="section">
+    <h2>Top xếp hạng</h2>
+
+    <div class="grid-3">
+        <div class="card" data-category="art">
+            <img src="https://picsum.photos/304/200">
+            <h3>Sự kiện 6</h3>
+            <p>Hà tự tìm nhé</p>
+        </div>
+
+        <div class="card" data-category="sport">
+            <img src="https://picsum.photos/305/200">
+            <h3>Sự kiện 7</h3>
+            <p>Hà tự tìm nhé</p>
+        </div>
+
+        <div class="card" data-category="workshop">
+            <img src="https://picsum.photos/306/200">
+            <h3>Sự kiện 8</h3>
+            <p>Hà tự tìm nhé</p>
+        </div>
+    </div>
+</section>
+
+<!-- POPUP (THÊM MỚI - KHÔNG ẢNH HƯỞNG LAYOUT) -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="close-btn">&times;</span>
+
+        <img id="popup-img">
+        <h2 id="popup-title"></h2>
+        <p id="popup-desc"></p>
+
+        <button>🎟 Đặt vé ngay</button>
+        <button>❤️ Lưu yêu thích</button>
+    </div>
+</div>
+
+<footer>
+    © 2026 EventHub
+</footer>
+
+<script src="js/script1.js"></script>
+</body>
+</html>

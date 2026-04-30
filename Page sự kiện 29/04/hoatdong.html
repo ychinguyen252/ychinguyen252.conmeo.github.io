@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hoạt động | Events Vietnam</title>
+
+<link rel="stylesheet" href="css/style1.css">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- NAV -->
+<header class="nav">
+    <div class="logo">EVENTS VIETNAM</div>
+
+    <div class="menu">
+        <a href="index.html">Trang chủ</a>
+        <a href="gioithieu.html">Giới thiệu</a>
+        <a class="active" href="hoatdong.html">Hoạt động</a>
+        <a href="dichvu.html">Dịch vụ</a>
+        <a href="lienhe.html">Liên hệ</a>
+    </div>
+
+    <div class="nav-right">
+        <input type="text" id="searchInput" placeholder="Tìm hoạt động...">
+        <span>❤️</span>
+        <span>🛒</span>
+        <a href="login.html" class="login-btn">Đăng nhập</a>
+    </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-left">
+        <h1>Khám phá hoạt động 🔥</h1>
+        <p>Trải nghiệm – kết nối – tận hưởng</p>
+    </div>
+</section>
+
+<!-- FILTER -->
+<section class="category">
+    <button class="active" onclick="filterCategory('all')">Tất cả</button>
+    <button onclick="filterCategory('workshop')">Workshop</button>
+    <button onclick="filterCategory('music')">Âm nhạc</button>
+    <button onclick="filterCategory('sport')">Thể thao</button>
+</section>
+
+<!-- ACTIVITIES -->
+<section class="section">
+    <h2>Danh sách hoạt động</h2>
+
+    <div class="grid-4" id="activityList">
+
+        <div class="card" data-category="workshop" onclick="openPopup('Sự kiện 1')">
+            Sự kiện 1
+            <p>Hà tự tìm nhé</p>
+        </div>
+
+        <div class="card" data-category="music" onclick="openPopup('Sự kiện 2')">
+            Sự kiện 2
+            <p>Hà tự tìm nhé</p>
+        </div>
+
+        <div class="card" data-category="sport" onclick="openPopup('Sự kiện 3')">
+            Sự kiện 3
+            <p>Hà tự tìm nhé</p>
+        </div>
+
+        <div class="card" data-category="workshop" onclick="openPopup('Sự kiện 4')">
+            Sự kiện 4
+            <p>Hà tự tìm nhé</p>
+        </div>
+
+        <div class="card" data-category="music" onclick="openPopup('Sự kiện 5')">
+            Sự kiện 5
+            <p>Hà tự tìm nhé</p>
+        </div>
+
+        <div class="card" data-category="sport" onclick="openPopup('Sự kiện 6')">
+            Sự kiện 6
+            <p>Hà tự tìm nhé</p>
+        </div>
+
+        <div class="card" data-category="workshop" onclick="openPopup('Sự kiện 7')">
+            Sự kiện 7
+            <p>Hà tự tìm nhé</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- POPUP -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()">×</span>
+
+        <img id="popup-img" src="https://picsum.photos/400/250">
+
+        <h2 id="popup-title"></h2>
+        <p>Hà tự tìm nhé</p>
+
+        <div class="popup-actions">
+            <button class="book">🎟 Đặt vé ngay</button>
+            <button class="like" onclick="saveFavorite()">❤️ Lưu</button>
+        </div>
+    </div>
+</div>
+<section class="section">
+    <h2>Lịch hoạt động</h2>
+
+    <div class="timeline">
+
+        <div class="time-group">
+            <h3>Hôm nay</h3>
+            <div class="time-item" onclick="openPopup('Sự kiện 1')"> 10:00 - Sự kiện 1</div>
+            <div class="time-item" onclick="openPopup('Sự kiện 2')">14:00 - Sự kiện 2</div>
+        </div>
+
+        <div class="time-group">
+            <h3>Ngày mai</h3>
+            <div class="time-item" onclick="openPopup('Sự kiện 3')">09:00 - Sự kiện 3</div>
+            <div class="time-item" onclick="openPopup('Sự kiện 4')">18:00 - Sự kiện 4</div>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    © 2026 EventHub
+</footer>
+
+<script src="js/script1.js"></script>
+</body>
+</html>

@@ -8,7 +8,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg,#BAE6FD,#F5D0FE,#ffffff);
+    background: linear-gradient(90deg, #a18cd1, #fbc2eb);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,11 +23,11 @@ body {
 
 /* Form box */
 .form-box {
-    background:#ffddfe;
-    padding: 30px;
+    background:#ddc3f8;
+    padding: 25px;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    border: 1px solid #febafc;
+    border: 1px solid #a18cd1;
 }
 
 /* Title */
@@ -102,7 +102,7 @@ p {
 }
 
 a {
-    color: linear-gradient(135deg,#BAE6FD,#F5D0FE,#ffffff);
+    color: linear-gradient(90deg, #a18cd1, #fbc2eb);
     text-decoration: none;
 }
 .form-box#successBox {
@@ -115,7 +115,7 @@ a {
     font-weight: bold;
 }
 #logoutBtn {
-    background: linear-gradient(135deg,#BAE6FD,#F5D0FE,#ffffff);;
+    background: linear-gradient(90deg, #a18cd1, #fbc2eb);
 }
 /* CSS cho tính năng Ẩn/Hiện mật khẩu */
 .input-group {
