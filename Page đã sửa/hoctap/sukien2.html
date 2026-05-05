@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sự kiện: Cùng Con Du Học Không Khó - SBS</title>
+</head>
+
+<body style="background:#0b0c0e;color:#fff;font-family:'Segoe UI';display:flex;justify-content:center;padding:50px;">
+
+<details style="background:#1a1d21;width:700px;border-radius:16px;overflow:hidden;border:1px solid #333;box-shadow:0 4px 20px rgba(0,0,0,0.8);">
+
+<!-- SUMMARY -->
+<summary style="list-style:none;cursor:pointer;">
+
+<div style="position:relative;">
+<img src="sksk2.1.png" style="width:100%;">
+
+<div style="position:absolute;top:15px;left:15px;display:flex;gap:10px;">
+<span onclick="toggleLove(this)" style="background:#111;padding:6px 10px;border-radius:50%;cursor:pointer;">❤️</span>
+<span onclick="addCart()" style="background:#111;padding:6px 10px;border-radius:50%;cursor:pointer;">🛒</span>
+</div>
+
+<div style="position:absolute;top:15px;right:15px;background:#ff8c00;padding:5px 12px;border-radius:4px;">
+Đã diễn ra
+</div>
+</div>
+
+<div style="padding:25px;">
+<h3>SỰ KIỆN: CÙNG CON DU HỌC KHÔNG KHÓ</h3>
+
+<p>Giá vé: <span style="color:#00d36b;font-size:22px;">Miễn phí</span></p>
+
+<p>🗓️ 09:30 - 11:30, 23/02/2025</p>
+
+<p>📍 The Audri Building</p>
+</div>
+
+</summary>
+
+<!-- CONTENT -->
+<div style="padding:25px;background:#111;">
+
+<h4 style="color:#00d36b;">Giới thiệu</h4>
+<p style="color:#ccc;">Nội dung giữ nguyên như của em...</p>
+
+<button disabled style="width:100%;padding:15px;background:#333;color:#888;border:none;border-radius:8px;">
+SỰ KIỆN ĐÃ KẾT THÚC
+</button>
+
+<!-- GỢI Ý -->
+<div style="margin-top:40px;">
+<h3>Bạn có thể thích</h3>
+
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:15px;">
+
+<div style="background:#1a1d21;padding:15px;border-radius:10px;">
+<img src="image1.png" style="width:100%;border-radius:8px;">
+<p><a href="sukien1.html" style="color:#6a5af9;">Thiền Tập 2026</a></p>
+</div>
+
+<div style="background:#1a1d21;padding:15px;border-radius:10px;">
+<p><a href="sukien2.html" style="color:#6a5af9;">Workshop Kỹ Năng</a></p>
+</div>
+
+<div style="background:#1a1d21;padding:15px;border-radius:10px;">
+<p><a href="sukien3.html" style="color:#6a5af9;">Hội thảo khoa học</a></p>
+</div>
+
+<div style="background:#1a1d21;padding:15px;border-radius:10px;">
+<p><a href="sukien4.html" style="color:#6a5af9;">Triển lãm sách</a></p>
+</div>
+
+</div>
+</div>
+
+<!-- COMMENT -->
+<div style="margin-top:40px;">
+
+<h3>Bình luận</h3>
+
+<div style="display:flex;gap:10px;padding:10px;background:#111;border-radius:12px;">
+
+<input id="commentInput"
+placeholder="Viết bình luận..."
+style="flex:1;padding:12px;border-radius:8px;border:none;background:#1a1d21;color:#fff;">
+
+<button onclick="addComment()"
+style="padding:10px 18px;border:none;border-radius:8px;background:#6a5af9;color:#fff;">
+Gửi
+</button>
+
+</div>
+
+<div id="commentList" style="margin-top:15px;"></div>
+
+</div>
+
+</div>
+</details>
+
+<script>
+// ❤️ LIKE
+function toggleLove(el){
+    el.classList.toggle("active");
+    el.style.background = el.classList.contains("active") ? "#ff4d6d" : "#111";
+}
+
+// 🛒 CART
+function addCart(){
+    alert("Đã thêm vào giỏ hàng!");
+}
+
+// COMMENT
+const eventId = "event1";
+let comments = JSON.parse(localStorage.getItem("comments_" + eventId)) || [];
+
+function addComment(){
+    const input = document.getElementById("commentInput");
+
+    if(input.value.trim() === "") return;
+
+    comments.push(input.value);
+    localStorage.setItem("comments_" + eventId, JSON.stringify(comments));
+
+    renderComments();
+    input.value = "";
+}
+
+function renderComments(){
+    const list = document.getElementById("commentList");
+    list.innerHTML = "";
+
+    comments.forEach(cmt => {
+        const p = document.createElement("p");
+        p.innerText = cmt;
+        p.style.background = "#1a1d21";
+        p.style.padding = "10px";
+        p.style.borderRadius = "8px";
+        p.style.marginTop = "10px";
+        list.appendChild(p);
+    });
+}
+
+renderComments();
+</script>
+
+</body>
+</html>

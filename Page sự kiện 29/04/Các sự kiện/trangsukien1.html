@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Chi tiết sự kiện</title>
+<link rel="stylesheet" href="css/sukien1.css">
+</head>
+
+<body class="detail-page">
+
+<!-- ===== EVENT DETAIL ===== -->
+<div class="event-detail">
+
+    <!-- RIGHT IMAGE -->
+    <div class="event-img">
+        <img src="ảnh/sukien1.png" id="img">
+    </div>
+
+    <!-- LEFT INFO -->
+    <div class="event-info">
+        <h1 id="title">Sự kiện 1</h1>
+
+        <p class="time">🕒 20:00 - 23:00</p>
+        <p class="location">📍 TP.HCM</p>
+
+        <h2 class="price">Từ 1.200.000đ</h2>
+
+        <div class="actions">
+            <button class="buy">🎟 Đặt vé</button>
+            <button class="cart">🛒 Thêm giỏ</button>
+            <button class="love" onclick="toggleLove()">❤️</button>
+        </div>
+    </div>
+
+</div>
+
+<!-- ===== INTRO ===== -->
+<section class="intro">
+
+    <h2>Giới thiệu</h2>
+
+    <p>
+        Hà tự tìm nhé.
+    </p>
+
+    <img src="ảnh/skns1.1.jpg" alt="ảnh 1">
+    <img src="ảnh/skns1.2.jpg" alt="ảnh 2">
+
+</section>
+
+<!-- ===== GỢI Ý ===== -->
+<section class="section">
+    <h2>Có thể bạn cũng thích</h2>
+
+    <div class="grid-4">
+        <div class="card" onclick="go('Event A')">Event A</div>
+        <div class="card" onclick="go('Event B')">Event B</div>
+        <div class="card" onclick="go('Event C')">Event C</div>
+        <div class="card" onclick="go('Event D')">Event D</div>
+    </div>
+</section>
+
+<!-- ===== COMMENT ===== -->
+<section class="section">
+    <h2>Bình luận</h2>
+
+    <div class="comment-box">
+        <input id="comment-input" placeholder="Viết bình luận...">
+        <button onclick="addComment()">Gửi</button>
+    </div>
+
+    <div id="comment-list"></div>
+</section>
+
+<script src="js/script1.js"></script>
+
+</body>
+</html>

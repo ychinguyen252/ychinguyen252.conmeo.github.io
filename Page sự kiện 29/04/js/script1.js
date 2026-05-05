@@ -1,30 +1,21 @@
-const cards = document.querySelectorAll(".card");
-const popup = document.getElementById("popup");
-
-const popupTitle = document.getElementById("popup-title");
-const popupDesc = document.getElementById("popup-desc");
-const popupImg = document.getElementById("popup-img");
-
-const closeBtn = document.querySelector(".close-btn");
-
-/* CLICK EVENT */
-cards.forEach(card => {
+/* =========================
+   CLICK → SANG TRANG DETAIL
+========================= */
+document.querySelectorAll(".card").forEach(card => {
     card.addEventListener("click", () => {
-        popup.style.display = "block";
+        const name = card.querySelector("h3").innerText;
+        const desc = card.querySelector("p")?.innerText || "Hà tự tìm nhé";
+        const img = card.querySelector("img")?.src || "https://picsum.photos/500";
 
-        popupTitle.innerText = card.querySelector("h3").innerText;
-        popupDesc.innerText = card.querySelector("p").innerText;
-        popupImg.src = card.querySelector("img").src;
+        const url = `event-detail.html?name=${encodeURIComponent(name)}&desc=${encodeURIComponent(desc)}&img=${encodeURIComponent(img)}`;
+        window.location.href = url;
     });
 });
 
-/* CLOSE */
-closeBtn.onclick = () => popup.style.display = "none";
-window.onclick = (e) => {
-    if (e.target === popup) popup.style.display = "none";
-};
 
-/* FILTER */
+/* =========================
+   FILTER CATEGORY
+========================= */
 const filterBtns = document.querySelectorAll(".filter-btn");
 
 filterBtns.forEach(btn => {
@@ -35,7 +26,7 @@ filterBtns.forEach(btn => {
 
         const category = btn.dataset.category;
 
-        cards.forEach(card => {
+        document.querySelectorAll(".card").forEach(card => {
             if (category === "all" || card.dataset.category === category) {
                 card.style.display = "block";
             } else {
@@ -44,54 +35,37 @@ filterBtns.forEach(btn => {
         });
     });
 });
-let currentEvent = "";
 
-// OPEN POPUP
-function openPopup(name) {
-    currentEvent = name;
 
-    document.getElementById("popup-title").innerText = name;
-    document.getElementById("popup").style.display = "block";
+/* =========================
+   SEARCH
+========================= */
+const searchInput = document.getElementById("searchInput");
+
+if (searchInput) {
+    searchInput.addEventListener("keyup", function () {
+        let value = this.value.toLowerCase();
+
+        document.querySelectorAll(".card").forEach(card => {
+            card.style.display = card.innerText.toLowerCase().includes(value)
+                ? "block"
+                : "none";
+        });
+    });
 }
 
-// CLOSE
-function closePopup() {
-    document.getElementById("popup").style.display = "none";
-}
 
-// SAVE FAVORITE
-function saveFavorite() {
+/* =========================
+   FAVORITE (LƯU LOCAL)
+========================= */
+function saveFavorite(name) {
     let list = JSON.parse(localStorage.getItem("favorites")) || [];
 
-    if (!list.includes(currentEvent)) {
-        list.push(currentEvent);
+    if (!list.includes(name)) {
+        list.push(name);
         localStorage.setItem("favorites", JSON.stringify(list));
         alert("Đã lưu ❤️");
     } else {
         alert("Đã tồn tại 😆");
     }
 }
-
-// FILTER
-function filterCategory(type) {
-    const cards = document.querySelectorAll(".card");
-
-    cards.forEach(card => {
-        if (type === "all" || card.dataset.category === type) {
-            card.style.display = "block";
-        } else {
-            card.style.display = "none";
-        }
-    });
-}
-
-// SEARCH
-document.getElementById("searchInput").addEventListener("keyup", function () {
-    let value = this.value.toLowerCase();
-
-    document.querySelectorAll(".card").forEach(card => {
-        card.style.display = card.innerText.toLowerCase().includes(value)
-            ? "block"
-            : "none";
-    });
-});

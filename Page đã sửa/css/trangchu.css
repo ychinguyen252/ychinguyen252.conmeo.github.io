@@ -1,0 +1,428 @@
+/* ================= RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Work Sans', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* ================= BACKGROUND PREMIUM ================= */
+body {
+    background: radial-gradient(circle at 20% 20%, #f5f3ff, transparent 40%),
+                radial-gradient(circle at 80% 30%, #ede9fe, transparent 40%),
+                radial-gradient(circle at 50% 80%, #e9d5ff, transparent 40%),
+                #faf9ff;
+    color: #2d2d2d;
+    animation: bgMove 12s ease-in-out infinite alternate;
+}
+
+@keyframes bgMove {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+}
+
+/* ================= NAV ================= */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 20px;
+    background: linear-gradient(90deg, #a78bfa, #c4b5fd);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* MENU */
+.menu a {
+    margin: 0 12px;
+    text-decoration: none;
+    color: #555;
+    position: relative;
+}
+
+/* underline */
+.menu a::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #a78bfa;
+    transition: 0.3s;
+}
+
+.menu a:hover::after,
+.menu .active::after {
+    width: 100%;
+}
+
+/* RIGHT */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-right input {
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid #e9d5ff;
+    background: rgba(255,255,255,0.6);
+    outline: none;
+}
+
+/* ================= BUTTON PREMIUM ================= */
+button {
+    position: relative;
+    padding: 12px 26px;
+    border: none;
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
+    overflow: hidden;
+
+    background: linear-gradient(135deg, #a78bfa, #c4b5fd, #ddd6fe);
+    color: #4c1d95;
+
+    box-shadow: 0 8px 25px rgba(167,139,250,0.3);
+    transition: all 0.3s ease;
+}
+
+button::before {
+    content: "";
+    position: absolute;
+    left: -100%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
+    transition: 0.5s;
+}
+
+button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(167,139,250,0.4);
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* ================= HERO ================= */
+.hero, .about-hero {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero h1, .about-hero h1 {
+    font-size: 42px;
+    background: linear-gradient(90deg, #a78bfa, #c4b5fd, #ddd6fe);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 5px 25px rgba(167,139,250,0.3);
+}
+
+.hero p, .about-hero p {
+    color: #666;
+    margin-top: 10px;
+}
+
+/* ================= SECTION ================= */
+.section {
+    padding: 50px 40px;
+}
+
+.section h2 {
+    margin-bottom: 20px;
+}
+
+/* ================= GRID ================= */
+.grid-4, .grid-3 {
+    display: grid;
+    gap: 25px;
+}
+
+.grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* ================= CARD PREMIUM ================= */
+.card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    padding: 20px;
+
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(12px);
+
+    transition: all 0.4s ease;
+}
+
+/* glow layer */
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg,
+        rgba(255,255,255,0.1),
+        rgba(196,181,253,0.3),
+        rgba(255,255,255,0.1));
+    opacity: 0;
+    transition: 0.4s;
+}
+
+/* shine */
+.card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
+    transition: 0.6s;
+}
+
+/* hover */
+.card:hover {
+    transform: scale(1.1) translateY(-6px);
+    box-shadow: 0 25px 60px rgba(167,139,250,0.35);
+    z-index: 5;
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card:hover::after {
+    left: 100%;
+}
+
+/* dim xung quanh */
+.grid-4:hover .card,
+.grid-3:hover .card {
+    opacity: 0.35;
+    filter: blur(1px);
+}
+
+.grid-4 .card:hover,
+.grid-3 .card:hover {
+    opacity: 1;
+    filter: blur(0);
+}
+
+/* image */
+.card img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+/* ================= CATEGORY ================= */
+.category {
+    text-align: center;
+    padding: 20px;
+}
+
+.category button {
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: none;
+    margin: 5px;
+    background: rgba(255,255,255,0.7);
+    cursor: pointer;
+}
+
+.category button:hover,
+.category .active {
+    background: linear-gradient(90deg, #c4b5fd, #ddd6fe);
+}
+
+/* ================= POPUP ================= */
+.popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(20px);
+    padding: 20px;
+    border-radius: 20px;
+    width: 380px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.4);
+    box-shadow: 0 25px 70px rgba(167,139,250,0.4);
+    animation: fade 0.3s ease;
+}
+
+.popup-content img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+/* ================= TIMELINE ================= */
+.timeline {
+    margin-top: 20px;
+    border-left: 3px solid #c4b5fd;
+    padding-left: 20px;
+}
+
+.time-item {
+    padding: 10px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.time-item:hover {
+    background: linear-gradient(90deg, #c4b5fd, #ddd6fe);
+    transform: translateX(5px);
+}
+
+/* ================= CTA ================= */
+.about-cta {
+    text-align: center;
+    padding: 70px 20px;
+}
+
+/* ================= FOOTER ================= */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #888;
+}
+
+/* ================= ANIMATION ================= */
+@keyframes fade {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width: 900px) {
+    .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-3 {
+        grid-template-columns: 1fr;
+    }
+}
+/* ================= FOOTER ================= */
+.footer {
+    margin-top: 50px;
+    padding: 40px 20px;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(15px);
+    border-top: 1px solid rgba(255,255,255,0.4);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer h3 {
+    margin-bottom: 10px;
+}
+
+.footer p {
+    color: #555;
+    font-size: 14px;
+}
+
+.social span {
+    margin-right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.social span:hover {
+    transform: scale(1.2);
+}
+
+footer .copyright {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 13px;
+    color: #777;
+}
+
+/* ===== SERVICE ROW ychi thêm ===== */
+.service-row {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 60px;
+}
+.service-row.reverse { /* đảo chiều */
+    flex-direction: row-reverse;
+}
+.service-img img {  /* IMAGE */
+    width: 500px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(167,139,250,0.3);
+}
+.service-content {  /* CONTENT cua dich vu */
+    max-width: 500px;
+}
+
+.service-content h2 {
+    margin-bottom: 10px;
+}
+
+.service-content p {
+    margin-bottom: 15px;
+    color: #555;
+}
+/* RESPONSIVE */
+@media(max-width: 900px) {
+    .service-row {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .service-row.reverse {
+        flex-direction: column;
+    }
+
+    .service-img img {
+        width: 100%;
+    }
+}

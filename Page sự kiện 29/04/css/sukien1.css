@@ -1,0 +1,177 @@
+/* ===== GLOBAL ===== */
+.detail-page {
+    background: #111;
+    color: white;
+    font-family: 'Work Sans', sans-serif;
+}
+
+/* ===== WRAPPER ===== */
+.event-detail {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+/* ===== IMAGE ===== */
+.event-img img {
+    width: 100%;
+    max-width: 550px;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+/* ===== INFO ===== */
+.event-info {
+    flex: 1;
+}
+
+.event-info h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.time, .location {
+    color: #bbb;
+    margin: 5px 0;
+}
+
+.price {
+    color: #00d36b;
+    font-size: 24px;
+    margin: 20px 0;
+}
+
+/* ===== BUTTON ===== */
+.actions {
+    margin-top: 20px;
+}
+
+.actions button {
+    margin-right: 10px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.buy {
+    background: #00d36b;
+    color: white;
+}
+
+.cart {
+    background: #333;
+    color: white;
+}
+
+.love {
+    background: #222;
+    color: white;
+}
+
+.actions button:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+/* ===== INTRO ===== */
+.intro {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.intro h2 {
+    margin-bottom: 10px;
+}
+
+.intro p {
+    color: #ccc;
+    line-height: 1.6;
+}
+
+.intro img {
+    width: 100%;
+    border-radius: 15px;
+    margin-top: 15px;
+}
+
+/* ===== SECTION ===== */
+.section {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* ===== GRID ===== */
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+/* ===== CARD ===== */
+.card {
+    background: #222;
+    padding: 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    background: #2a2a2a;
+}
+
+/* ===== COMMENT ===== */
+.comment-box {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.comment-box input {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+}
+
+.comment-box button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #00d36b;
+    color: white;
+    cursor: pointer;
+}
+
+#comment-list p {
+    background: #222;
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    .event-detail {
+        flex-direction: column;
+    }
+
+    .event-img img {
+        max-width: 100%;
+    }
+
+    .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#869489",
+                    "on-primary-fixed-variant": "#005230",
+                    "on-tertiary-fixed": "#0d1c2d",
+                    "on-tertiary-fixed-variant": "#39485a",
+                    "inverse-primary": "#006d41",
+                    "on-secondary-container": "#b4b5b5",
+                    "surface-bright": "#343b35",
+                    "primary-container": "#26b875",
+                    "outline-variant": "#3d4a40",
+                    "error": "#ffb4ab",
+                    "on-error": "#690005",
+                    "surface-container-high": "#252c26",
+                    "on-secondary": "#2f3131",
+                    "primary-fixed-dim": "#58de97",
+                    "inverse-on-surface": "#2b322d",
+                    "on-tertiary": "#233143",
+                    "primary": "#58de97",
+                    "on-tertiary-container": "#2b394b",
+                    "secondary-container": "#454747",
+                    "tertiary-container": "#94a3b8",
+                    "on-primary": "#00391f",
+                    "on-secondary-fixed-variant": "#454747",
+                    "tertiary": "#b9c8de",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "on-background": "#dde4dc",
+                    "on-surface": "#dde4dc",
+                    "on-error-container": "#ffdad6",
+                    "secondary": "#c6c6c7",
+                    "background": "#0e1510",
+                    "secondary-fixed-dim": "#c6c6c7",
+                    "surface-variant": "#2f3631",
+                    "tertiary-fixed": "#d4e4fa",
+                    "on-surface-variant": "#bccabe",
+                    "error-container": "#93000a",
+                    "surface": "#0e1510",
+                    "secondary-fixed": "#e2e2e2",
+                    "tertiary-fixed-dim": "#b9c8de",
+                    "surface-container-low": "#161d18",
+                    "inverse-surface": "#dde4dc",
+                    "primary-fixed": "#77fbb1",
+                    "surface-container-highest": "#2f3631",
+                    "surface-tint": "#58de97",
+                    "on-primary-container": "#004225",
+                    "on-primary-fixed": "#002110",
+                    "surface-container": "#1a211c",
+                    "surface-dim": "#0e1510",
+                    "surface-container-lowest": "#09100b"
+            },
+            "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+            "spacing": { "base": "8px", "gutter": "24px", "sm": "12px", "md": "24px", "xs": "4px", "margin": "32px", "xl": "80px", "lg": "48px" },
+            "fontFamily": { "h1": ["Inter"], "body-sm": ["Inter"], "h3": ["Inter"], "h2": ["Inter"], "body-lg": ["Inter"], "body-md": ["Inter"], "label-caps": ["Inter"] },
+            "fontSize": {
+                    "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "h2": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        body { min-height: max(884px, 100dvh); }
+</style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary selection:text-on-primary">
+
+<header class="bg-zinc-950 flex justify-between items-center w-full px-6 h-16 fixed top-0 z-50 border-b border-zinc-800">
+    <div class="flex items-center gap-4">
+        <button class="active:opacity-70 transition-all text-emerald-500"><span class="material-symbols-outlined">menu</span></button>
+        <h1 class="text-xl font-black tracking-tighter text-emerald-500 font-inter">EVENTSVIETNAM</h1>
+    </div>
+    <div class="flex items-center gap-4">
+        <button class="material-symbols-outlined text-zinc-400">notifications</button>
+        <div class="w-8 h-8 rounded-full overflow-hidden border border-zinc-700">
+            <img alt="User avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBB-S7paBPZQEZ_AaHKue9zOA5EoSc7bMwvurk4MXdyovf3fsbk08aNdfqKUq-I7sFZQgJkblJzrnsVHC10-1osr8rVvuIHvQ77J1ejbn-xmM4dynPIN49IQGC7zO1Yo8EyAwiYX4PQbXhaM5XoItIkyVLvi4_Rd2I5WvJDKtwfm8334sAbYlCagDaoZUnmK312-79WPEY6pi2O58e6kbeMJEXkubHspGPycaoGbdVQNhaDkoo_aH-0XGxq7K5VGMgHRjlkoLG7bUE"/>
+        </div>
+    </div>
+</header>
+
+<main class="pt-16 pb-24">
+    <footer class="px-6 py-12 bg-background">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
+            <div class="space-y-8">
+                <div>
+                    <h6 class="text-on-surface font-bold mb-4 font-inter text-sm">Hotline</h6>
+                    <div class="flex items-start gap-3 text-on-surface-variant">
+                        <span class="material-symbols-outlined text-xl">call</span>
+                        <div class="space-y-1">
+                            <p class="text-sm">Thứ 2 - Chủ Nhật (8:00 - 23:00)</p>
+                            <p class="text-xl font-bold text-primary">1900.6408</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h6 class="text-on-surface font-bold mb-4 font-inter text-sm">Email</h6>
+                    <div class="flex items-center gap-3 text-on-surface-variant">
+                        <span class="material-symbols-outlined text-xl">mail</span>
+                        <p class="text-sm">support@ticketbox.vn</p>
+                    </div>
+                </div>
+                <div>
+                    <h6 class="text-on-surface font-bold mb-4 font-inter text-sm">Văn phòng chính</h6>
+                    <div class="flex items-start gap-3 text-on-surface-variant">
+                        <span class="material-symbols-outlined text-xl">location_on</span>
+                        <p class="text-sm leading-relaxed">Tòa HT1, Trường Quốc Tế - Đại học Quốc gia Hà Nội</p>
+                    </div>
+                </div>
+                <div class="pt-4 space-y-4">
+                    <h6 class="text-on-surface font-bold font-inter text-sm">Ứng dụng Ticketbox</h6>
+                    <div class="flex gap-3">
+                        <a href="#"><img alt="Google Play" class="h-10 border border-outline-variant rounded-lg bg-black px-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTzpDdg_65DnCJ0aRUoJ45gbNszToxKGdxu3khBiZiW3M6w-nsruMH4EdYEU1OJayoDxwjiZZZYysT9cMAyKbn-L2aL1j584LGHO8t9W-IMEz5ru-FiyVyU24sps__HKe_pr9mSsucrjeAkdEgoEDZ7b3MJ7d9SykL_qcLetSB27-BWKU4BB7NbhR3av4nt1itOM4HuW70ubWbkr7bBIKoM0C8Q-xO-ep7dC34NKDawgR9YxLtFzEBMLGwk7kkdwTcfRTscV1njcc"/></a>
+                        <a href="#"><img alt="App Store" class="h-10 border border-outline-variant rounded-lg bg-black px-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC3ATIQdCNcAmpBsrv685sQpi-lVjxvYf5S8TeKNv-IX_rtumqKYHKybW4BKdpEafziFY0OR94q3_SlS-J2HAsvWNz0BJUHFW167q4FhacxHlqbeb1fD5iDYhIcWJ4DFeB3iyyVBW5s54xpUuzthZL75nR890Xd_IFnELdPr4SLtgikdWw-G6RfP84-a6waT5nfNgwL6rOzWHbV9lT_e4bSw5RpswJNSY14nHKnomPTeJv_Ci2Ymhp0257h_7_f4sRocvwN2qu4Mw"/></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-12">
+                <div class="space-y-8">
+                    <div>
+                        <h6 class="text-on-surface font-bold mb-4 font-inter text-sm">Dành cho Khách hàng</h6>
+                        <ul class="space-y-3">
+                            <li><a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="javascript:void(0)" onclick="openModal('Điều khoản Khách hàng')">Điều khoản sử dụng cho khách hàng</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h6 class="text-on-surface font-bold mb-4 font-inter text-sm">Dành cho Ban Tổ chức</h6>
+                        <ul class="space-y-3">
+                            <li><a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="javascript:void(0)" onclick="openModal('Điều khoản Ban Tổ chức')">Điều khoản sử dụng cho ban tổ chức</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <h6 class="text-on-surface font-bold font-inter text-sm">Ứng dụng check-in cho Ban tổ chức</h6>
+                    <div class="flex gap-3">
+                        <a href="#"><img alt="Google Play" class="h-10 border border-outline-variant rounded-lg bg-black px-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDQxR8CueNoH9k5SNOy_S2BDQ2_v2k0C_VPESnT13nKUijNR8GPFtcCsfmMVmkN3tn3md_9iHVG0fZMA7gyNfDyw1aGTrXjZOf5emDf8MI9UnuIsSvl2jnljLKRElDKff4zccE4c-fRJ2aL340JBG-9Df8XSRPXKnj7Fgwruz-aRikCxkoMirz82lBQw0THDrLyf7L7LaitHl6w-9AA3pGi0QbRW6Ahmd0Tfwe5-H8PbqOQOJ-PMa5LmEk65yqmoPoTdSPZqYWsHE"/></a>
+                        <a href="#"><img alt="App Store" class="h-10 border border-outline-variant rounded-lg bg-black px-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3TzE_U2cosFvTx03xGphF3pUsmpTMG3hDox9I2OpVa2-WvHRr5pv29UJuWeFE6GvQNqBpRycuBiZpMOWvn143ORXLunTtkhWzU3g6zAOQlVS9ZB9kgrQpY3n6Zp3MkAJui2iAnwAJ0AJGS5hYvoiBOcCkt7cN2o9itrHWyXPF6HSGdAV_b24GC0fPvwlp3LnGOtCoiKEJ0m3zPEzBbLBNlM4nBiRP7XOWB5o5_IU2SRz0JPXjQrmU6G7sLmH8rBPpYtfi6YLHeIU"/></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-8">
+                <div>
+                    <h6 class="text-on-surface font-bold mb-4 font-inter text-sm">Về công ty chúng tôi</h6>
+                    <ul class="space-y-2">
+                        <li><a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="javascript:void(0)" onclick="openModal('Quy chế hoạt động')">Quy chế hoạt động</a></li>
+                        <li><a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="javascript:void(0)" onclick="openModal('Chính sách bảo mật')">Chính sách bảo mật thông tin</a></li>
+                        <li><a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="javascript:void(0)" onclick="openModal('Giải quyết tranh chấp')">Cơ chế giải quyết tranh chấp/ khiếu nại</a></li>
+                        <li><a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="javascript:void(0)" onclick="openModal('Bảo mật thanh toán')">Chính sách bảo mật thanh toán</a></li>
+                        <li><a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="javascript:void(0)" onclick="openModal('Chính sách đổi trả')">Chính sách đổi trả và kiểm hàng</a></li>
+                        <li><a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="javascript:void(0)" onclick="openModal('Điều kiện vận chuyển')">Điều kiện vận chuyển và giao nhận</a></li>
+                        <li><a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="javascript:void(0)" onclick="openModal('Phương thức thanh toán')">Phương thức thanh toán</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-6">
+                    <div>
+                        <h6 class="text-on-surface font-bold mb-3 font-inter text-sm">Follow us</h6>
+                        <div class="flex gap-3">
+                            <a class="w-8 h-8 rounded-full bg-[#1877F2] flex items-center justify-center text-white text-xs font-bold" href="#">f</a>
+                            <a class="w-8 h-8 rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] flex items-center justify-center text-white text-xs font-bold" href="#">i</a>
+                            <a class="w-8 h-8 rounded-full bg-black flex items-center justify-center text-white text-xs font-bold border border-zinc-700" href="#">t</a>
+                            <a class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-black text-[10px] font-bold" href="#">th</a>
+                            <a class="w-8 h-8 rounded-full bg-[#0A66C2] flex items-center justify-center text-white text-xs font-bold" href="#">in</a>
+                        </div>
+                    </div>
+                    <div>
+                        <h6 class="text-on-surface font-bold mb-3 font-inter text-sm">Ngôn ngữ</h6>
+                        <div class="flex gap-2">
+                            <button class="border border-outline-variant p-0.5 rounded overflow-hidden">
+                                <img alt="VN" class="w-8 h-5 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnIMwQ8_0LjtEvloKE9l2Zbae7S16zn4hRAc_bv1mL-05yVly4XQG_pLddZZfsc_-MDJsWKBLVO5P0peKm1TwLdN-AzGpweYtf8Q2-3oYlSx8K7j7JaNd2hTMK5YeeJzET3E1xXUdG-a739ts5EOK1Pj4gLdZStxs6b1ClrWvDF8m4W3nHN_948hFqCeNErQfRxnNjQxjDzqFdvaWNWc9udqDylGFKUII0MrrgORvPJudit5JhS5UEwwElb4qjUDpHBnpc_U0q4FQ"/>
+                            </button>
+                            <button class="border border-outline-variant p-0.5 rounded overflow-hidden">
+                                <img alt="EN" class="w-8 h-5 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSD4nqgiEJDDhYdZflf8CCHvNTbhAPrha5yo4UueWYhTzord7ykpYGbI24VJS0YSgX-2qEfiNaI3xG3T7C4huQrleUK_Q-dqqDRXgEM3O8ixVUNsMu0dsQXukWBQGol7-8Xx3z29XdmY-K8WLNiHVxr7yJollPzBFCbvh1VNOaYES25mJ87AXel3_HgWNHJqPdDzzAoAyPRZz0CD1IZWYDxCbFRfKoUT3v0vQWj8X-EKtq08TcSxg8wr5aYR5HgpXRdm4iYa-TFfU"/>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-16 pt-8 border-t border-outline-variant">
+            <p class="text-center text-[10px] text-on-surface-variant font-inter uppercase tracking-widest">© 2024 TICKETBOX GLOBAL. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+</main>
+
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 bg-zinc-900/90 backdrop-blur-lg border-t border-zinc-800 rounded-t-2xl shadow-[0_-8px_30px_rgb(0,0,0,0.5)]">
+    <a class="flex flex-col items-center justify-center text-emerald-500" href="#"><span class="material-symbols-outlined">home</span><span class="text-[11px]">Home</span></a>
+    <a class="flex flex-col items-center justify-center text-zinc-500" href="#"><span class="material-symbols-outlined">search</span><span class="text-[11px]">Explore</span></a>
+    <a class="flex flex-col items-center justify-center text-zinc-500" href="#"><span class="material-symbols-outlined">confirmation_number</span><span class="text-[11px]">Tickets</span></a>
+    <a class="flex flex-col items-center justify-center text-zinc-500" href="#"><span class="material-symbols-outlined">person</span><span class="text-[11px]">Profile</span></a>
+</nav>
+
+<div id="modal-container" style="display:none; position:fixed; inset:0; z-index:100; background:rgba(0,0,0,0.8); align-items:center; justify-content:center; padding:16px;">
+    <div style="background:white; color:black; width:100%; max-width:800px; height:80vh; border-radius:16px; overflow:hidden; display:flex; flex-direction:column;">
+        <div style="padding:16px; border-bottom:1px solid #ddd; display:flex; justify-content:space-between; align-items:center; background:#f5f5f5;">
+            <h2 id="modal-title" style="font-weight:bold; color:#333;">Tiêu đề</h2>
+            <button onclick="closeModal()" style="cursor:pointer; border:none; background:none;">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <div id="modal-body" style="flex:1; overflow:hidden; background:#fafafa;">
+            </div>
+    </div>
+</div>
+
+<script>
+    function openModal(title) {
+        document.getElementById('modal-container').style.display = 'flex';
+        document.getElementById('modal-title').innerText = title;
+        document.body.style.overflow = 'hidden';
+
+        let fileName = "";
+        
+        // Tự động chọn file theo tên tiêu đề
+        if(title === 'Điều khoản Khách hàng') fileName = "dieukhoansudungchokh.pdf";
+        else if(title === 'Điều khoản Ban Tổ chức') fileName = "dieukhoansudungdvdcntcsukien.pdf";
+        else if(title === 'Quy chế hoạt động') fileName = "quychehoatdong.pdf";
+        else if(title === 'Chính sách bảo mật') fileName = "chinh-sach-bao-mat.pdf";
+        else if(title === 'Giải quyết tranh chấp') fileName = "giai-quyet-tranh-chap.pdf";
+        else if(title === 'Bảo mật thanh toán') fileName = "bao-mat-thanh-toan.pdf";
+        else if(title === 'Chính sách đổi trả') fileName = "chinh-sach-doi-tra.pdf";
+        else if(title === 'Điều kiện vận chuyển') fileName = "dieu-kien-van-chuyen.pdf";
+        else if(title === 'Phương thức thanh toán') fileName = "phuong-thuc-thanh-toan.pdf";
+
+        const modalBody = document.getElementById('modal-body');
+        if (fileName !== "") {
+            modalBody.innerHTML = `<iframe src="${fileName}" style="width:100%; height:100%; border:none;"></iframe>`;
+        } else {
+            modalBody.innerHTML = `<div style="padding:32px; text-align:center;">Đang cập nhật nội dung cho ${title}...</div>`;
+        }
+    }
+
+    function closeModal() {
+        document.getElementById('modal-container').style.display = 'none';
+        document.body.style.overflow = 'auto';
+        document.getElementById('modal-body').innerHTML = '';
+    }
+</script>
+</body>
+</html>
