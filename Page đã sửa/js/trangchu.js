@@ -98,3 +98,28 @@ function applyFilterAndSearch() {
         }
     });
 }
+// footer//
+function openModal(title) {
+    document.getElementById('modal-container').style.display = 'flex';
+    document.getElementById('modal-title').innerText = title;
+}
+
+function closeModal() {
+    document.getElementById('modal-container').style.display = 'none';
+}
+
+
+// Tự động chọn file theo tên tiêu đề
+function openModal(fileName) {
+    const modal = document.getElementById("modal-container");
+    const body = document.getElementById("modal-body");
+
+    body.innerHTML = `
+        <iframe src="pdf/${fileName}.pdf" width="100%" height="500px"></iframe>
+    `;
+    modal.style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("modal-container").style.display = "none";
+}

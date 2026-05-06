@@ -319,13 +319,6 @@ button:active {
     padding: 70px 20px;
 }
 
-/* ================= FOOTER ================= */
-footer {
-    text-align: center;
-    padding: 20px;
-    color: #888;
-}
-
 /* ================= ANIMATION ================= */
 @keyframes fade {
     from { transform: scale(0.8); opacity: 0; }
@@ -342,87 +335,134 @@ footer {
         grid-template-columns: 1fr;
     }
 }
-/* ================= FOOTER ================= */
+
+/* FOOTER */
 .footer {
-    margin-top: 50px;
-    padding: 40px 20px;
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(15px);
-    border-top: 1px solid rgba(255,255,255,0.4);
+    padding: 40px 24px;
+    background: #fafafa;
 }
 
-.footer-content {
+/* 🔥 CHIA 2 CỘT */
+.footer-grid {
     display: flex;
-    justify-content: space-between;
-    gap: 20px;
+    justify-content: center;
+    gap: 100px;
     flex-wrap: wrap;
 }
 
-.footer h3 {
-    margin-bottom: 10px;
+/* mỗi bên chiếm 50% */
+.footer-grid .col {
+    flex: 1;
+    min-width: 100px;
 }
 
-.footer p {
+/* TEXT TO HƠN */
+.footer h6 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #7c3aed;
+}
+
+.footer p,
+.footer a {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    display: block;
     color: #555;
-    font-size: 14px;
+    text-decoration: none;
 }
 
-.social span {
-    margin-right: 10px;
-    font-size: 20px;
-    cursor: pointer;
+.footer a:hover {
+    color: #7c3aed;
 }
 
-.social span:hover {
-    transform: scale(1.2);
+/* SOCIAL */
+.social {
+    display: flex;
+    gap: 10px;
 }
 
-footer .copyright {
+.social a {
+    width: 36px;
+    height: 36px;
+    background: #ede9fe;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* COPYRIGHT */
+.copyright {
+    margin-top: 30px;
     text-align: center;
-    margin-top: 20px;
-    font-size: 13px;
-    color: #777;
+    font-size: 14px;
+    color: #888;
 }
 
-/* ===== SERVICE ROW ychi thêm ===== */
+/* MODAL */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-box {
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    border-bottom: 1px solid #eee;
+}
+/* thêm dich vu*/
+/* ================= SERVICE ================= */
 .service-row {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 40px;
     margin-bottom: 60px;
 }
-.service-row.reverse { /* đảo chiều */
+
+/* đảo chiều */
+.service-row.reverse {
     flex-direction: row-reverse;
 }
-.service-img img {  /* IMAGE */
-    width: 500px;
-    border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(167,139,250,0.3);
+
+/* ảnh */
+.service-img {
+    flex: 1;
 }
-.service-content {  /* CONTENT cua dich vu */
-    max-width: 500px;
+
+.service-img img {
+    width: 100%;
+    border-radius: 16px;
+    object-fit: cover;
+}
+
+/* nội dung */
+.service-content {
+    flex: 1;
 }
 
 .service-content h2 {
+    font-size: 28px;
     margin-bottom: 10px;
 }
 
 .service-content p {
+    color: #666;
     margin-bottom: 15px;
-    color: #555;
-}
-/* RESPONSIVE */
-@media(max-width: 900px) {
-    .service-row {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .service-row.reverse {
-        flex-direction: column;
-    }
-
-    .service-img img {
-        width: 100%;
-    }
 }

@@ -25,8 +25,12 @@
 
     <div class="nav-right">
         <input type="text" id="searchInput" placeholder="Search...">
-        <span>❤️</span>
-        <span>🛒</span>
+        <a id="favicon" href="yeuthich.html">
+            <button>❤️</button>
+        </a>
+        <a id="carticon" href="giohang.html">
+            <button>🛒</button>
+        </a>
         <a href="login.html">
             <button>Đăng nhập</button>
         </a>
@@ -105,34 +109,78 @@
 
 <!-- FOOTER -->
 <footer class="footer">
-    <div class="footer-content">
-
+    <div class="footer-grid">
+        <!-- LEFT -->
         <div class="footer-left">
-            <h3>EVENTS VIETNAM ✨</h3>
-            <p>Kết nối - Trải nghiệm - Bùng nổ cảm xúc</p>
-        </div>
+            <div class="footer-block">
+                <h6>Hotline</h6>
+                <p>Thứ 2 - Chủ Nhật (8:00 - 23:00)</p>
+                <p class="highlight">1900.6408</p>
+            </div>
 
-        <div class="footer-center">
-            <p>📍 Việt Nam</p>
-            <p>📧 eventsvietnam@gmail.com</p>
-            <p>📞 0123 456 789</p>
-        </div>
+            <div class="footer-block">
+                <h6>Email</h6>
+                <p>support@ticketbox.vn</p>
+            </div>
 
-        <div class="footer-right">
-            <p>Theo dõi chúng tôi</p>
-            <div class="social">
-                <span>🌐</span>
-                <span>📘</span>
-                <span>📸</span>
-                <span>🎵</span>
+            <div class="footer-block">
+                <h6>Văn phòng</h6>
+                <p>Tòa HT1 - Đại học Quốc gia Hà Nội</p>
             </div>
         </div>
 
-    </div>
+        <!-- center -->
+        <div class="footer-center">
 
-    <p class="copyright">© 2026 Events Vietnam. All rights reserved.</p>
+            <div class="footer-block">
+                <h6>Dành cho khách hàng</h6>
+                <a onclick="openModal('Điều khoản Khách hàng')">Điều khoản sử dụng dành cho khách hàng</a>
+            </div>
+
+            <div class="footer-block">
+                <h6>Dành cho ban tổ chức</h6>
+                <a onclick="openModal('Điều khoản Ban Tổ chức')">Điều khoản sử dụng dành cho ban tổ chức</a>
+            </div>
+        </div>
+            <!-- RIGHT -->
+             <div class="footer-right">
+                <h6>Về công ty chúng tôi</h6>
+                <a class="text-sm "onclick="openModal('Quy chế hoạt động')">Quy chế hoạt động</a>
+                <a class="text-sm "onclick="openModal('Chính sách bảo mật')">Chính sách bảo mật thông tin</a>
+                <a class="text-sm "onclick="openModal('Giải quyết tranh chấp')">Cơ chế giải quyết tranh chấp/ khiếu nại</a>
+                <a class="text-sm "onclick="openModal('Bảo mật thanh toán')">Chính sách bảo mật thanh toán</a>
+                <a class="text-sm "onclick="openModal('Chính sách đổi trả')">Chính sách đổi trả và kiểm hàng</a>
+                <a class="text-sm "onclick="openModal('Điều kiện vận chuyển')">Điều kiện vận chuyển và giao nhận</a>
+                <a class="text-sm "onclick="openModal('Phương thức thanh toán')">Phương thức thanh toán</a>
+            </div>
+            <div class="footer-block">
+                <h6>Follow</h6>
+                <div class="social">
+                    <a>f</a>
+                    <a>i</a>
+                    <a>t</a>
+                    <a>in</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class="copyright">
+        © 2024 TICKETBOX GLOBAL. ALL RIGHTS RESERVED.
+    </p>
 </footer>
 
+</main>
+
+<!-- MODAL -->
+<div id="modal-container" class="modal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h2 id="modal-title">Tiêu đề</h2>
+            <button onclick="closeModal()">✕</button>
+        </div>
+        <div id="modal-body"></div>
+    </div>
+</div>
 <script src="js/script1.js"></script>
 </body>
 </html>
