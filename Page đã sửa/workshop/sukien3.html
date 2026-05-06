@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[LEMLAB] Workshop TRẢI NGHIỆM VẼ LY GỐM</title>
+</head>
+<style>
+    /* ================= RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f6f6fb;
+    color: #1a1a2e;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 50px 15px;
+}
+
+/* ================= CONTAINER ================= */
+details {
+    width: 700px;
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+details:hover {
+    transform: translateY(-3px);
+}
+
+/* ================= SUMMARY ================= */
+summary {
+    list-style: none;
+    cursor: pointer;
+    outline: none;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+/* ================= IMAGE ================= */
+summary img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+/* Badge */
+summary div div:first-child > div {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #c4b5fd;
+    color: #3b2f63;
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+/* ================= HEADER CONTENT ================= */
+summary > div:last-child {
+    padding: 24px;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    color: #1a1a2e;
+}
+
+/* Giá */
+p span {
+    color: #a78bfa;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+/* Info */
+summary > div:last-child > div {
+    margin: 10px 0;
+    color: #555;
+    font-size: 14.5px;
+}
+
+/* Địa điểm */
+strong {
+    color: #a78bfa;
+}
+
+/* Divider text */
+summary > div:last-child > div:last-child {
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+    margin-top: 15px;
+}
+
+/* ================= EXPAND ================= */
+details > div {
+    padding: 25px;
+    border-top: 1px solid #eee;
+    background: #fafafe;
+}
+
+/* Section */
+section {
+    margin-bottom: 30px;
+}
+
+/* Title */
+h4 {
+    color: #a78bfa;
+    margin-bottom: 12px;
+    padding-left: 10px;
+    border-left: 4px solid #a78bfa;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+/* Text */
+section p {
+    color: #444;
+    line-height: 1.8;
+    font-size: 14.5px;
+}
+
+/* List */
+ul {
+    padding-left: 20px;
+    color: #444;
+}
+
+li {
+    margin-bottom: 6px;
+}
+
+/* Images */
+section img {
+    width: 100%;
+    border-radius: 10px;
+    margin: 15px 0;
+    border: 1px solid #eee;
+}
+
+/* Box */
+section > div {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    padding: 18px;
+}
+
+/* ================= NOTE ================= */
+section:last-of-type {
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.suggest h4 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #a78bfa;
+    border-left: 4px solid #a78bfa;
+    padding-left: 10px;
+}
+/* ================= BUTTON ================= */
+button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    font-size: 15px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Active */
+button:not([disabled]) {
+    background: linear-gradient(135deg, #c4b5fd, #a78bfa);
+    color: #fff;
+}
+
+button:not([disabled]):hover {
+    transform: scale(1.03);
+}
+
+/* Disabled */
+button[disabled] {
+    background: #eee;
+    color: #999;
+    cursor: not-allowed;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    details {
+        width: 100%;
+    }
+
+    body {
+        padding: 20px;
+    }
+}
+/* ACTION */
+.action-bar {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.action-bar button {
+    flex: 1;
+}
+
+/* COMMENT */
+.comment-box {
+    margin-top: 30px;
+}
+
+.comment-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.comment-input input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+#commentList div {
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #eee;
+}
+
+/* SUGGEST */
+.suggest {
+    margin-top: 30px;
+}
+
+.suggest-grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+}
+
+.suggest-card {
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.suggest-card:hover {
+    transform: scale(1.05);
+}
+
+.suggest-card img {
+    width: 100%;
+    border-radius: 8px;
+}
+</style>
+<body>
+    <details>
+        
+        <summary>
+            <div>
+                <img src="image3.png" alt="Vẽ ly gốm Workshop">
+            </div>
+            
+            <div>
+                <h3>
+                    [LEMLAB] Workshop TRẢI NGHIỆM VẼ LY GỐM
+                </h3>
+                <p>
+                    Giá từ <span>180.000đ</span>
+                </p>
+                <div>
+                    <span>🗓️</span> 03 tháng 05, 2026
+                </div>
+                <div>
+                    <span>📍</span>
+                    <div>
+                        <strong>Lemlab Pottery Studio</strong>
+                        <span>83F Trần Kế Xương, Phường 7, Quận Phú Nhuận, TPHCM</span>
+                    </div>
+                </div>
+                <div>
+                    ▼ Click để xem Giới thiệu đầy đủ, Lịch hoạt động & BTC ▼
+                </div>
+            </div>
+        </summary>
+
+        <div>
+            
+            <section>
+                <h4>Giới thiệu workshop</h4>
+                
+                <div>
+                    <p>🌺 Thỏa sức sáng tạo - Vẽ ly gốm 🌺</p>
+                    <p>Khơi dậy khả năng nghệ thuật và cá tính riêng của bé (hoặc chính bạn) qua hoạt động vẽ trên ly gốm độc đáo! Thay vì tạo hình, bạn sẽ được tự do trang trí những chiếc ly gốm xinh xắn theo phong cách của riêng mình. Đây là cơ hội tuyệt vời để thư giãn, thể hiện sự sáng tạo và mang về một món đồ dùng cá nhân hoặc món quà ý nghĩa.</p>
+                    
+                    <p>Các bạn tham dự sẽ được cung cấp đầy đủ ly gốm trắng và màu vẽ chuyên dụng để thỏa sức sáng tạo. Sản phẩm sẽ được nung hoàn chỉnh sau <strong>15-20 ngày</strong>.</p>
+                    
+                    <div>
+                        <p>• <strong>Thời gian:</strong> 09:30 - 10:30</p>
+                        <p>• <strong>Địa chỉ:</strong> LemLab Pottery Studio - 83F Trần Kế Xương, Phường 7, Quận Phú Nhuận</p>
+                        <p>• <strong>Phí tham dự:</strong> Từ 180.000 đồng đến 285.000 đồng/ người (tùy thuộc vào loại ly gốm bạn chọn)</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>Lịch hoạt động tháng 5/2026</h4>
+                <div>
+                    <p>Suất diễn cố định hàng ngày.</p>
+                    <p>Tổng cộng 5 suất diễn tiêu biểu.</p>
+                    <p>Ngày hoạt động: 04, 05, 07, 09, 10 Tháng 05.</p>
+                </div>
+            </section>
+
+            <section>
+                <h4>Ban tổ chức</h4>
+                <div>
+                    <img src="skht2.1.png" alt="Logo Lemlab">
+                    <div>
+                        <h3>Lemlab Pottery Studio</h3>
+                        <p>"Mong được cùng bạn thỏa sức sáng tạo."</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>LƯU Ý</h4>
+                <div>
+                    <p>• Phí tham gia đã bao gồm: nguyên liệu, dụng cụ, ly gốm trắng, tráng men và nung.</p>
+                    <p>• Có phụ phí <strong>50k/tiếng</strong> nếu bạn làm thêm giờ ngoài khung giờ 09:30 - 10:30.</p>
+                    <p>• Sản phẩm hoàn thiện có thể sử dụng hàng ngày sau khi nung xong.</p>
+                    <p>• Vui lòng đặt chỗ trước để Studio chuẩn bị ly gốm phù hợp.</p>
+                </div>
+            </section>
+
+            <button type="button">
+                ĐĂNG KÝ NGAY
+            </button>
+            <!-- ACTION -->
+<div class="action-bar" data-id="event1" data-name="Thiền Tập Bên Nhau">
+    <button class="cart-btn">🛒 Thêm vào giỏ</button>
+    <button class="fav-btn">❤️ Yêu thích</button>
+</div>
+
+<!-- COMMENT -->
+<section class="comment-box">
+    <h4>Bình luận</h4>
+
+    <div class="comment-input">
+        <input type="text" id="cmtInput" placeholder="Viết bình luận...">
+        <button onclick="addComment()">Gửi</button>
+    </div>
+
+    <div id="commentList"></div>
+</section>
+
+<!-- SUGGEST -->
+<section class="suggest">
+    <h4>Bạn có thể thích</h4>
+
+    <div class="suggest-grid">
+        <div class="suggest-card">
+            <img src="image1.png">
+            <a href="sukien1.html">Sự kiện: Cùng Con Du Học Không Khó - SBS</a>
+        </div>
+
+        <div class="suggest-card">
+            <img src="image2.png">
+            <a href="sukien2.html">[LEMLAB] Workshop Làm Gốm Trẻ Em</a>
+        </div>
+
+        <div class="suggest-card">
+            <img src="image4.png">
+            <a href="sukien4.html">[Quà Tặng Tâm Ý] Workshop Làm Quà Tặng</a>
+        </div>
+
+        <div class="suggest-card">
+            <img src="image5.png">
+            <a href="sukien5.html">[Qode] LUNCH & LEARN: Workshop về Phỏng vấn Ứng viên</a>
+        </div>
+    </div>
+</section>
+        </div>
+    </details>
+    <script>
+        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+const actionBar = document.querySelector(".action-bar");
+const favBtn = document.querySelector(".fav-btn");
+const cartBtn = document.querySelector(".cart-btn");
+
+// ❤️ YÊU THÍCH
+if (favBtn) {
+    favBtn.onclick = () => {
+        const id = actionBar.dataset.id;
+        const name = actionBar.dataset.name;
+
+        const index = favorites.findIndex(i => i.id === id);
+
+        if (index === -1) {
+            favorites.push({ id, name });
+            favBtn.innerText = "💜 Đã thích";
+        } else {
+            favorites.splice(index, 1);
+            favBtn.innerText = "❤️ Yêu thích";
+        }
+
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+    };
+}
+
+// 🛒 GIỎ HÀNG
+if (cartBtn) {
+    cartBtn.onclick = () => {
+        const id = actionBar.dataset.id;
+        const name = actionBar.dataset.name;
+
+        cart.push({ id, name });
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert("Đã thêm vào giỏ 🛒");
+    };
+}
+    </script>
+
+</body>
+</html>

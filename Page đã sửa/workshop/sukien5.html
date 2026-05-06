@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunch & Learn: Read Every Candidate Like A Pro - Qode</title>
+</head>
+<style>
+    /* ================= RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f6f6fb;
+    color: #1a1a2e;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 50px 15px;
+}
+
+/* ================= CONTAINER ================= */
+details {
+    width: 700px;
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+details:hover {
+    transform: translateY(-3px);
+}
+
+/* ================= SUMMARY ================= */
+summary {
+    list-style: none;
+    cursor: pointer;
+    outline: none;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+/* ================= IMAGE ================= */
+summary img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+/* Badge */
+summary div div:first-child > div {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #c4b5fd;
+    color: #3b2f63;
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+/* ================= HEADER CONTENT ================= */
+summary > div:last-child {
+    padding: 24px;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    color: #1a1a2e;
+}
+
+/* Giá */
+p span {
+    color: #a78bfa;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+/* Info */
+summary > div:last-child > div {
+    margin: 10px 0;
+    color: #555;
+    font-size: 14.5px;
+}
+
+/* Địa điểm */
+strong {
+    color: #a78bfa;
+}
+
+/* Divider text */
+summary > div:last-child > div:last-child {
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+    margin-top: 15px;
+}
+
+/* ================= EXPAND ================= */
+details > div {
+    padding: 25px;
+    border-top: 1px solid #eee;
+    background: #fafafe;
+}
+
+/* Section */
+section {
+    margin-bottom: 30px;
+}
+
+/* Title */
+h4 {
+    color: #a78bfa;
+    margin-bottom: 12px;
+    padding-left: 10px;
+    border-left: 4px solid #a78bfa;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+/* Text */
+section p {
+    color: #444;
+    line-height: 1.8;
+    font-size: 14.5px;
+}
+
+/* List */
+ul {
+    padding-left: 20px;
+    color: #444;
+}
+
+li {
+    margin-bottom: 6px;
+}
+
+/* Images */
+section img {
+    width: 100%;
+    border-radius: 10px;
+    margin: 15px 0;
+    border: 1px solid #eee;
+}
+
+/* Box */
+section > div {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    padding: 18px;
+}
+
+/* ================= NOTE ================= */
+section:last-of-type {
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.suggest h4 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #a78bfa;
+    border-left: 4px solid #a78bfa;
+    padding-left: 10px;
+}
+/* ================= BUTTON ================= */
+button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    font-size: 15px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Active */
+button:not([disabled]) {
+    background: linear-gradient(135deg, #c4b5fd, #a78bfa);
+    color: #fff;
+}
+
+button:not([disabled]):hover {
+    transform: scale(1.03);
+}
+
+/* Disabled */
+button[disabled] {
+    background: #eee;
+    color: #999;
+    cursor: not-allowed;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    details {
+        width: 100%;
+    }
+
+    body {
+        padding: 20px;
+    }
+}
+/* ACTION */
+.action-bar {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.action-bar button {
+    flex: 1;
+}
+
+/* COMMENT */
+.comment-box {
+    margin-top: 30px;
+}
+
+.comment-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.comment-input input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+#commentList div {
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #eee;
+}
+
+/* SUGGEST */
+.suggest {
+    margin-top: 30px;
+}
+
+.suggest-grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+}
+
+.suggest-card {
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.suggest-card:hover {
+    transform: scale(1.05);
+}
+
+.suggest-card img {
+    width: 100%;
+    border-radius: 8px;
+}
+</style>
+<body>
+
+    <details>
+        
+        <summary>
+            <div>
+                <img src="image5.png" alt="Qode Lunch and Learn Workshop">
+                <span>Chỉ 25 suất duy nhất</span>
+            </div>
+            
+            <div>
+                <h3>
+                    LUNCH & LEARN: Workshop về Phỏng vấn Ứng viên - Read Every Candidate Like A Pro
+                </h3>
+                <p>
+                    Giá từ <span>200.000đ</span>
+                </p>
+                <div>
+                    <span>🗓️</span> 23 tháng 05, 2026
+                </div>
+                <div>
+                    <span>📍</span>
+                    <div>
+                        <strong>Tòa nhà W Business Center</strong>
+                        <span>Tầng G, 200 Pasteur, Phường Võ Thị Sáu (Quận 3 cũ), TP.HCM</span>
+                    </div>
+                </div>
+                <div>
+                    ▼ Click để xem Nội dung chi tiết, Diễn giả & BTC ▼
+                </div>
+            </div>
+        </summary>
+
+        <div>
+            
+            <section>
+                <h4>Giới thiệu sự kiện</h4>
+                
+                <div>
+                    <p>Cùng dùng bữa trưa, kết nối với những recruiters cùng đam mê và học hỏi kinh nghiệm từ các senior recruiters và recruiter leads giàu kinh nghiệm của các công ty lớn!</p>
+                    <p>Không những vậy, bạn còn nhận được 1 tháng sourcing miễn phí, truy cập vào hơn 5 triệu profiles tại Việt Nam & nhận chứng chỉ LinkedIn!</p>
+                    
+                    <p><strong>Chi tiết sự kiện:</strong></p>
+                    <p>• <strong>Thời gian:</strong> 9h - 12h sáng, Thứ Bảy, 23/05/2026</p>
+                    <p>• <strong>Địa điểm:</strong> W Business Center, Tầng G, 200 Pasteur, P. Võ Thị Sáu (Quận 3), TP.HCM</p>
+                    <p>• <strong>Chứng nhận LinkedIn:</strong> Nhận chứng chỉ "The AI-powered Recruiter" sau khi hoàn thành, chia sẻ và đăng tải nhanh chóng trên LinkedIn chỉ với 1 chạm từ email</p>
+
+                    <p><strong>Chương trình chính:</strong></p>
+                    <ul>
+                        <li>• <strong>Phần 1:</strong> Chia sẻ và Hướng dẫn của Diễn giả Khách mời #1 - Cách nhìn thấu những ứng viên được "đánh bóng" bởi AI</li>
+                        <li>• <strong>Phần 2:</strong> Chia sẻ và Hướng dẫn của Diễn giả Khách mời #2 - Những kỹ thuật phỏng vấn giúp bộc lộ con người thật của ứng viên</li>
+                        <li>• <strong>Phần 3:</strong> Q&A Trực tiếp & Tea Break</li>
+                        <li>• <strong>Phần 4:</strong> Trải nghiệm Nền tảng Qode và Tracy - AI Interview Expert của Qode</li>
+                        <li>• <strong>Phần 5:</strong> Mini Game & Trao giải</li>
+                        <li>• <strong>Phần 6:</strong> Tiệc trưa & Giao lưu Kết nối</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h4>Khách mời (Mentors)</h4>
+                <div>
+                    <div>
+                        <p><strong>Anh Harry Linh Trương - Head of TA, KMS Technology Inc</strong></p>
+                        <p>Trưởng bộ phận Tuyển dụng (Head of TA) tại KMS Technology với hơn 10 năm kinh nghiệm dẫn dắt công tác thu hút nhân tài tại một số công ty nổi tiếng nhất Việt Nam - từ Tiki và Masterise Homes cho đến WPP Media. Anh là một huấn luyện viên lãnh đạo (leadership coach) được cấp chứng chỉ và là một chuyên gia nhân sự đầy tâm huyết, người mang đến cả chiều sâu chiến lược lẫn tư duy "lấy con người làm trung tâm" vào từng cuộc trao đổi tuyển dụng.</p>
+                    </div>
+                    <div>
+                        <p><strong>Chị Loan Võ - Talent Acquisition Lead, VNG Corporation</strong></p>
+                        <p>Trưởng nhóm Tuyển dụng (Talent Acquisition Lead) tại VNG Corporation với hơn 6 năm kinh nghiệm, phát triển từ vị trí chuyên viên lên trưởng nhóm tại một trong những công ty công nghệ lớn nhất Việt Nam. Chị được biết đến với năng lực xây dựng các hệ thống tuyển dụng có khả năng mở rộng, dẫn dắt các chương trình tuyển dụng tài năng trẻ (fresher) và chuyển hóa dữ liệu thành những quyết định tuyển dụng mang lại hiệu quả gắn kết lâu dài.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>Lịch trình & Giá vé</h4>
+                <div>
+                    <div>
+                        <div>
+                            <p>09:00 - 12:00, Thứ Bảy</p>
+                            <p>23 Tháng 05, 2026</p>
+                        </div>
+                        <span>Đang mở bán</span>
+                    </div>
+                    
+                    <div>
+                        <div>
+                            <span>> Vé Early Bird</span>
+                            <span>200.000 đ</span>
+                        </div>
+                        <div>
+                            <span>> Vé Tiêu chuẩn</span>
+                            <span>400.000 đ</span>
+                        </div>
+                        <p>*Giá vé đã bao gồm Tea break và Tiệc trưa. Có hỗ trợ xuất hóa đơn VAT để claim lại công ty.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>Ban tổ chức</h4>
+                <div>
+                    <img src="skht5.1.png" alt="Logo Qode">
+                    <div>
+                        <h3>Qode</h3>
+                        <p>Qode centralizes your entire hiring lifecycle in one environment, replacing disconnected tools with a single engine for speed, precision, and enterprise-grade scale.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>LƯU Ý</h4>
+                <div>
+                    <p>• Đặc biệt: Tặng 1 tháng free trial sử dụng nền tảng Qode (ATS, AI Interview, Candidate Sourcing) cho người tham dự.</p>
+                    <p>• Workshop giới hạn chỉ <strong>25 suất duy nhất</strong> để đảm bảo chất lượng giao lưu.</p>
+                    <p>• Vui lòng xuất trình email xác nhận khi check-in tại quầy lễ tân tầng G.</p>
+                </div>
+            </section>
+
+            <button type="button">
+                XÁC NHẬN MUA VÉ
+            </button>
+            <!-- ACTION -->
+<div class="action-bar" data-id="event1" data-name="Thiền Tập Bên Nhau">
+    <button class="cart-btn">🛒 Thêm vào giỏ</button>
+    <button class="fav-btn">❤️ Yêu thích</button>
+</div>
+
+<!-- COMMENT -->
+<section class="comment-box">
+    <h4>Bình luận</h4>
+
+    <div class="comment-input">
+        <input type="text" id="cmtInput" placeholder="Viết bình luận...">
+        <button onclick="addComment()">Gửi</button>
+    </div>
+
+    <div id="commentList"></div>
+</section>
+
+<!-- SUGGEST -->
+<section class="suggest">
+    <h4>Bạn có thể thích</h4>
+
+    <div class="suggest-grid">
+        <div class="suggest-card">
+            <img src="image1.png">
+            <a href="sukien1.html">Sự kiện: Cùng Con Du Học Không Khó - SBS</a>
+        </div>
+
+        <div class="suggest-card">
+            <img src="image2.png">
+            <a href="sukien2.html">[LEMLAB] Workshop Làm Gốm Trẻ Em</a>
+        </div>
+
+        <div class="suggest-card">
+            <img src="image3.png">
+            <a href="sukien3.html">[LEMLAB] Workshop TRẢI NGHIỆM VẼ LY GỐM</a>
+        </div>
+
+        <div class="suggest-card">
+            <img src="image4.png">
+            <a href="sukien4.html">[Quà Tặng Tâm Ý] Workshop Làm Quà Tặng</a>
+        </div>
+    </div>
+</section>
+        </div>
+    </details>
+    <script>
+        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+const actionBar = document.querySelector(".action-bar");
+const favBtn = document.querySelector(".fav-btn");
+const cartBtn = document.querySelector(".cart-btn");
+
+// ❤️ YÊU THÍCH
+if (favBtn) {
+    favBtn.onclick = () => {
+        const id = actionBar.dataset.id;
+        const name = actionBar.dataset.name;
+
+        const index = favorites.findIndex(i => i.id === id);
+
+        if (index === -1) {
+            favorites.push({ id, name });
+            favBtn.innerText = "💜 Đã thích";
+        } else {
+            favorites.splice(index, 1);
+            favBtn.innerText = "❤️ Yêu thích";
+        }
+
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+    };
+}
+
+// 🛒 GIỎ HÀNG
+if (cartBtn) {
+    cartBtn.onclick = () => {
+        const id = actionBar.dataset.id;
+        const name = actionBar.dataset.name;
+
+        cart.push({ id, name });
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert("Đã thêm vào giỏ 🛒");
+    };
+}
+    </script>
+
+</body>
+</html>

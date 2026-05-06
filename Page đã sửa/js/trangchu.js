@@ -117,6 +117,7 @@ function openModal(fileName) {
     body.innerHTML = `
         <iframe src="pdf/${fileName}.pdf" width="100%" height="500px"></iframe>
     `;
+
     modal.style.display = "flex";
 }
 
