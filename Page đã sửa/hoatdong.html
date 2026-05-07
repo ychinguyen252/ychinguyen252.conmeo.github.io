@@ -20,7 +20,6 @@
         <a href="gioithieu.html">Giới thiệu</a>
         <a class="active" href="hoatdong.html">Hoạt động</a>
         <a href="dichvu.html">Dịch vụ</a>
-        <a href="lienhe.html">Liên hệ</a>
     </div>
 
     <div class="nav-right">
@@ -395,6 +394,7 @@
 <!-- FOOTER -->
 <footer class="footer">
     <div class="footer-grid">
+
         <!-- LEFT -->
         <div class="footer-left">
             <div class="footer-block">
@@ -414,58 +414,57 @@
             </div>
         </div>
 
-        <!-- center -->
+        <!-- CENTER -->
         <div class="footer-center">
 
             <div class="footer-block">
                 <h6>Dành cho khách hàng</h6>
-                <a onclick="openModal('Điều khoản Khách hàng')">Điều khoản sử dụng dành cho khách hàng</a>
+                <a href="https://drive.google.com/file/d/1fICzY5vYkFk1QNJY9YxAMG_SEfSqAY-u/view?usp=sharing" target="_blank">
+                    Điều khoản sử dụng dành cho khách hàng
+                </a>
             </div>
 
             <div class="footer-block">
                 <h6>Dành cho ban tổ chức</h6>
-                <a onclick="openModal('Điều khoản Ban Tổ chức')">Điều khoản sử dụng dành cho ban tổ chức</a>
+                <a href="https://drive.google.com/drive/u/0/folders/16la2NVji8Sm1TY8_UEPVte40aQ8NtTRT" target="_blank">
+                    Điều khoản sử dụng dành cho ban tổ chức
+                </a>
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+        <div class="footer-right">
+            <h6>Về công ty chúng tôi</h6>
+
+            <a onclick="openModal('quyche')">Quy chế hoạt động</a>
+            <a href="https://drive.google.com/drive/u/0/folders/16la2NVji8Sm1TY8_UEPVte40aQ8NtTRT">Chính sách bảo mật thông tin</a>
+            <a href="https://drive.google.com/drive/u/0/folders/16la2NVji8Sm1TY8_UEPVte40aQ8NtTRT">Cơ chế giải quyết tranh chấp</a>
+            <a href="https://drive.google.com/drive/u/0/folders/16la2NVji8Sm1TY8_UEPVte40aQ8NtTRT">Chính sách bảo mật thanh toán</a>
+            <a href="https://docs.google.com/document/d/1hGGbKdJvPvlebMGQ_Id_8kq1OJV9XZs8/edit">Chính sách đổi trả</a>
+            <a href="https://drive.google.com/drive/u/0/folders/16la2NVji8Sm1TY8_UEPVte40aQ8NtTRT">Điều kiện vận chuyển</a>
+            <a href="https://drive.google.com/drive/u/0/folders/16la2NVji8Sm1TY8_UEPVte40aQ8NtTRT">Phương thức thanh toán</a>
+        </div>
+
+        <!-- SOCIAL -->
+        <div class="footer-block">
+            <h6>Follow</h6>
+            <div class="social">
+                <a>f</a>
+                <a>i</a>
+                <a>t</a>
+                <a>in</a>
             </div>
         </div>
-            <!-- RIGHT -->
-             <div class="footer-right">
-                <h6>Về công ty chúng tôi</h6>
-                <a class="text-sm "onclick="openModal('Quy chế hoạt động')">Quy chế hoạt động</a>
-                <a class="text-sm "onclick="openModal('Chính sách bảo mật')">Chính sách bảo mật thông tin</a>
-                <a class="text-sm "onclick="openModal('Giải quyết tranh chấp')">Cơ chế giải quyết tranh chấp/ khiếu nại</a>
-                <a class="text-sm "onclick="openModal('Bảo mật thanh toán')">Chính sách bảo mật thanh toán</a>
-                <a class="text-sm "onclick="openModal('Chính sách đổi trả')">Chính sách đổi trả và kiểm hàng</a>
-                <a class="text-sm "onclick="openModal('Điều kiện vận chuyển')">Điều kiện vận chuyển và giao nhận</a>
-                <a class="text-sm "onclick="openModal('Phương thức thanh toán')">Phương thức thanh toán</a>
-            </div>
-            <div class="footer-block">
-                <h6>Follow</h6>
-                <div class="social">
-                    <a>f</a>
-                    <a>i</a>
-                    <a>t</a>
-                    <a>in</a>
-                </div>
-            </div>
-        </div>
+
     </div>
+
     <p class="copyright">
-        © 2024 TICKETBOX GLOBAL. ALL RIGHTS RESERVED.
+        © 2024 EVENTS VIETNAM. ALL RIGHTS RESERVED.
     </p>
 </footer>
 
 </main>
-
-<!-- MODAL -->
-<div id="modal-container" class="modal">
-    <div class="modal-box">
-        <div class="modal-header">
-            <h2 id="modal-title">Tiêu đề</h2>
-            <button onclick="closeModal()">✕</button>
-        </div>
-        <div id="modal-body"></div>
-    </div>
-</div>
 
 <script src="js/trangchu.js"></script>
 </body>
