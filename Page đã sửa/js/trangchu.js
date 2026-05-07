@@ -5,91 +5,83 @@ const cartBtn = document.getElementById("cart-btn");
 const searchInput = document.getElementById("searchInput");
 
 // ===== FAVORITE =====
-heartBtn.onclick = () => {
-    let list = JSON.parse(localStorage.getItem("favorites")) || [];
+if (heartBtn) {
+    heartBtn.onclick = () => {
 
-    list.push("Trang chủ");
+        let list = JSON.parse(localStorage.getItem("favorites")) || [];
 
-    localStorage.setItem("favorites", JSON.stringify(list));
+        list.push("Trang chủ");
 
-    heartBtn.innerText = "💖";
-    alert("Đã lưu yêu thích ❤️");
-};
+        localStorage.setItem("favorites", JSON.stringify(list));
+
+        heartBtn.innerText = "💖";
+
+        alert("Đã lưu yêu thích ❤️");
+    };
+}
 
 // ===== CART =====
-cartBtn.onclick = () => {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+if (cartBtn) {
+    cartBtn.onclick = () => {
 
-    cart.push("Event demo");
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    localStorage.setItem("cart", JSON.stringify(cart));
+        cart.push("Event demo");
 
-    cartBtn.innerText = "🛍️";
-    alert("Đã thêm giỏ hàng 🛒");
-};
+        localStorage.setItem("cart", JSON.stringify(cart));
 
-// ===== FILTER =====
-const filterBtns = document.querySelectorAll(".filter-btn");
+        cartBtn.innerText = "🛍️";
 
-filterBtns.forEach(btn => {
-    btn.onclick = () => {
-
-        document.querySelector(".filter-btn.active")?.classList.remove("active");
-        btn.classList.add("active");
-
-        const category = btn.dataset.category;
-
-        cards.forEach(card => {
-            if (category === "all" || card.dataset.category === category) {
-                card.style.display = "block";
-            } else {
-                card.style.display = "none";
-            }
-        });
+        alert("Đã thêm giỏ hàng 🛒");
     };
-});
+}
 
-// ===== SEARCH =====
-searchInput.onkeyup = () => {
-    let value = searchInput.value.toLowerCase();
+// ===== SEARCH + FILTER =====
 
-    cards.forEach(card => {
-        card.style.display = card.innerText.toLowerCase().includes(value)
-            ? "block"
-            : "none";
-    });
-};
-
-// ===== SU KIEN CHAY =====
 let currentFilter = "all";
 
 // FILTER
 function filterCategory(e, type) {
+
     currentFilter = type;
 
     const buttons = document.querySelectorAll(".category button");
-    buttons.forEach(btn => btn.classList.remove("active"));
+
+    buttons.forEach(btn => {
+        btn.classList.remove("active");
+    });
+
     e.target.classList.add("active");
 
     applyFilterAndSearch();
 }
 
 // SEARCH
-document.getElementById("searchInput").addEventListener("keyup", function () {
-    applyFilterAndSearch();
-});
+if (searchInput) {
+    searchInput.addEventListener("keyup", applyFilterAndSearch);
+}
 
-// CORE LOGIC (gộp cả 2)
+// MAIN FUNCTION
 function applyFilterAndSearch() {
-    const value = document.getElementById("searchInput").value.toLowerCase();
+
+    const value = document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
+
     const cards = document.querySelectorAll(".card");
 
     cards.forEach(card => {
+
         const text = card.innerText.toLowerCase();
+
         const category = card.dataset.category;
 
         const matchSearch = text.includes(value);
-        const matchFilter = (currentFilter === "all" || category === currentFilter);
+
+        const matchFilter =
+            currentFilter === "all" ||
+            category === currentFilter;
 
         if (matchSearch && matchFilter) {
             card.style.display = "block";
@@ -98,29 +90,16 @@ function applyFilterAndSearch() {
         }
     });
 }
-// footer//
+
+// ===== FOOTER MODAL =====
 function openModal(title) {
+
     document.getElementById('modal-container').style.display = 'flex';
+
     document.getElementById('modal-title').innerText = title;
 }
 
 function closeModal() {
+
     document.getElementById('modal-container').style.display = 'none';
-}
-
-
-// Tự động chọn file theo tên tiêu đề
-function openModal(fileName) {
-    const modal = document.getElementById("modal-container");
-    const body = document.getElementById("modal-body");
-
-    body.innerHTML = `
-        <iframe src="pdf/${fileName}.pdf" width="100%" height="500px"></iframe>
-    `;
-
-    modal.style.display = "flex";
-}
-
-function closeModal() {
-    document.getElementById("modal-container").style.display = "none";
 }

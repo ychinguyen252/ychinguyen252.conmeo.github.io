@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[VIVIAN VU’S CANDLES] WORKSHOP LÀM NẾN THƠM</title>
+</head>
+
+<style>
+    /* ================= RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f6f6fb;
+    color: #1a1a2e;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 50px 15px;
+}
+
+/* ================= CONTAINER ================= */
+details {
+    width: 700px;
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+details:hover {
+    transform: translateY(-3px);
+}
+
+/* ================= SUMMARY ================= */
+summary {
+    list-style: none;
+    cursor: pointer;
+    outline: none;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+/* ================= IMAGE ================= */
+summary img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+/* Badge */
+summary div div:first-child > div {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #c4b5fd;
+    color: #3b2f63;
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+/* ================= HEADER CONTENT ================= */
+summary > div:last-child {
+    padding: 24px;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    color: #1a1a2e;
+}
+
+/* Giá */
+p span {
+    color: #a78bfa;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+/* Info */
+summary > div:last-child > div {
+    margin: 10px 0;
+    color: #555;
+    font-size: 14.5px;
+}
+
+/* Địa điểm */
+strong {
+    color: #a78bfa;
+}
+
+/* Divider text */
+summary > div:last-child > div:last-child {
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+    margin-top: 15px;
+}
+
+/* ================= EXPAND ================= */
+details > div {
+    padding: 25px;
+    border-top: 1px solid #eee;
+    background: #fafafe;
+}
+
+/* Section */
+section {
+    margin-bottom: 30px;
+}
+
+/* Title */
+h4 {
+    color: #a78bfa;
+    margin-bottom: 12px;
+    padding-left: 10px;
+    border-left: 4px solid #a78bfa;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+/* Text */
+section p {
+    color: #444;
+    line-height: 1.8;
+    font-size: 14.5px;
+}
+
+/* List */
+ul {
+    padding-left: 20px;
+    color: #444;
+}
+
+li {
+    margin-bottom: 6px;
+}
+
+/* Images */
+section img {
+    width: 100%;
+    border-radius: 10px;
+    margin: 15px 0;
+    border: 1px solid #eee;
+}
+
+/* Box */
+section > div {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    padding: 18px;
+}
+
+/* ================= NOTE ================= */
+section:last-of-type {
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.suggest h4 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #a78bfa;
+    border-left: 4px solid #a78bfa;
+    padding-left: 10px;
+}
+/* ================= BUTTON ================= */
+button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    font-size: 15px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Active */
+button:not([disabled]) {
+    background: linear-gradient(135deg, #c4b5fd, #a78bfa);
+    color: #fff;
+}
+
+button:not([disabled]):hover {
+    transform: scale(1.03);
+}
+
+/* Disabled */
+button[disabled] {
+    background: #eee;
+    color: #999;
+    cursor: not-allowed;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    details {
+        width: 100%;
+    }
+
+    body {
+        padding: 20px;
+    }
+}
+/* ACTION */
+.action-bar {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.action-bar button {
+    flex: 1;
+}
+
+/* COMMENT */
+.comment-box {
+    margin-top: 30px;
+}
+
+.comment-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.comment-input input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+#commentList div {
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #eee;
+}
+
+/* SUGGEST */
+.suggest {
+    margin-top: 30px;
+}
+
+.suggest-grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+}
+
+.suggest-card {
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.suggest-card:hover {
+    transform: scale(1.05);
+}
+
+.suggest-card img {
+    width: 100%;
+    border-radius: 8px;
+}
+</style>
+<body>
+
+    <details class="workshop-card">
+
+        <!-- SUMMARY -->
+        <summary class="workshop-summary">
+
+            <div class="banner">
+                <img src="image1.png" alt="Vivian Vu's Candles Workshop">
+            </div>
+
+            <div class="summary-content">
+
+                <h3>
+                    [VIVIAN VU’S CANDLES] WORKSHOP LÀM NẾN THƠM VÀ SÁP THƠM HANDMADE
+                </h3>
+
+                <p class="price">
+                    Giá từ <span>315.000đ</span>
+                </p>
+
+                <div class="info">
+                    🗓️ 04 tháng 05, 2026
+                </div>
+
+                <div class="location">
+                    <span class="icon">📍</span>
+
+                    <div>
+                        <strong>CDC Building</strong>
+                        <span>25 Lê Đại Hành, Hai Bà Trưng, Hà Nội</span>
+                    </div>
+                </div>
+
+                <div class="open-text">
+                    ▼ Click để xem Giới thiệu đầy đủ, Lịch diễn & BTC ▼
+                </div>
+
+            </div>
+
+        </summary>
+
+        <!-- DETAIL -->
+        <div class="detail-content">
+
+            <!-- GIỚI THIỆU -->
+            <section>
+
+                <h4>Giới thiệu workshop</h4>
+
+                <div class="section-text">
+
+                    <p class="title-big">
+                        WORKSHOP LÀM NẾN & SÁP THƠM HANDMADE
+                    </p>
+
+                    <p><i>Không chỉ là một buổi workshop mà là một trải nghiệm đáng nhớ.</i></p>
+
+                    <p>
+                        Giữa guồng quay bận rộn, có khi nào bạn tự hỏi:
+                        <i>Lần cuối mình dành 90 phút chỉ cho bản thân là khi nào?</i>
+                    </p>
+
+                    <p>
+                        Workshop làm Nến & Sáp thơm của Vivian Vu's Candles
+                        không đơn thuần là một lớp học thủ công.
+                        Đây là khoảng thời gian để bạn thả lỏng tâm trí,
+                        chạm vào mùi hương mình yêu thích và tự tay tạo nên
+                        những điều xinh đẹp mang dấu ấn cá nhân.
+                    </p>
+
+                    <img src="skht1.1.png" alt="Trải nghiệm làm nến">
+
+                    <p class="title-small">
+                        Với workshop cá nhân, bạn sẽ:
+                    </p>
+
+                    <ul>
+                        <li>✨ Tự tay hoàn thiện 2 sản phẩm handmade mang về.</li>
+                        <li>✨ Được hướng dẫn chi tiết từ A-Z.</li>
+                        <li>✨ Sáng tạo theo phong cách riêng.</li>
+                        <li>✨ Thưởng thức đồ uống trong không gian chill.</li>
+                        <li>✨ Tận hưởng không gian tầng 11 Candle Lab.</li>
+                    </ul>
+
+                    <p>
+                        Chỉ 90 phút nhưng đủ để bạn giảm căng thẳng,
+                        khơi nguồn sáng tạo và mang về thành phẩm xinh xắn.
+                    </p>
+
+                    <p class="title-small">
+                        WORKSHOP DOANH NGHIỆP
+                    </p>
+
+                    <p>
+                        Vivian Vu's Candles còn tổ chức workshop doanh nghiệp
+                        quy mô lên đến 200 người.
+                    </p>
+
+                    <img src="skht1.2.png" alt="Workshop doanh nghiệp">
+
+                    <ul>
+                        <li>Kết nối đội ngũ nhẹ nhàng và tinh tế</li>
+                        <li>Tăng tương tác giữa các phòng ban</li>
+                        <li>Mang lại trải nghiệm mới lạ</li>
+                        <li>Tạo dấu ấn thương hiệu riêng</li>
+                    </ul>
+
+                </div>
+
+            </section>
+
+            <!-- LỊCH -->
+            <section>
+
+                <h4>Lịch hoạt động & Địa điểm</h4>
+
+                <div class="schedule-box">
+                    <p>🕯️ <strong>Ca sáng:</strong> 9:00 – 10:30</p>
+                    <p>🕯️ <strong>Ca chiều:</strong> 14:30 – 16:00</p>
+                    <p>📍 <strong>Candle Lab:</strong> CDC Building</p>
+                    <p>⏰ <strong>Thời lượng:</strong> 90 phút</p>
+                    <p>📞 <strong>Hotline:</strong> 0917 992 066</p>
+
+                    <div class="schedule-note">
+                        📅 26 suất diễn trong Tháng 5/2026
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- BTC -->
+            <section class="organizer">
+
+                <h4>Ban tổ chức</h4>
+
+                <div class="organizer-box">
+
+                    <img src="skht1.3.png" alt="Logo Vivian Vu">
+
+                    <div>
+                        <h3>Vivian Vu’s Candles</h3>
+
+                        <p>
+                            Chuyên cung cấp các loại nến thơm cao cấp
+                            và tổ chức workshop nghệ thuật.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- NOTE -->
+            <section class="note-section">
+
+                <div class="note-title">
+                    <h4>LƯU Ý</h4>
+                </div>
+
+                <div class="note-content">
+                    <p>• Số lượng chỗ mỗi ca luôn giới hạn.</p>
+                    <p>• Vui lòng đặt chỗ trước qua Hotline.</p>
+                    <p>• Phù hợp cho cả người mới bắt đầu.</p>
+                    <p>• Hẹn gặp bạn tại Candle Lab.</p>
+                </div>
+
+            </section>
+
+            <button class="buy-btn">
+                MUA VÉ NGAY
+            </button>
+            <!-- ACTION -->
+<div class="action-bar" data-id="event1" data-name="[VIVIAN VU’S CANDLES] WORKSHOP LÀM NẾN THƠM">
+    <button class="cart-btn">🛒 Thêm vào giỏ</button>
+    <button class="fav-btn">❤️ Yêu thích</button>
+</div>
+
+<!-- COMMENT -->
+<section class="comment-box">
+    <h4>Bình luận</h4>
+
+    <div class="comment-input">
+        <input type="text" id="cmtInput" placeholder="Viết bình luận...">
+        <button onclick="addComment()">Gửi</button>
+    </div>
+
+    <div id="commentList"></div>
+</section>
+
+<!-- SUGGEST -->
+<section class="suggest">
+    <h4>Bạn có thể thích</h4>
+
+    <div class="suggest-grid">
+        <div class="suggest-card">
+            <img src="image2.png">
+            <a href="sukien2.html">[LEMLAB] Workshop TRẢI NGHIỆM LÀM GỐM TRẺ EM</a>
+        </div>
+
+        <div class="suggest-card">
+            <img src="image3.png">
+            <a href="sukien3.html">[LEMLAB] Workshop TRẢI NGHIỆM VẼ LY GỐM</a>
+        </div>
+
+        <div class="suggest-card">
+            <img src="image4.png">
+            <a href="sukien4.html">[Quà Tặng Tâm Ý] Workshop Làm Quà Tặng</a>
+        </div>
+
+        <div class="suggest-card">
+            <img src="image5.png">
+            <a href="sukien5.html">[Qode] LUNCH & LEARN: Workshop về Phỏng vấn Ứng viên</a>
+        </div>
+    </div>
+</section>
+        </div>
+    </details>
+    <script>
+        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+const actionBar = document.querySelector(".action-bar");
+const favBtn = document.querySelector(".fav-btn");
+const cartBtn = document.querySelector(".cart-btn");
+
+// ❤️ YÊU THÍCH
+if (favBtn) {
+    favBtn.onclick = () => {
+        const id = actionBar.dataset.id;
+        const name = actionBar.dataset.name;
+
+        const index = favorites.findIndex(i => i.id === id);
+
+        if (index === -1) {
+            favorites.push({ id, name });
+            favBtn.innerText = "💜 Đã thích";
+        } else {
+            favorites.splice(index, 1);
+            favBtn.innerText = "❤️ Yêu thích";
+        }
+
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+    };
+}
+
+// 🛒 GIỎ HÀNG
+if (cartBtn) {
+    cartBtn.onclick = () => {
+        const id = actionBar.dataset.id;
+        const name = actionBar.dataset.name;
+
+        cart.push({ id, name });
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert("Đã thêm vào giỏ 🛒");
+    };
+}
+    </script>
+
+</body>
+</html>

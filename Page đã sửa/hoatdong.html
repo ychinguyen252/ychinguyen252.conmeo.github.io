@@ -45,13 +45,13 @@
 
 <!-- FILTER -->
 <section class="category">
-    <button class="active" onclick="filterCategory('all')">Tất cả</button>
-    <button onclick="filterCategory('study')">Học tập</button>
-    <button onclick="filterCategory('workshop')">Workshop</button>
-    <button onclick="filterCategory('music')">Âm nhạc</button>
-    <button onclick="filterCategory('art')">Nghệ thuật</button>
-    <button onclick="filterCategory('experience')">Trải nghiệm</button>
-    <button onclick="filterCategory('sport')">Thể thao</button>
+    <button class="active" onclick="filterCategory(event, 'all')">Tất cả</button>
+    <button onclick="filterCategory(event, 'study')">Học tập</button>
+    <button onclick="filterCategory(event, 'workshop')">Workshop</button>
+    <button onclick="filterCategory(event, 'music')">Âm nhạc</button>
+    <button onclick="filterCategory(event, 'art')">Nghệ thuật</button>
+    <button onclick="filterCategory(event, 'experience')">Trải nghiệm</button>
+    <button onclick="filterCategory(event, 'sport')">Thể thao</button>
 </section>
 
 <!-- ACTIVITIES -->
@@ -80,7 +80,7 @@
             </p>
         </div>
 
-        <div class="card" data-category="study" onclick="openPopup('Sự kiện 3')">
+        <div class="card" data-category="study" onclick="openPopup('Luyện thi chứng chỉ IIBA (ECBA, CCBA, CBAP) 3.0 - ONLINE')">
             <h3>Luyện thi chứng chỉ IIBA (ECBA, CCBA, CBAP) 3.0 - ONLINE</h3>
             <img src="hoctap/image3.png">
             <p>
@@ -90,7 +90,7 @@
             </p>
         </div>
 
-        <div class="card" data-category="study" onclick="openPopup('Sự kiện 4')">
+        <div class="card" data-category="study" onclick="openPopup('[Metashow] Triển Lãm Nghệ Thuật Ánh Sáng')">
             <h3>[Metashow] Triển Lãm Nghệ Thuật Ánh Sáng</h3>
             <img src="hoctap/image4.png">
             <p>
@@ -100,7 +100,7 @@
             </p>
         </div>
 
-        <div class="card" data-category="study" onclick="openPopup('Sự kiện 5')">
+        <div class="card" data-category="study" onclick="openPopup('THE GLOBAL LEADERSHIP SUMMIT 2026')">
             <h3>THE GLOBAL LEADERSHIP SUMMIT 2026</h3>
             <img src="hoctap/image5.png">
             <p>
@@ -110,16 +110,158 @@
             </p>
         </div>
 
+        <div class="card" data-category="workshop" onclick="openPopup('[VIVIAN VU’S CANDLES] WORKSHOP LÀM NẾN THƠM')">
+            <h3>[VIVIAN VU’S CANDLES] WORKSHOP LÀM NẾN THƠM</h3>
+            <img src="workshop/image1.png">
+            <p>
+                <a href="workshop/sukien1.html">
+                    <button> Xem chi tiết</button>
+                </a>
+            </p>
+        </div>
+
+        <div class="card" data-category="workshop" onclick="openPopup('[LEMLAB] Workshop TRẢI NGHIỆM LÀM GỐM TRẺ EM')">
+            <h3>[LEMLAB] Workshop TRẢI NGHIỆM LÀM GỐM TRẺ EM</h3>
+            <img src="workshop/image2.png">
+            <p>
+                <a href="workshop/sukien2.html">
+                    <button> Xem chi tiết</button>
+                </a>
+            </p>
+        </div>
+
+        <div class="card" data-category="workshop" onclick="openPopup('[LEMLAB] Workshop TRẢI NGHIỆM VẼ LY GỐM')">
+            <h3>[LEMLAB] Workshop TRẢI NGHIỆM VẼ LY GỐM</h3>
+            <img src="workshop/image3.png">
+            <p>
+                <a href="workshop/sukien3.html">
+                    <button> Xem chi tiết</button>
+                </a>
+            </p>
+        </div>
+
+        <div class="card" data-category="workshop" onclick="openPopup('Workshop Hương Sắc Tâm Ý - Quà Tặng Tâm Ý')">
+            <h3>Workshop Hương Sắc Tâm Ý - Quà Tặng Tâm Ý</h3>
+            <img src="workshop/image4.png">
+            <p>
+                <a href="workshop/sukien4.html">
+                    <button> Xem chi tiết</button>
+                </a>
+            </p>
+        </div>
+        <div class="card" data-category="workshop" onclick="openPopup('[Qode] LUNCH & LEARN: Workshop về Phỏng vấn Ứng viên')">
+            <h3>[Qode] LUNCH & LEARN: Workshop về Phỏng vấn Ứng viên</h3>
+            <img src="workshop/image5.png">
+            <p>
+                <a href="workshop/sukien5.html">
+                    <button> Xem chi tiết</button>
+                </a>
+            </p>
+        </div>
+
+        <div class="card" data-category="music" onclick="openPopup('Đêm nhạc Mỹ Vị Cuộc Đời - Trung Quân & Myra Trần')">
+            <h3>Đêm nhạc Mỹ Vị Cuộc Đời - Trung Quân & Myra Trần</h3>
+            <img src="âm nhạc/image1.png">
+            <p>
+                <a href="âm nhạc/sukien1.html">
+                    <button> Xem chi tiết</button>
+                </a>
+            </p>
+        </div>
+        <div class="card" data-category="music" onclick="openPopup('Sự kiện: Tan Tan Acoustic - Monarch Creative Studio')">
+            <h3>Sự kiện: Tan Tan Acoustic - Monarch Creative Studio</h3>
+            <img src="âm nhạc/image2.png">
+            <p>
+                <a href="âm nhạc/sukien2.html">
+                    <button> Xem chi tiết</button>
+                </a>
+            </p>
+        </div>
+        <div class="card" data-category="music" onclick="openPopup('Sự kiện: BLU Nightfall')">
+            <h3>Sự kiện: BLU Nightfall</h3>
+            <img src="âm nhạc/image3.png">
+            <p>
+                <a href="âm nhạc/sukien3.html">
+                    <button> Xem chi tiết</button>
+                </a>
+            </p>
+        </div>
+        <div class="card" data-category="music" onclick="openPopup('Sự kiện: Ladies Night Negav')">
+            <h3>Sự kiện: Ladies Night Negav</h3>
+            <img src="âm nhạc/image4.png">
+            <p>
+                <a href="âm nhạc/sukien4.html">
+                    <button> Xem chi tiết</button>
+                </a>
+            </p>
+        </div>
+        <div class="card" data-category="music" onclick="openPopup('Sự kiện: Mr Siro Fan Concert')">
+            <h3>Sự kiện: Mr Siro Fan Concert</h3>
+            <img src="âm nhạc/image5.png">
+            <p>
+                <a href="âm nhạc/sukien5.html">
+                    <button> Xem chi tiết</button>
+                </a>
+            </p>
+        </div>
+        <div class="card" data-category="art" onclick="openPopup('vietcharm: Live The Legacy')">
+            <h3>vietcharm: Live The Legacy</h3>
+            <img src="nghệ thuật/image1.png">
+            <p>
+                <a href="nghệ thuật/sukien1.html">
+                    <button> Xem chi tiết</button>
+                </a>
+            </p>
+        </div>
+        <div class="card" data-category="art" onclick="openPopup('Sự kiện: Tấm Cám Đại Chiến! - IDECAF')">
+            <h3>Sự kiện: Tấm Cám Đại Chiến! - IDECAF</h3>
+            <img src="nghệ thuật/sk2.png">
+            <p>
+                <a href="nghệ thuật/sukien2.html">
+                    <button> Xem chi tiết</button>
+                </a>
+            </p>
+        </div>
+        <div class="card" data-category="art" onclick="openPopup('Show Thực Cảnh Anh Hùng Cờ Lau - Đinh Bộ Lĩnh')">
+            <h3>Sự kiện: Show Thực Cảnh Anh Hùng Cờ Lau - Đinh Bộ Lĩnh</h3>
+            <img src="nghệ thuật/image3.png">
+            <p>
+                <a href="nghệ thuật/sukien3.html">
+                    <button> Xem chi tiết</button>
+                </a>
+            </p>
+        </div>
+         <div class="card" data-category="art" onclick="openPopup('Sân Khấu 5B: Xóm Phông Bạt')">
+            <h3>Sân Khấu 5B: Xóm Phông Bạt</h3>
+            <img src="nghệ thuật/image4.png">
+            <p>
+                <a href="nghệ thuật/sukien4.html">
+                    <button> Xem chi tiết</button>
+                </a>
+            </p>
+         </div>
+         <div class="card" data-category="art" onclick="openPopup('Sự kiện: Ngăn Lạnh Số 44 - SKNT Trương Hùng Minh')">
+            <h3>Sự kiện: Ngăn Lạnh Số 44 - SKNT Trương Hùng Minh</h3>
+            <img src="nghệ thuật/image5.png">
+            <p>
+                <a href="nghệ thuật/sukien5.html">
+                    <button> Xem chi tiết</button>
+                </a>
+            </p>
+        </div>
         <div class="card" data-category="workshop" onclick="openPopup('Sự kiện 6')">
             <h3>Sự kiện 6</h3>
             <p>Hà tự tìm nhé</p>
         </div>
-
-        <div class="card" data-category="workshop" onclick="openPopup('Sự kiện 7')">
-            <h3>Sự kiện 7</h3>
+        <div class="card" data-category="workshop" onclick="openPopup('Sự kiện 6')">
+            <h3>Sự kiện 6</h3>
             <p>Hà tự tìm nhé</p>
         </div>
-
+        <div class="card" data-category="workshop" onclick="openPopup('Sự kiện 6')">
+            <h3>Sự kiện 6</h3>
+            <p>Hà tự tìm nhé</p>
+        </div>
+        
     </div>
 </section>
 

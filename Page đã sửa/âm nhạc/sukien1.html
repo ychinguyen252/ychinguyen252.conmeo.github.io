@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[LEMLAB] Workshop TRẢI NGHIỆM LÀM GỐM TRẺ EM</title>
+    <title>Đêm nhạc Mỹ Vị Cuộc Đời - Trung Quân & Myra Trần</title>
 </head>
 <style>
-    /* ================= RESET ================= */
+/* ================= RESET ================= */
 * {
     margin: 0;
     padding: 0;
@@ -172,13 +172,13 @@ section:last-of-type {
     padding-top: 20px;
 }
 
-.suggest h4 {
-    font-size: 18px;
-    margin-bottom: 15px;
-    color: #a78bfa;
-    border-left: 4px solid #a78bfa;
-    padding-left: 10px;
+section:last-of-type h4 {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 22px;
+    padding: 10px 6px;
 }
+
 /* ================= BUTTON ================= */
 button {
     width: 100%;
@@ -219,155 +219,87 @@ button[disabled] {
         padding: 20px;
     }
 }
-/* ACTION */
-.action-bar {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.action-bar button {
-    flex: 1;
-}
-
-/* COMMENT */
-.comment-box {
-    margin-top: 30px;
-}
-
-.comment-input {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.comment-input input {
-    flex: 1;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-}
-
-#commentList div {
-    background: #fff;
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    border: 1px solid #eee;
-}
-
-/* SUGGEST */
-.suggest {
-    margin-top: 30px;
-}
-
-.suggest-grid {
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 10px;
-}
-
-.suggest-card {
-    background: #fff;
-    padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.suggest-card:hover {
-    transform: scale(1.05);
-}
-
-.suggest-card img {
-    width: 100%;
-    border-radius: 8px;
-}
 </style>
 <body>
     <details>
         <summary>
-            <div>
-                <img src="image2.png" alt="Lemlab Pottery Workshop">
+            <div class="event-banner">
+                <img src="image1.png" alt="Banner Mỹ Vị Cuộc Đời">
             </div>
-            
-            <div>
-                <h3>
-                    [LEMLAB] Workshop TRẢI NGHIỆM LÀM GỐM TRẺ EM
+
+            <div class="event-content">
+                <h3 class="event-title">
+                    [CAT&MOUSE] CA SĨ TRUNG QUÂN + CA SĨ MYRA TRẦN
                 </h3>
                 <p>
-                    Giá từ <span>350.000đ</span>
+                    Giá từ <span class="event-price">1.200.000đ</span>
                 </p>
                 <div>
-                    <span>🗓️</span> 03 tháng 05, 2026
+                    <span>🗓️</span>
+                    <span class="event-date">02 tháng 05, 2026</span>
                 </div>
                 <div>
-                    <span>📍</span>
-                    <div>
-                        <strong>Lemlab Pottery Studio</strong>
-                        <span>83F Trần Kế Xương, Phường 7, Quận Phú Nhuận, TPHCM</span>
-                    </div>
-                </div>
-                <div>
-                    ▼ Click để xem Giới thiệu đầy đủ, Lịch hoạt động & BTC ▼
+                    ▼ Click để xem Giới thiệu & Lịch diễn chi tiết ▼
                 </div>
             </div>
         </summary>
 
         <div>
-            
-            <section>
-                <h4>Giới thiệu workshop</h4>
+            <div class="section-intro">
+                <h4>GIỚI THIỆU SỰ KIỆN</h4>
+                <p>Đêm nhạc đặc biệt mang tên "Mỹ Vị Cuộc Đời" với sự kết hợp của hai giọng ca nội lực Trung Quân và Myra Trần.</p>
+                <img src="skns1.1.png" alt="Trung Quân Idol">
+                <img src="skns1.2.png" alt="Myra Trần">
+            </div>
+
+            <div class="section-schedule">
+                <h4>Lịch diễn</h4>
                 
                 <div>
-                    <p>🌺 Thỏa sức sáng tạo cùng gốm 🌺</p>
-                    <p>Thử sức sáng tạo và sự khéo tay của bé khi làm gốm. Trẻ em hay làm người lớn bất ngờ bởi những ý tưởng mới lạ của mình lắm. Hãy thử để bé được lăn xả cùng gốm, không ngại lấm lem, để hiểu thêm về tính cách, khả năng sáng tạo của bé thông qua các hoạt động nhé.</p>
-                    
-                    <p>Các bé tham dự sẽ được cung cấp đầy đủ dụng cụ và nguyên liệu để tự tay làm và trang trí các sản phẩm đơn giản theo chủ đề. Mỗi bạn sẽ được làm một sản phẩm của riêng mình, và sản phẩm sẽ được nung hoàn chỉnh sau 20 ngày.</p>
-                    
                     <div>
-                        <p>• <strong>Thời gian:</strong> 10:00 - 12:30</p>
-                        <p>• <strong>Địa chỉ:</strong> LemLab Pottery Studio - 83F Trần Kế Xương, Phường 7, Quận Phú Nhuận</p>
-                        <p>• <strong>Phí tham dự:</strong> 350.000 đồng/ bé (phụ phí 50k/ tiếng nếu làm thêm giờ)</p>
+                        <div>
+                            <p>20:00 - 23:00, T7</p>
+                            <p>02 Tháng 05, 2026</p>
+                        </div>
+                        <button>Mua vé ngay</button>
+                    </div>
+
+                    <div>
+                        <p>Thông tin vé</p>
+                        
+                        <div>
+                            <span>STANDARD 1</span>
+                            <span>1.200.000 đ</span>
+                        </div>
+
+                        <div>
+                            <span>VIP</span>
+                            <span>2.100.000 đ</span>
+                        </div>
+
+                        <div>
+                            <span>SUPER VIP</span>
+                            <span>2.400.000 đ</span>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <section>
-                <h4>Lịch hoạt động tháng 5/2026</h4>
-                <div>
-                    <p>Workshop mở vào các ngày cuối tuần.</p>
-                    <p>Tổng cộng 5 suất diễn có sẵn.</p>
-                    <p>Ngày hoạt động: 03, 04, 05, 07, 09, 10 Tháng 05.</p>
-                </div>
-            </section>
-
-            <section>
+            <div class="organizer-section">
                 <h4>Ban tổ chức</h4>
                 <div>
-                    <img src="skht2.1.png" alt="Logo Lemlab">
+                    <img src="skns1.3.png" alt="Logo Cat&Mouse">
                     <div>
-                        <h3>Lemlab Pottery Studio</h3>
-                        <p>"Mong được cùng bé chia sẻ hành trình làm gốm."</p>
+                        <h3>Cat&Mouse Live Music</h3>
+                        <p>Phòng trà Cat&Mouse Live Music</p>
                     </div>
                 </div>
-            </section>
+                <p>📍 37B Phạm Ngọc Thạch, P. Xuân Hòa, TP. Hồ Chí Minh</p>
+            </div>
 
-            <section>
-                <h4>LƯU Ý</h4>
-                <div>
-                    <p>• Workshop phù hợp cho trẻ em từ <strong>6 - 12 tuổi</strong>.</p>
-                    <p>• Phí tham gia đã bao gồm nguyên liệu, dụng cụ, tráng men và nung hoàn thiện.</p>
-                    <p>• Sản phẩm cần thời gian nung và sẽ được gửi trả sau <strong>20 ngày</strong>.</p>
-                    <p>• Vui lòng đến đúng giờ (09:30 - 12:00) để đảm bảo thời gian trải nghiệm tốt nhất cho bé.</p>
-                </div>
-            </section>
-
-            <button type="button">
-                ĐĂNG KÝ NGAY
-            </button>
+            <button>MUA VÉ NGAY</button>
             <!-- ACTION -->
-<div class="action-bar" data-id="event2" data-name="[LEMLAB] Workshop TRẢI NGHIỆM LÀM GỐM TRẺ EM">
+<div class="action-bar" data-id="event1" data-name="Đêm nhạc Mỹ Vị Cuộc Đời - Trung Quân & Myra Trần">
     <button class="cart-btn">🛒 Thêm vào giỏ</button>
     <button class="fav-btn">❤️ Yêu thích</button>
 </div>
@@ -390,23 +322,23 @@ button[disabled] {
 
     <div class="suggest-grid">
         <div class="suggest-card">
-            <img src="image1.png">
-            <a href="sukien1.html">[VIVIAN VU’S CANDLES] WORKSHOP LÀM NẾN THƠM</a>
+            <img src="image2.png">
+            <a href="sukien2.html">Sự kiện: Tan Tan Acoustic - Monarch Creative Studio</a>
         </div>
 
         <div class="suggest-card">
             <img src="image3.png">
-            <a href="sukien3.html">[LEMLAB] Workshop TRẢI NGHIỆM VẼ LY GỐM</a>
+            <a href="sukien3.html">Chi tiết Sự kiện - BLU Nightfall</a>
         </div>
 
         <div class="suggest-card">
             <img src="image4.png">
-            <a href="sukien4.html">[Quà Tặng Tâm Ý] Workshop Làm Quà Tặng</a>
+            <a href="sukien4.html">Sự kiện: Ladies Night Negav</a>
         </div>
 
         <div class="suggest-card">
             <img src="image5.png">
-            <a href="sukien5.html">[Qode] LUNCH & LEARN: Workshop về Phỏng vấn Ứng viên</a>
+            <a href="sukien5.html">Mr Siro Fan Concert</a>
         </div>
     </div>
 </section>
