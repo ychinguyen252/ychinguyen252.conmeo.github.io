@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>B.DUCK CITYFUNS @Vincom Center Landmark 81</title>
-    <link rel="stylesheet" href="sk1.css">
 </head>
 <body >
 
@@ -15,7 +14,7 @@
         <summary >
             <div >
                 <!-- Banner sự kiện (Từ ảnh Screenshot 2026-05-03 180138.jpg) -->
-                <img src="image.png" alt="B.Duck Cityfuns Banner" >
+                <img src="image3.png" alt="B.Duck Cityfuns Banner" >
             </div>
             
             <div >
@@ -64,7 +63,7 @@
                     </ul>
 
                     <!-- Ảnh giới thiệu 2 -->
-                    <img src="sktq3.2.jpeg" alt="Trò chơi cho bé" >
+                    <img src="sktq3.2.png" alt="Trò chơi cho bé" >
 
                     <ul >
                         <li>Tiêu chuẩn Quốc tế.</li>
@@ -119,8 +118,93 @@
             <button type="button" >
                 MUA VÉ NGAY
             </button>
+                        <!-- ACTION -->
+<div class="action-bar" data-id="event3" data-name="B.DUCK CITYFUNS @Vincom Center Landmark 81">
+    <button class="cart-btn">🛒 Thêm vào giỏ</button>
+    <button class="fav-btn">❤️ Yêu thích</button>
+</div>
+
+<!-- COMMENT -->
+<section class="comment-box">
+    <h4>Bình luận</h4>
+
+    <div class="comment-input">
+        <input type="text" id="cmtInput" placeholder="Viết bình luận...">
+        <button onclick="addComment()">Gửi</button>
+    </div>
+
+    <div id="commentList"></div>
+</section>
+
+<!-- SUGGEST -->
+<section class="suggest">
+    <h4>Bạn có thể thích</h4>
+
+    <div class="suggest-grid">
+        <div class="suggest-card">
+            <img src="image1.png">
+            <a href="sukien1.html">Tour Đêm Văn Miếu - Quốc Tử Giám</a>
+        </div>
+
+        <div class="suggest-card">
+            <img src="image2.png">
+            <a href="sukien2.html">Phật Bảo Nghiêm Trấn - Triển Lãm Di Sản Phật Giáo</a>
+        </div>
+
+        <div class="suggest-card">
+            <img src="image4.png">
+            <a href="sukien4.html">Địa đạo Củ Chi - Trăng Chiến Khu</a>
+        </div>
+
+        <div class="suggest-card">
+            <img src="image5.png">
+            <a href="sukien5.html">Sensation of "I DO" - White Palace</a>
+        </div>
+    </div>
+</section>
         </div>
     </details>
+    <script>
+        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+const actionBar = document.querySelector(".action-bar");
+const favBtn = document.querySelector(".fav-btn");
+const cartBtn = document.querySelector(".cart-btn");
+
+// ❤️ YÊU THÍCH
+if (favBtn) {
+    favBtn.onclick = () => {
+        const id = actionBar.dataset.id;
+        const name = actionBar.dataset.name;
+
+        const index = favorites.findIndex(i => i.id === id);
+
+        if (index === -1) {
+            favorites.push({ id, name });
+            favBtn.innerText = "💜 Đã thích";
+        } else {
+            favorites.splice(index, 1);
+            favBtn.innerText = "❤️ Yêu thích";
+        }
+
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+    };
+}
+
+// 🛒 GIỎ HÀNG
+if (cartBtn) {
+    cartBtn.onclick = () => {
+        const id = actionBar.dataset.id;
+        const name = actionBar.dataset.name;
+
+        cart.push({ id, name });
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert("Đã thêm vào giỏ 🛒");
+    };
+}
+    </script>
 
 </body>
 </html>

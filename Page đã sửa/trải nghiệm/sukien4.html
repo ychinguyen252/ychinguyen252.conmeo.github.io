@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Địa đạo Củ Chi - Trăng Chiến Khu</title>
-    <link rel="stylesheet" href="sk1.css">
 </head>
 <body>
 
@@ -12,7 +11,7 @@
         
         <summary>
             <div>
-                <img src="image.png" alt="Trăng Chiến Khu Banner">
+                <img src="image4.png" alt="Trăng Chiến Khu Banner">
                 <span>Đã diễn ra</span>
             </div>
             
@@ -107,8 +106,93 @@
             <button type="button" disabled>
                 SỰ KIỆN ĐÃ KẾT THÚC
             </button>
+                        <!-- ACTION -->
+<div class="action-bar" data-id="event4" data-name="Địa đạo Củ Chi - Trăng Chiến Khu">
+    <button class="cart-btn">🛒 Thêm vào giỏ</button>
+    <button class="fav-btn">❤️ Yêu thích</button>
+</div>
+
+<!-- COMMENT -->
+<section class="comment-box">
+    <h4>Bình luận</h4>
+
+    <div class="comment-input">
+        <input type="text" id="cmtInput" placeholder="Viết bình luận...">
+        <button onclick="addComment()">Gửi</button>
+    </div>
+
+    <div id="commentList"></div>
+</section>
+
+<!-- SUGGEST -->
+<section class="suggest">
+    <h4>Bạn có thể thích</h4>
+
+    <div class="suggest-grid">
+        <div class="suggest-card">
+            <img src="image1.png">
+            <a href="sukien1.html">Tour Đêm Văn Miếu - Quốc Tử Giám</a>
+        </div>
+
+        <div class="suggest-card">
+            <img src="image2.png">
+            <a href="sukien2.html">Phật Bảo Nghiêm Trấn - Triển Lãm Di Sản Phật Giáo</a>
+        </div>
+
+        <div class="suggest-card">
+            <img src="image3.png">
+            <a href="sukien3.html">B.DUCK CITYFUNS @Vincom Center Landmark 81</a>
+        </div>
+
+        <div class="suggest-card">
+            <img src="image5.png">
+            <a href="sukien5.html">[Qode] LUNCH & LEARN: Workshop về Phỏng vấn Ứng viên</a>
+        </div>
+    </div>
+</section>
         </div>
     </details>
+    <script>
+        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+const actionBar = document.querySelector(".action-bar");
+const favBtn = document.querySelector(".fav-btn");
+const cartBtn = document.querySelector(".cart-btn");
+
+// ❤️ YÊU THÍCH
+if (favBtn) {
+    favBtn.onclick = () => {
+        const id = actionBar.dataset.id;
+        const name = actionBar.dataset.name;
+
+        const index = favorites.findIndex(i => i.id === id);
+
+        if (index === -1) {
+            favorites.push({ id, name });
+            favBtn.innerText = "💜 Đã thích";
+        } else {
+            favorites.splice(index, 1);
+            favBtn.innerText = "❤️ Yêu thích";
+        }
+
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+    };
+}
+
+// 🛒 GIỎ HÀNG
+if (cartBtn) {
+    cartBtn.onclick = () => {
+        const id = actionBar.dataset.id;
+        const name = actionBar.dataset.name;
+
+        cart.push({ id, name });
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert("Đã thêm vào giỏ 🛒");
+    };
+}
+    </script>
 
 </body>
 </html>

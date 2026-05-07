@@ -103,3 +103,62 @@ function closeModal() {
 
     document.getElementById('modal-container').style.display = 'none';
 }
+//==== coundown timer ====//
+function updateCountdown(id, targetDate) {
+
+    const now = new Date().getTime();
+
+    const distance = targetDate - now;
+
+    if (distance <= 0) {
+        document.getElementById(id).innerHTML = "Đã diễn ra";
+        return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+    const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24))
+        / (1000 * 60 * 60)
+    );
+
+    const minutes = Math.floor(
+        (distance % (1000 * 60 * 60))
+        / (1000 * 60)
+    );
+
+    const seconds = Math.floor(
+        (distance % (1000 * 60))
+        / 1000
+    );
+
+    document.getElementById(id).innerHTML =
+        `${days} ngày ${hours} giờ ${minutes} phút ${seconds} giây`;
+}
+
+// update liên tục
+setInterval(() => {
+
+    // 09/05/2026
+    updateCountdown(
+        "countdown1",
+        new Date("May 9, 2026 10:00:00").getTime()
+    );
+
+    updateCountdown(
+        "countdown2",
+        new Date("May 9, 2026 18:00:00").getTime()
+    );
+
+    // 10/05/2026
+    updateCountdown(
+        "countdown3",
+        new Date("May 10, 2026 09:00:00").getTime()
+    );
+
+    updateCountdown(
+        "countdown4",
+        new Date("May 10, 2026 20:00:00").getTime()
+    );
+
+}, 1000);
