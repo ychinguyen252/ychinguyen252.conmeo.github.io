@@ -181,12 +181,16 @@ section:last-of-type {
     border-top: 1px solid #eee;
     padding-top: 20px;
 }
+.note-section {
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
 
-section:last-of-type h4 {
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    font-size: 22px;
-    padding: 10px 6px;
+.note-section h4 {
+    writing-mode: horizontal-tb;
+    transform: none;
+    font-size: 14px;
+    padding: 0;
 }
 
 /* ================= BUTTON ================= */
@@ -327,7 +331,7 @@ button[disabled] {
 </section>
 
 <!-- SUGGEST -->
-<section class="suggest">
+<section class="note-section">
     <h4>Bạn có thể thích</h4>
 
     <div class="suggest-grid">
