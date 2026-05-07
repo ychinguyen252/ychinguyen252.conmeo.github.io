@@ -24,7 +24,8 @@ body {
 
 /* ================= CONTAINER ================= */
 details {
-    width: 700px;
+    width: 100%;
+    max-width: 700px;
     background: #ffffff;
     border-radius: 18px;
     overflow: hidden;
@@ -51,8 +52,9 @@ summary::-webkit-details-marker {
 /* ================= IMAGE ================= */
 summary img {
     width: 100%;
-    display: block;
+    height: 280px;
     object-fit: cover;
+    display: block;
 }
 
 /* Badge */
@@ -157,7 +159,15 @@ section img {
     margin: 15px 0;
     border: 1px solid #eee;
 }
-
+.section-intro img{
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border-radius: 16px;
+    object-fit: cover;
+}
 /* Box */
 section > div {
     background: #ffffff;
@@ -261,7 +271,9 @@ button[disabled] {
                             <p>20:00 - 23:00, T7</p>
                             <p>02 Tháng 05, 2026</p>
                         </div>
-                        <button>Mua vé ngay</button>
+                        <a href="thanh toan/thanhtoan.html">
+                            <button>Mua vé ngay</button>
+                        </a>
                     </div>
 
                     <div>
@@ -296,8 +308,6 @@ button[disabled] {
                 </div>
                 <p>📍 37B Phạm Ngọc Thạch, P. Xuân Hòa, TP. Hồ Chí Minh</p>
             </div>
-
-            <button>MUA VÉ NGAY</button>
             <!-- ACTION -->
 <div class="action-bar" data-id="event1" data-name="Đêm nhạc Mỹ Vị Cuộc Đời - Trung Quân & Myra Trần">
     <button class="cart-btn">🛒 Thêm vào giỏ</button>

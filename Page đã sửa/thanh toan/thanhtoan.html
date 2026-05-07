@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html  lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="thanhtoan.css">
+</head>
+<style>
+/* ================= RESET ================= */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: linear-gradient(135deg, #f5efff, #ede4ff, #f8f4ff);
+    font-family: 'Inter', sans-serif;
+    color: #2d2140;
+    min-height: 100vh;
+    padding-bottom: 130px;
+
+}
+
+/* ================= HEADER ================= */
+header{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid #e7dfff;
+}
+
+header > div{
+    max-width: 900px;
+    margin: auto;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+header button{
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    border: none;
+    background: #ede4ff;
+    color: #7b57d1;
+    cursor: pointer;
+    font-family: 'Material Symbols Outlined';
+    font-size: 24px;
+    transition: 0.3s;
+}
+
+header button:hover{
+    background: #dccbff;
+    transform: scale(1.05);
+}
+
+header h1{
+    font-size: 24px;
+    font-weight: 700;
+    color: #5d3bb8;
+}
+
+/* ================= MAIN ================= */
+main{
+    max-width: 900px;
+    margin: auto;
+    padding: 30px 22px;
+}
+
+/* ================= PROGRESS ================= */
+main > div:first-child{
+    background: rgba(255,255,255,0.7);
+    border: 1px solid #e7dfff;
+    border-radius: 24px;
+    padding: 25px 20px;
+    margin-bottom: 24px;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 8px 25px rgba(143, 111, 255, 0.08);
+}
+
+main > div:first-child > div{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+main > div:first-child > div > div:nth-child(1),
+main > div:first-child > div > div:nth-child(2){
+    position: absolute;
+    top: 18px;
+    left: 15%;
+    width: 70%;
+    height: 5px;
+    background: #d9c8ff;
+    border-radius: 20px;
+}
+
+main > div:first-child > div > div:nth-child(2){
+    width: 70%;
+    background: linear-gradient(90deg, #b388ff, #7b57d1);
+}
+
+main > div:first-child > div > div:nth-child(n+3){
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #7154b2;
+    font-weight: 600;
+}
+
+main > div:first-child span[class]{
+    font-family: 'Material Symbols Outlined';
+}
+
+main > div:first-child > div > div:nth-child(n+3) > div{
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #b388ff, #7b57d1);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    box-shadow: 0 5px 15px rgba(123,87,209,0.25);
+}
+
+/* ================= TIMER ================= */
+main > div:nth-child(2){
+    background: linear-gradient(135deg, #c8a8ff, #a87fff);
+    color: white;
+    padding: 18px 22px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    box-shadow: 0 10px 25px rgba(140, 99, 255, 0.18);
+}
+
+main > div:nth-child(2) span:first-child{
+    font-family: 'Material Symbols Outlined';
+    font-size: 28px;
+}
+
+/* ================= CARD CHUNG ================= */
+section{
+    background: rgba(255,255,255,0.72);
+    border: 1px solid #e6ddff;
+    border-radius: 26px;
+    padding: 24px;
+    margin-bottom: 24px;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 10px 25px rgba(124, 84, 199, 0.08);
+}
+
+/* ================= EVENT ================= */
+section img{
+    width: 100%;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+section h2{
+    margin-top: 18px;
+    font-size: 26px;
+    color: #5b36bc;
+}
+
+section h3{
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #5d3bb8;
+}
+
+section > div:nth-child(1){
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+section > div:nth-child(1) > div{
+    flex: 1;
+}
+
+section > div:nth-child(1) > div > div{
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+section > div:nth-child(1) span[class]{
+    font-family: 'Material Symbols Outlined';
+    color: #9a70ff;
+}
+
+section > div:nth-child(1) > div > div > div{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #5f5575;
+}
+
+/* ================= PRICE ================= */
+section > div:nth-child(3){
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+section > div:nth-child(3) > div{
+    display: flex;
+    justify-content: space-between;
+    color: #5f5575;
+    font-size: 15px;
+}
+
+/* ================= PROMOTION ================= */
+label{
+    display: block;
+    font-weight: 600;
+    margin-bottom: 14px;
+    color: #5c3eb3;
+}
+
+input[type="text"]{
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 16px;
+    border: 1px solid #d9c7ff;
+    background: white;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+}
+
+input[type="text"]:focus{
+    border-color: #9c70ff;
+    box-shadow: 0 0 0 4px rgba(156,112,255,0.15);
+}
+
+section button:not(.qr-close) {
+    border: none;
+    background: linear-gradient(135deg, #a97fff, #7a58d1);
+    color: white;
+    padding: 14px 22px;
+    border-radius: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+   
+}
+
+section button:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(122,88,209,0.22);
+}
+
+/* ================= PAYMENT ================= */
+section > div > label{
+    background: white;
+    border: 1px solid #eadfff;
+    border-radius: 20px;
+    padding: 18px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+section > div > label:hover{
+    border-color: #b087ff;
+    transform: translateY(-2px);
+}
+
+section > div > label > div{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+section > div > label > div > div{
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #caaeff, #9b70ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+}
+
+input[type="radio"]{
+    accent-color: #8d67f0;
+    width: 20px;
+    height: 20px;
+}
+
+/* ================= POLICY ================= */
+main p{
+    text-align: center;
+    color: #736887;
+    line-height: 1.7;
+}
+
+main a{
+    color: #7f57e2;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* ================= FOOTER ================= */
+footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid #eadfff;
+    z-index: 1000;
+}
+
+.footer-content{
+    max-width: 900px;
+    margin: auto;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.footer-price{
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-price span:first-child{
+    color: #776b8f;
+    font-size: 14px;
+}
+
+.footer-price span:last-child{
+    font-size: 28px;
+    font-weight: 700;
+    color: #6e45d7;
+}
+
+#payBtn{
+    border: none;
+    background: linear-gradient(135deg, #af86ff, #7b57d1);
+    color: white;
+    padding: 16px 40px;
+    border-radius: 18px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 10px 20px rgba(123,87,209,0.25);
+}
+
+#payBtn:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 14px 25px rgba(123,87,209,0.35);
+}
+/* ================= QR OVERLAY ================= */
+.qr-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    inset: 0;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(6px);
+
+    z-index: 9999;
+}
+.qr-overlay.active {
+    display: flex;
+}
+
+/* ================= QR POPUP ================= */
+.qr-popup{
+    width: 460px;
+    background: #ffffff;
+    border-radius: 30px;
+    padding: 34px 32px 30px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 25px 60px rgba(91, 63, 191, 0.25);
+    animation: popupShow 0.3s ease;
+   pointer-events: auto;
+}
+
+/* ================= CLOSE BUTTON ================= */
+.qr-close{
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 42px;
+    height: 42px;
+    border: none;
+    background: transparent;
+    font-size: 42px;
+    line-height: 42px;
+    color: #7d7b92;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.qr-close:hover{
+    color: #6f46e8;
+    transform: rotate(90deg);
+}
+
+/* ================= ICON ================= */
+.qr-icon{
+    width: 84px;
+    height: 84px;
+    margin: 0 auto 22px;
+    border-radius: 50%;
+    background: #f3ebff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #7b57d1;
+    font-size: 42px;
+    font-weight: bold;
+}
+
+/* ================= TITLE ================= */
+.qr-title{
+    font-size: 34px;
+    font-weight: 700;
+    color: #6e45d7;
+    margin-bottom: 12px;
+}
+
+/* ================= DESCRIPTION ================= */
+.qr-desc{
+    font-size: 18px;
+    color: #80759a;
+    margin-bottom: 26px;
+    line-height: 1.6;
+}
+
+/* ================= QR BOX ================= */
+.qr-box{
+    width: 300px;
+    height: 300px;
+    margin: auto;
+    background: #f7f1ff;
+    border-radius: 24px;
+    padding: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ================= QR IMAGE ================= */
+.qr-box img{
+    width: 100% !important;
+    max-width: 260px;
+    height: 100% !important;
+    display: block;
+    margin: auto;
+    object-fit: contain;
+    border-radius: 14px;
+    background: white;
+}
+
+/* ================= NOTE ================= */
+.qr-note{
+    margin-top: 24px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #8b82a4;
+}
+
+/* ================= TIMER ================= */
+.qr-timer{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #7b57d1;
+}
+
+/* ================= ANIMATION ================= */
+@keyframes popupShow{
+    from{
+        opacity: 0;
+        transform: scale(0.88);
+    }
+    to{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px){
+
+    .qr-popup{
+        width: 92%;
+        padding: 28px 20px;
+    }
+
+    .qr-title{
+        font-size: 28px;
+    }
+
+    .qr-desc{
+        font-size: 16px;
+    }
+
+    .qr-box{
+        width: 240px;
+        height: 240px;
+    }
+
+    .qr-timer{
+        font-size: 20px;
+    }
+}
+</style>
+<body >
+<!-- Top App Bar -->
+<header >
+<div >
+<button >arrow_back</button>
+<h1 >Thanh toán</h1>
+</div>
+</header>
+<main >
+<!-- Checkout Progress Indicator -->
+<div >
+<div >
+<!-- Progress Line -->
+<div ></div>
+<div ></div>
+<!-- Steps -->
+<div >
+<div >
+<span  >check</span>
+</div>
+<span >Chọn vé</span>
+</div>
+<div >
+<div >
+<span  >check</span>
+</div>
+<span >Thông tin</span>
+</div>
+<div >
+<div >
+                        3
+                    </div>
+<span >Thanh toán</span>
+</div>
+</div>
+</div>
+<!-- Timer Banner -->
+<div >
+<span >timer</span>
+<span >Thời gian giữ vé: <span >09:59</span></span>
+</div>
+<!-- Event Summary Card -->
+<section >
+<div >
+<img alt="Event"  data-alt="A wide-angle shot of a vibrant indie rock concert at night. The stage is bathed in atmospheric blue and magenta lighting, with a silhouettes of a band performing in front of a cheering crowd with their hands raised. The visual style is energetic and professional, with high contrast and sharp details that evoke the excitement of a live musical performance in a modern arena." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCt3-NWum5VGl95qoYneamRKsqKsp7uki_utgXtk66qbtAy7EBORjKDMuxvoy2n3tmBEEYXLHYf3ryF8OV9Ib9EmG7V8iwqlK8bBYeNCzYGB9yzreO1XtdRJRzWV6MkkMqO4iRbCmZ7AtA02oKz5FdfrhKz8udEoJf6foemZtQiNWNsClXXtxy39g-hOn_UYoUyWzOOQRObpruFV2iEOarUXiM2LLWBOPlzt_Ue8ZXoychGb6d2qmgc9PNqBdiLcDQnIkVpzd9iOtLZ"/>
+<div >
+<h2 >CHILLIES CONCERT 2024</h2>
+<div >
+<div >
+<span >calendar_today</span>
+<span >19:00, Thứ Bảy, 15/06/2024</span>
+</div>
+<div >
+<span >location_on</span>
+<span >Nhà thi đấu Quân khu 7, TP.HCM</span>
+</div>
+</div>
+</div>
+</div>
+<div ></div>
+<div >
+<div >
+<span >Standard Ticket x2</span>
+<span >1,200,000đ</span>
+</div>
+<div >
+<span >Phí dịch vụ</span>
+<span >40,000đ</span>
+</div>
+</div>
+</section>
+<!-- Promotion Code -->
+<section >
+<label >Mã giảm giá</label>
+<div >
+<input  placeholder="Nhập mã ưu đãi" type="text"/>
+<button >Áp dụng</button>
+</div>
+</section>
+<!-- Payment Methods -->
+<section >
+<h3 >Phương thức thanh toán</h3>
+<div >
+<!-- MoMo -->
+<label >
+<div >
+<div >
+<span >MOMO</span>
+</div>
+<span >MoMo</span>
+</div>
+<input checked=""  name="payment" type="radio"/>
+</label>
+<!-- ZaloPay -->
+<label >
+<div >
+<div >
+<span >ZALO</span>
+</div>
+<span >ZaloPay</span>
+</div>
+<input  name="payment" type="radio"/>
+</label>
+<!-- ATM -->
+<label >
+<div >
+<div >
+<span >account_balance</span>
+</div>
+<span >Thẻ nội địa (ATM)</span>
+</div>
+<input  name="payment" type="radio"/>
+</label>
+<!-- Visa/Master -->
+<label >
+<div >
+<div >
+<span >credit_card</span>
+</div>
+<span >Thẻ quốc tế (Visa/Master)</span>
+</div>
+<input  name="payment" type="radio"/>
+</label>
+</div>
+</section>
+<!-- Policies -->
+<p >
+            Bằng việc nhấn Thanh toán, bạn đồng ý với <a  href="#">Điều khoản &amp; Chính sách</a> của Ticketbox.
+        </p>
+</main>
+<!-- Sticky Bottom Section -->
+<footer>
+    <div class="footer-content">
+
+        <div class="footer-price">
+            <span>Tổng cộng</span>
+            <span>1,240,000đ</span>
+        </div>
+
+        <button id="payBtn">
+            Thanh toán
+        </button>
+
+    </div>
+</footer>
+<!-- Popup QR -->
+<div class="qr-overlay">
+    <div class="qr-popup">
+
+        <button class="qr-close">×</button>
+
+        <div class="qr-icon">⌘</div>
+
+        <h2 class="qr-title">Quét mã để thanh toán</h2>
+
+        <p class="qr-desc">
+            Sử dụng ứng dụng thanh toán để quét mã QR
+        </p>
+
+        <div class="qr-box">
+            <img src="thanhtoan.png" alt="QR Code">
+        </div>
+
+        <p class="qr-note">
+            Vui lòng không tắt ứng dụng cho đến khi xác nhận thanh toán thành công
+        </p>
+
+        <div class="qr-timer">
+            ⏱ Thời gian thanh toán: 09:59
+        </div>
+
+    </div>
+</div>
+<script>
+const payBtn = document.getElementById("payBtn");
+const qrOverlay = document.querySelector(".qr-overlay");
+const closeBtn = document.querySelector(".qr-close");
+
+payBtn.onclick = function () {
+    qrOverlay.style.display = "flex";
+}
+
+closeBtn.onclick = function () {
+    qrOverlay.style.display = "none";
+};
+</script>
+</body>
+</html>
