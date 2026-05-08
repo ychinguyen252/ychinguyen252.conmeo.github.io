@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday Apủn</title>
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body{
+      height:100vh;
+      overflow:hidden;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+
+      /* nền pastel */
+      background:linear-gradient(
+      135deg,
+      #dbeafe,
+      #bfdbfe,
+      #c7d2fe,
+      #a5f3fc
+      );
+
+      position:relative;
+      color:white;
+    }
+
+    /* Bong bóng */
+    .balloon{
+      position:absolute;
+      bottom:-150px;
+      font-size:55px;
+      animation: fly linear infinite;
+      opacity:0.9;
+      filter:drop-shadow(0 0 10px rgba(255,255,255,0.6));
+    }
+
+    .balloon:nth-child(1){left:5%; animation-duration:8s;}
+    .balloon:nth-child(2){left:12%; animation-duration:10s;}
+    .balloon:nth-child(3){left:20%; animation-duration:7s;}
+    .balloon:nth-child(4){left:28%; animation-duration:12s;}
+    .balloon:nth-child(5){left:36%; animation-duration:9s;}
+    .balloon:nth-child(6){left:44%; animation-duration:11s;}
+    .balloon:nth-child(7){left:52%; animation-duration:8s;}
+    .balloon:nth-child(8){left:60%; animation-duration:13s;}
+    .balloon:nth-child(9){left:68%; animation-duration:9s;}
+    .balloon:nth-child(10){left:76%; animation-duration:7s;}
+    .balloon:nth-child(11){left:84%; animation-duration:10s;}
+    .balloon:nth-child(12){left:92%; animation-duration:8s;}
+
+    @keyframes fly{
+      0%{
+        transform:translateY(0) rotate(0deg);
+        opacity:0;
+      }
+
+      10%{
+        opacity:1;
+      }
+
+      100%{
+        transform:translateY(-120vh) rotate(15deg);
+        opacity:0;
+      }
+    }
+
+    /* Card */
+    .card{
+      position:relative;
+      z-index:2;
+      width:70%;
+      max-width:500px;
+      padding:25px;
+      text-align:center;
+
+      background:rgba(255,255,255,0.25);
+
+      backdrop-filter:blur(15px);
+      border-radius:30px;
+
+      border:1px solid rgba(255,255,255,0.4);
+
+      box-shadow:
+      0 10px 30px rgba(59,130,246,0.2);
+
+      animation: fadeIn 1.5s ease;
+    }
+
+    h1{
+      font-size:40px;
+      margin-bottom:20px;
+      color:#2a7ac9;
+      text-shadow:0 0 15px rgba(255,255,255,0.8);
+    }
+
+    h2{
+      font-size:30px;
+      margin-bottom:20px;
+      color:#2a7ac9;
+    }
+
+    p{
+      font-size:18px;
+      line-height:1.8;
+      margin-bottom:35px;
+      color:#2a7ac9;
+    }
+
+    /* Hộp quà */
+    .gift-btn{
+      background:none;
+      border:none;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .gift-btn:hover{
+      transform:scale(1.1);
+    }
+
+    .gift{
+      font-size:90px;
+      animation: shake 1.5s infinite;
+      filter:drop-shadow(0 0 12px rgba(255,255,255,0.8));
+    }
+
+    @keyframes shake{
+      0%{transform:rotate(0deg);}
+      25%{transform:rotate(-5deg);}
+      50%{transform:rotate(5deg);}
+      75%{transform:rotate(-5deg);}
+      100%{transform:rotate(0deg);}
+    }
+
+    /* Popup */
+    .popup{
+      position:fixed;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%) scale(0);
+
+      background:rgba(255,255,255,0.95);
+
+      color:#6366f1;
+
+      width:85%;
+      max-width:500px;
+
+      padding:40px;
+      border-radius:25px;
+      text-align:center;
+
+      z-index:10;
+      transition:0.4s;
+
+      box-shadow:
+      0 10px 40px rgba(96,165,250,0.3);
+    }
+
+    .popup.show{
+      transform:translate(-50%,-50%) scale(1);
+    }
+
+    .popup h3{
+      font-size:38px;
+      margin-bottom:20px;
+      color:#818cf8;
+    }
+
+    .popup p{
+      color:#6366f1;
+      margin-bottom:20px;
+    }
+
+    .close-btn{
+      padding:12px 28px;
+      border:none;
+      border-radius:50px;
+
+      background:linear-gradient(
+      135deg,
+      #93c5fd,
+      #818cf8
+      );
+
+      color:white;
+      font-size:16px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .close-btn:hover{
+      transform:scale(1.05);
+    }
+
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(30px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Bong bóng -->
+  <div class="balloon">🎈</div>
+  <div class="balloon">🎈</div>
+  <div class="balloon">🎈</div>
+  <div class="balloon">🎈</div>
+  <div class="balloon">🎈</div>
+  <div class="balloon">🎈</div>
+  <div class="balloon">🎈</div>
+  <div class="balloon">🎈</div>
+  <div class="balloon">🎈</div>
+  <div class="balloon">🎈</div>
+  <div class="balloon">🎈</div>
+  <div class="balloon">🎈</div>
+
+  <!-- Nội dung -->
+  <div class="card">
+    <h1>🎂 Happy Birthday 🎂</h1>
+
+    <h2>Apủn sinh nhật vui vẻ </h2>
+
+    <p>
+      Chúc AP tuổi mới luôn vui vẻ, hạnh phúc,
+      học thật giỏi và gặp thật nhiều may mắn ✨
+      Mong mọi điều tốt đẹp nhất sẽ đến với AP từ giây phút này và cả sau này!
+    </p>
+
+    <button class="gift-btn" onclick="openGift()">
+      <div class="gift">🎁</div>
+    </button>
+
+    <p>Nhấn vào hộp quà để có được LINH CU 🎉</p>
+  </div>
+
+  <!-- Popup quà -->
+  <div class="popup" id="popup">
+    <h3>💙 Surprise 💙</h3>
+
+    <p>
+      Chúc AP có một sinh nhật thật đáng nhớ,
+      luôn cười thật nhiều và mãi hạnh phúc nhaaa 🎂✨ <br>
+        Đây là ảnh Linh Cu dành tặng AP, mong AP sẽ thích
+    </p>
+
+    <h1>🎉🎈🎂 <br>
+    <img src="trang.png" alt="Linh Cu" width="100">
+</h1>
+
+    <button class="close-btn" onclick="closeGift()">
+      Đóng
+    </button>
+    <a href="anh.html">
+        <button style="background: linear-gradient(135deg, #93c5fd, #818cf8); color: white; border: none; padding: 12px 28px; border-radius: 50px; cursor: pointer; transition: 0.3s;">Ấn vào để nhận quà</button>
+    </a>
+  </div>
+
+  <script>
+    function openGift(){
+      document.getElementById("popup").classList.add("show");
+    }
+
+    function closeGift(){
+      document.getElementById("popup").classList.remove("show");
+    }
+  </script>
+
+</body>
+</html>

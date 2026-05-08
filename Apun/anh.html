@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Gallery 💙</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body{
+      background: linear-gradient(
+      135deg,
+      #dbeafe,
+      #bfdbfe,
+      #c7d2fe,
+      #a5f3fc
+      );
+
+      overflow-x:hidden;
+      min-height:100vh;
+      padding:40px 20px;
+      position:relative;
+    }
+
+    /* Bong bóng */
+    .balloon{
+      position:fixed;
+      bottom:-120px;
+      font-size:50px;
+      animation: fly linear infinite;
+      opacity:0.9;
+      z-index:0;
+    }
+
+    .balloon:nth-child(1){left:5%; animation-duration:8s;}
+    .balloon:nth-child(2){left:15%; animation-duration:11s;}
+    .balloon:nth-child(3){left:25%; animation-duration:7s;}
+    .balloon:nth-child(4){left:35%; animation-duration:12s;}
+    .balloon:nth-child(5){left:45%; animation-duration:9s;}
+    .balloon:nth-child(6){left:55%; animation-duration:13s;}
+    .balloon:nth-child(7){left:65%; animation-duration:8s;}
+    .balloon:nth-child(8){left:75%; animation-duration:10s;}
+    .balloon:nth-child(9){left:85%; animation-duration:9s;}
+    .balloon:nth-child(10){left:95%; animation-duration:11s;}
+
+    @keyframes fly{
+      0%{
+        transform:translateY(0);
+        opacity:0;
+      }
+
+      10%{
+        opacity:1;
+      }
+
+      100%{
+        transform:translateY(-120vh);
+        opacity:0;
+      }
+    }
+
+    /* Hoa rơi */
+    .flower{
+      position:fixed;
+      top:-50px;
+      font-size:30px;
+      animation: fall linear infinite;
+      opacity:0.8;
+      z-index:0;
+    }
+
+    .flower:nth-child(11){left:10%; animation-duration:10s;}
+    .flower:nth-child(12){left:20%; animation-duration:14s;}
+    .flower:nth-child(13){left:30%; animation-duration:12s;}
+    .flower:nth-child(14){left:40%; animation-duration:16s;}
+    .flower:nth-child(15){left:50%; animation-duration:11s;}
+    .flower:nth-child(16){left:60%; animation-duration:15s;}
+    .flower:nth-child(17){left:70%; animation-duration:13s;}
+    .flower:nth-child(18){left:80%; animation-duration:17s;}
+    .flower:nth-child(19){left:90%; animation-duration:12s;}
+
+    @keyframes fall{
+      0%{
+        transform:translateY(0) rotate(0deg);
+      }
+
+      100%{
+        transform:translateY(120vh) rotate(360deg);
+      }
+    }
+
+    .container{
+      position:relative;
+      z-index:2;
+      max-width:1200px;
+      margin:auto;
+      text-align:center;
+    }
+
+    h1{
+      font-size:55px;
+      color:white;
+      margin-bottom:15px;
+      text-shadow:0 0 15px rgba(255,255,255,0.8);
+    }
+
+    p{
+      color:white;
+      font-size:20px;
+      margin-bottom:40px;
+    }
+
+    /* Gallery */
+    .gallery{
+      position:relative;
+      width:100%;
+      min-height:1450px;
+      margin-top:50px;
+    }
+
+    /* Card ảnh */
+    .photo-card{
+      position:absolute;
+      width:220px;
+      height:280px;
+
+      padding:10px;
+
+      background:rgba(255,255,255,0.25);
+
+      backdrop-filter:blur(10px);
+
+      border-radius:25px;
+
+      box-shadow:
+      0 10px 25px rgba(59,130,246,0.25);
+
+      transition:0.4s;
+
+      overflow:hidden;
+    }
+
+    .photo-card:hover{
+      transform:scale(1.06) rotate(0deg) !important;
+      z-index:20;
+    }
+
+    .photo-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:18px;
+    }
+
+    /* Xếp ảnh chéo aesthetic */
+
+    .photo-card:nth-child(1){
+      top:0;
+      left:5%;
+      transform:rotate(-8deg);
+    }
+
+    .photo-card:nth-child(2){
+      top:80px;
+      left:30%;
+      transform:rotate(6deg);
+    }
+
+    .photo-card:nth-child(3){
+      top:30px;
+      right:8%;
+      transform:rotate(-5deg);
+    }
+
+    .photo-card:nth-child(4){
+      top:340px;
+      left:10%;
+      transform:rotate(7deg);
+    }
+
+    .photo-card:nth-child(5){
+      top:420px;
+      left:38%;
+      transform:rotate(-6deg);
+    }
+
+    .photo-card:nth-child(6){
+      top:350px;
+      right:6%;
+      transform:rotate(8deg);
+    }
+
+    .photo-card:nth-child(7){
+      top:700px;
+      left:5%;
+      transform:rotate(-7deg);
+    }
+
+    .photo-card:nth-child(8){
+      top:760px;
+      left:32%;
+      transform:rotate(5deg);
+    }
+
+    .photo-card:nth-child(9){
+      top:690px;
+      right:8%;
+      transform:rotate(-8deg);
+    }
+
+    .photo-card:nth-child(10){
+      top:1050px;
+      left:12%;
+      transform:rotate(6deg);
+    }
+
+    .photo-card:nth-child(11){
+      top:1120px;
+      left:40%;
+      transform:rotate(-5deg);
+    }
+
+    .photo-card:nth-child(12){
+      top:1030px;
+      right:7%;
+      transform:rotate(7deg);
+    }
+
+    /* Nút quay lại */
+
+    .back-btn{
+      margin-top:40px;
+      display:inline-block;
+      padding:14px 30px;
+      border-radius:50px;
+      text-decoration:none;
+      color:white;
+
+      background:linear-gradient(
+      135deg,
+      #93c5fd,
+      #818cf8
+      );
+
+      transition:0.3s;
+      font-size:18px;
+    }
+
+    .back-btn:hover{
+      transform:scale(1.08);
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Bong bóng -->
+  <div class="balloon">🎈</div>
+  <div class="balloon">🎈</div>
+  <div class="balloon">🎈</div>
+  <div class="balloon">🎈</div>
+  <div class="balloon">🎈</div>
+  <div class="balloon">🎈</div>
+  <div class="balloon">🎈</div>
+  <div class="balloon">🎈</div>
+  <div class="balloon">🎈</div>
+  <div class="balloon">🎈</div>
+
+  <!-- Hoa -->
+  <div class="flower">🌸</div>
+  <div class="flower">🌸</div>
+  <div class="flower">🌼</div>
+  <div class="flower">🌸</div>
+  <div class="flower">🌷</div>
+  <div class="flower">🌼</div>
+  <div class="flower">🌸</div>
+  <div class="flower">🌷</div>
+  <div class="flower">🌸</div>
+
+  <div class="container">
+
+    <h1>✨ Our Memories ✨</h1>
+
+    <p>
+      CE LUN BÊN APUN
+    </p>
+
+    <div class="gallery">
+
+      <!-- THAY LINK ẢNH CỦA EM VÀO -->
+
+      <div class="photo-card">
+        <img src="ap1.png">
+      </div>
+
+      <div class="photo-card">
+        <img src="ap2.png">
+      </div>
+
+      <div class="photo-card">
+        <img src="ap3.png">
+      </div>
+
+      <div class="photo-card">
+        <img src="ap4.png">
+      </div>
+
+      <div class="photo-card">
+        <img src="ap5.png">
+      </div>
+
+      <div class="photo-card">
+        <img src="ap6.png">
+      </div>
+
+      <div class="photo-card">
+        <img src="ap7.png">
+      </div>
+
+      <div class="photo-card">
+        <img src="ap8.png">
+      </div>
+
+      <div class="photo-card">
+        <img src="ap9.png">
+      </div>
+
+      <div class="photo-card">
+        <img src="ap10.png">
+      </div>
+
+      <div class="photo-card">
+        <img src="ap11.png">
+      </div>
+
+      <div class="photo-card">
+        <img src="ap12.png">
+      </div>
+
+    </div>
+
+    <a href="chucmung.html" class="back-btn">
+      Oẹ quay lại trang chính
+    </a>
+
+  </div>
+
+</body>
+</html>
