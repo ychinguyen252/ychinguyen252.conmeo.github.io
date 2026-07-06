@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trắc nghiệm Công nghệ số - Chương 1</title>
+    <style>
+        :root {
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --text-main: #1f2937;
+            --text-muted: #4b5563;
+            --correct: #10b981;
+            --incorrect: #ef4444;
+            --border: #e5e7eb;
+            
+            --devil-bg: linear-gradient(135deg, #111827 0%, #7f1d1d 100%);
+            --devil-glow: 0 0 20px rgba(239, 68, 68, 0.6);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 850px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            body {
+                padding: 10px;
+            }
+        }
+
+        header {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .main-quiz {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+            position: relative;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Devil mode style for Question 30 */
+        .main-quiz.devil-mode {
+            background: var(--devil-bg);
+            color: #fca5a5;
+            box-shadow: var(--devil-glow);
+            border: 1px solid #b91c1c;
+        }
+        .main-quiz.devil-mode .question-title {
+            color: #ffffff !important;
+            text-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
+        }
+        .main-quiz.devil-mode .option-label {
+            background-color: rgba(255,255,255,0.05);
+            border-color: #991b1b;
+            color: #fecaca;
+        }
+        .main-quiz.devil-mode .option-label:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 12px;
+        }
+
+        .main-quiz.devil-mode .question-header {
+            border-bottom-color: #991b1b;
+        }
+
+        .question-number {
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--primary);
+        }
+        
+        .main-quiz.devil-mode .question-number {
+            color: #ef4444;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; text-shadow: 0 0 12px #ef4444; }
+            100% { opacity: 0.6; }
+        }
+
+        .question-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            color: var(--text-main);
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .option-item input[type="radio"] {
+            display: none;
+        }
+
+        .option-label {
+            display: block;
+            padding: 14px 18px;
+            background-color: #f9fafb;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .option-label:hover {
+            background-color: #f3f4f6;
+            border-color: #9ca3af;
+        }
+
+        .option-item input[type="radio"]:checked + .option-label {
+            background-color: #eff6ff;
+            border-color: var(--primary);
+            color: #1e40af;
+            font-weight: 500;
+        }
+
+        /* Answer states after submission */
+        .option-item.correct .option-label {
+            background-color: #ecfdf5 !important;
+            border-color: var(--correct) !important;
+            color: #065f46 !important;
+            font-weight: 600;
+            position: relative;
+        }
+        .option-item.correct .option-label::after {
+            content: "✓ Đúng";
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--correct);
+            font-size: 0.85rem;
+        }
+
+        .option-item.incorrect-selected .option-label {
+            background-color: #fef2f2 !important;
+            border-color: var(--incorrect) !important;
+            color: #991b1b !important;
+            position: relative;
+        }
+        .option-item.incorrect-selected .option-label::after {
+            content: "✕ Sai";
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--incorrect);
+            font-size: 0.85rem;
+        }
+
+        .hint-box, .rationale-box {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            display: none;
+        }
+
+        .hint-box {
+            background-color: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            color: #78350f;
+        }
+
+        .rationale-box {
+            background-color: #f0fdf4;
+            border-left: 4px solid var(--correct);
+            color: #166534;
+        }
+
+        .main-quiz.devil-mode .hint-box {
+            background-color: rgba(245, 158, 11, 0.1);
+            border-left-color: #f59e0b;
+            color: #fde68a;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
+        }
+
+        .main-quiz.devil-mode .nav-buttons {
+            border-top-color: #991b1b;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .btn-secondary {
+            background-color: #e5e7eb;
+            color: var(--text-main);
+        }
+        .btn-secondary:hover:not(:disabled) {
+            background-color: #d1d5db;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        .btn-primary:hover:not(:disabled) {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-hint {
+            background-color: #f59e0b;
+            color: white;
+        }
+        .btn-hint:hover {
+            background-color: #d97706;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Sidebar navigation map */
+        .sidebar {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar h3 {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 8px;
+        }
+
+        .question-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        .grid-btn {
+            aspect-ratio: 1;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f3f4f6;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .grid-btn:hover {
+            background-color: #e5e7eb;
+        }
+
+        .grid-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .grid-btn.answered {
+            background-color: #dbeafe;
+            color: #1e40af;
+            border-color: #bfdbfe;
+        }
+
+        .grid-btn.answered.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Post-submit grid classes */
+        .grid-btn.correct-status {
+            background-color: #d1fae5 !important;
+            color: #065f46 !important;
+            border-color: #a7f3d0 !important;
+        }
+        .grid-btn.incorrect-status {
+            background-color: #fee2e2 !important;
+            color: #991b1b !important;
+            border-color: #fca5a5 !important;
+        }
+        .grid-btn.correct-status.active {
+            outline: 3px solid var(--correct);
+        }
+        .grid-btn.incorrect-status.active {
+            outline: 3px solid var(--incorrect);
+        }
+
+        .grid-btn.devil-btn {
+            background-color: #374151;
+            color: #fca5a5;
+            border-color: #4b5563;
+        }
+        .grid-btn.devil-btn:hover {
+            background-color: #4b5563;
+        }
+        .grid-btn.devil-btn.active {
+            background-color: #ef4444 !important;
+            color: white !important;
+            border-color: #ef4444 !important;
+            box-shadow: 0 0 8px #ef4444;
+        }
+
+        .btn-submit-all {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 12px;
+            font-size: 1.05rem;
+            border-radius: 8px;
+            margin-top: 10px;
+            box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2);
+        }
+
+        .btn-submit-all:hover {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+        }
+
+        /* Result Panel overlay */
+        .result-panel {
+            display: none;
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border: 2px solid var(--correct);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .result-panel.fail {
+            background: linear-gradient(135deg, #fff5f5 0%, #fee2e2 100%);
+            border-color: var(--incorrect);
+        }
+
+        .result-score {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #065f46;
+            margin: 10px 0;
+        }
+        .result-panel.fail .result-score {
+            color: #991b1b;
+        }
+
+        .progress-container {
+            width: 100%;
+            background-color: var(--border);
+            border-radius: 4px;
+            height: 6px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Bài Trắc Nghiệm: Máy Tính & Công Nghệ Số</h1>
+            <p>Phạm vi: Kiến thức Nền tảng Chương 1 (30 câu hỏi từ Dễ đến Khó)</p>
+            <div class="progress-container">
+                <div class="progress-bar" id="topProgressBar"></div>
+            </div>
+        </header>
+
+        <!-- Main Quiz Block -->
+        <div class="main-quiz" id="quizCard">
+            <div>
+                <div class="question-header">
+                    <span class="question-number" id="qNumberDisplay">Câu 1/30</span>
+                    <button class="btn-hint" id="btnHint" onclick="toggleHint()">💡 Xem Gợi Ý</button>
+                </div>
+
+                <div class="question-title" id="qTitle">Đang tải câu hỏi...</div>
+
+                <div class="hint-box" id="hintBox"></div>
+                <div class="rationale-box" id="rationaleBox"></div>
+
+                <div class="options-list" id="optionsContainer">
+                    <!-- Dynamic choices here -->
+                </div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn-secondary" id="btnPrev" onclick="navigate(-1)" disabled>← Câu Trước</button>
+                <button class="btn-primary" id="btnNext" onclick="navigate(1)">Câu Tiếp →</button>
+            </div>
+        </div>
+
+        <!-- Sidebar Actions & Navigation -->
+        <div class="sidebar">
+            <div class="result-panel" id="resultPanel">
+                <h3>Kết Quả Của Bạn</h3>
+                <div class="result-score" id="scoreDisplay">0/30</div>
+                <p id="resultText">Hoàn thành bài test để xem đánh giá!</p>
+            </div>
+
+            <h3>Bản Đồ Câu Hỏi</h3>
+            <div class="question-grid" id="questionGrid">
+                <!-- 30 buttons generated dynamically -->
+            </div>
+
+            <button class="btn-submit-all" id="btnSubmitAll" onclick="submitQuiz()">📥 NỘP BÀI KIỂM TRA</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [{"number": 1, "question": "Theo tài liệu, sự khác biệt cơ bản giữa 'Dữ liệu' (Data) và 'Thông tin' (Information) là gì?", "options": ["Dữ liệu là kết quả của quá trình xử lý, còn thông tin là các sự kiện thô.", "Dữ liệu là các sự kiện thô chưa được xử lý, còn thông tin là dữ liệu đã được xử lý và có ý nghĩa.", "Dữ liệu chỉ bao gồm các con số, còn thông tin bao gồm cả hình ảnh và âm thanh.", "Dữ liệu và thông tin là hai khái niệm hoàn toàn giống nhau."], "correct": 1, "hint": "Hãy nghĩ xem cái nào là 'nguyên liệu thô' và cái nào là 'thành phẩm'.", "rationale": "Chính xác, tài liệu định nghĩa dữ liệu là thô, còn thông tin là kết quả xử lý, tổ chức dữ liệu một cách có ý nghĩa."}, {"number": 2, "question": "Quá trình xử lý thông tin trên máy tính bao gồm 4 giai đoạn cơ bản nào?", "options": ["Nhập liệu (Input), Truyền tải, Phân tích, Lưu trữ.", "Tiếp nhận (Input), Xử lý (Processing), Xuất thông tin (Output), Lưu trữ (Storage).", "Khởi động, Xử lý, Lưu trữ, Tắt máy.", "Tải về, Cài đặt, Xử lý, Xóa bỏ."], "correct": 1, "hint": "Hãy nhớ lại trình tự từ lúc bạn gõ phím đến lúc thấy kết quả hiện ra và lưu lại trên máy.", "rationale": "Đây là 4 giai đoạn chuẩn được mô tả trong quá trình hoạt động của máy tính."}, {"number": 3, "question": "Thành phần nào được ví như 'bộ não' của máy tính?", "options": ["Bo mạch chủ (Mainboard)", "Ổ cứng (HDD/SSD)", "Bộ xử lý trung tâm (CPU)", "Bộ nhớ truy cập ngẫu nhiên (RAM)"], "correct": 2, "hint": "Bộ phận này có nhiệm vụ tính toán, so sánh và điều khiển mọi hoạt động xử lý.", "rationale": "Tài liệu nêu rõ CPU được ví như 'bộ não', chịu trách nhiệm thực hiện lệnh và tính toán."}, {"number": 4, "question": "NPU (Neural Processing Unit) được tích hợp trong các dòng CPU hiện đại có chức năng chuyên dụng để làm gì?", "options": ["Xử lý đồ họa 3D phức tạp cho các trò chơi điện tử.", "Tăng tốc độ truy xuất dữ liệu từ ổ cứng.", "Tối ưu hóa và tăng tốc các tác vụ trí tuệ nhân tạo (AI).", "Mở rộng dung lượng RAM của máy tính."], "correct": 2, "hint": "Chữ 'Neural' liên quan đến mạng nơ-ron, một khái niệm gắn liền với một công nghệ rất 'hot' hiện nay.", "rationale": "Tài liệu khẳng định NPU là bộ xử lý chuyên dụng cho các tác vụ AI, giúp chúng chạy nhanh và hiệu quả hơn."}, {"number": 5, "question": "Đặc điểm nào sau đây mô tả đúng nhất về RAM?", "options": ["Là bộ nhớ lưu trữ dữ liệu lâu dài, không bị mất đi khi tắt máy.", "Chứa các chương trình khởi động do nhà sản xuất cài đặt sẵn và không thể thay đổi.", "Là không gian làm việc tạm thời, dữ liệu sẽ bị mất khi tắt nguồn.", "Sử dụng đĩa từ quay để đọc/ghi dữ liệu."], "correct": 2, "hint": "Hãy nhớ lại xem điều gì xảy ra với các tệp Word bạn chưa kịp lưu khi máy tính đột ngột sập nguồn.", "rationale": "RAM lưu trữ dữ liệu tạm thời để CPU truy cập nhanh và sẽ xóa sạch khi mất điện."}, {"number": 6, "question": "Phần mềm máy tính được chia thành hai loại chính nào?", "options": ["Phần mềm hệ thống và Phần mềm ứng dụng", "Phần mềm mã nguồn mở và Phần mềm thương mại", "Hệ điều hành và Trình duyệt web", "Phần mềm nhập liệu và Phần mềm xuất liệu"], "correct": 0, "hint": "Một loại giúp quản lý phần cứng (như Windows), loại kia phục vụ nhu cầu cụ thể của bạn (như Word, Game).", "rationale": "Tài liệu phân loại phần mềm thành phần mềm hệ thống (như Hệ điều hành) và phần mềm ứng dụng (như Word, Chrome)."}, {"number": 7, "question": "Ổ cứng SSD vượt trội hơn ổ cứng cơ HDD chủ yếu ở yếu tố nào?", "options": ["Dung lượng lưu trữ lớn hơn rất nhiều với giá thành rẻ hơn.", "Tốc độ đọc/ghi nhanh hơn rất nhiều do sử dụng chip nhớ flash.", "Không bao giờ bị hỏng hóc vật lý.", "Khả năng tản nhiệt tốt hơn cho toàn bộ hệ thống máy tính."], "correct": 1, "hint": "HDD phải quay các đĩa từ vật lý, trong khi SSD sử dụng các chip điện tử tĩnh.", "rationale": "Chính xác, SSD dùng chip nhớ flash (không có bộ phận chuyển động) nên tốc độ truy xuất vượt trội."}, {"number": 8, "question": "Loại thiết bị nào được thiết kế siêu mỏng nhẹ, tối ưu cho thao tác chạm/vuốt, thích hợp đọc sách, ghi chú nhưng hiệu năng bị hạn chế cho công việc phức tạp?", "options": ["Máy tính để bàn (Desktop)", "Máy tính xách tay (Laptop)", "Máy tính bảng (Tablet)", "Đồng hồ thông minh (Smartwatch)"], "correct": 2, "hint": "Thiết bị này nằm ở phân khúc giữa điện thoại thông minh và laptop.", "rationale": "Tài liệu mô tả Tablet có thiết kế siêu mỏng nhẹ, màn hình cảm ứng, lý tưởng để tiêu thụ nội dung và ghi chú."}, {"number": 9, "question": "Theo tài liệu, hệ điều hành mã nguồn mở và miễn phí, linh hoạt, tùy biến cao và được giới lập trình ưa thích là:", "options": ["Microsoft Windows", "Apple macOS", "Linux", "iOS"], "correct": 2, "hint": "Hệ điều hành này có biểu tượng đặc trưng là chú chim cánh cụt (Tux) và có một bản phân phối phổ biến tên là Ubuntu.", "rationale": "Linux (với các bản phân phối như Ubuntu) là mã nguồn mở, miễn phí và có tính tùy biến cực cao."}, {"number": 10, "question": "Giao diện đồ họa người dùng (GUI) sử dụng phương thức tương tác chính nào?", "options": ["Gõ các lệnh văn bản vào cửa sổ terminal.", "Nhận diện giọng nói để điều khiển máy tính.", "Các yếu tố đồ họa trực quan (biểu tượng, cửa sổ) tương tác bằng chuột và bàn phím.", "Sóng vô tuyến thông qua thiết bị đeo."], "correct": 2, "hint": "Chữ 'G' trong GUI là viết tắt của 'Graphical' (Đồ họa).", "rationale": "GUI (Graphical User Interface) dựa vào đồ họa trực quan, thao tác click, kéo-thả."}, {"number": 11, "question": "Phần mở rộng của một tệp tin (ví dụ: .docx, .jpg) có vai trò chính là gì?", "options": ["Giúp hệ điều hành và người dùng nhận biết loại tệp để mở bằng phần mềm phù hợp.", "Chỉ định vị trí lưu trữ của tệp tin trên ổ cứng.", "Tăng tốc độ truy xuất tệp tin khi khởi động máy.", "Mã hóa tệp tin để bảo vệ khỏi virus."], "correct": 0, "hint": "Khi bạn nhìn thấy '.jpg', bạn biết ngay đó là bức ảnh chứ không phải bài nhạc.", "rationale": "Tài liệu chỉ rõ phần mở rộng giúp nhận biết định dạng dữ liệu (ảnh, văn bản...)."}, {"number": 12, "question": "Thiết bị ngoại vi nào sau đây là thiết bị ĐẦU VÀO (Input) giúp số hóa các tài liệu giấy?", "options": ["Máy in (Printer)", "Máy quét (Scanner)", "Màn hình (Monitor)", "Ổ cứng di động"], "correct": 1, "hint": "Thiết bị này hoạt động gần giống như một chiếc máy photocopy nhưng kết quả lưu vào máy tính.", "rationale": "Máy quét (Scanner) giúp chuyển đổi tài liệu giấy thành tệp tin số (nhập dữ liệu vào)."}, {"number": 13, "question": "Khi tìm nguồn tải phần mềm an toàn để cài đặt, lựa chọn nào sau đây là ĐÁNG TIN CẬY NHẤT?", "options": ["Các liên kết trong email quảng cáo ngẫu nhiên.", "Các trang web tải phần mềm 'crack', bẻ khóa miễn phí.", "Trang web chính thức của nhà phát triển hoặc các Cửa hàng ứng dụng (App Store, Microsoft Store).", "Các diễn đàn chia sẻ tài liệu không kiểm duyệt."], "correct": 2, "hint": "Để đảm bảo an toàn cho ngôi nhà, bạn nên nhận chìa khóa trực tiếp từ thợ khóa uy tín thay vì nhặt trên đường.", "rationale": "Tài liệu nhấn mạnh đây là nguồn an toàn và đáng tin cậy nhất."}, {"number": 14, "question": "Đâu là ưu điểm của kết nối có dây (Ethernet) so với kết nối không dây (Wi-Fi)?", "options": ["Linh hoạt, có thể di chuyển thiết bị khắp nơi trong nhà.", "Tốc độ nhanh, ổn định hơn, độ trễ thấp và ít bị nhiễu sóng.", "Không bị giới hạn bởi chiều dài dây cáp.", "Kết nối được hàng trăm thiết bị di động cùng lúc một cách dễ dàng."], "correct": 1, "hint": "Hãy nghĩ xem tại sao các game thủ chuyên nghiệp luôn ưu tiên cắm cáp mạng thay vì dùng Wi-Fi.", "rationale": "Đúng, kết nối có dây cung cấp đường truyền vật lý ổn định hơn so với sóng vô tuyến."}, {"number": 15, "question": "Công nghệ kết nối không dây nào hoạt động tầm cực ngắn (vài centimet) thường được ứng dụng để thanh toán không chạm hay xác thực CCCD?", "options": ["Wi-Fi 7", "Bluetooth 5.4", "NFC (Near Field Communication)", "Ethernet"], "correct": 2, "hint": "Từ khóa ở đây là 'chạm' hoặc 'trường gần'.", "rationale": "NFC là Giao tiếp trường gần, hoạt động ở khoảng cách vài cm, ứng dụng thanh toán chạm và đọc chip."}, {"number": 16, "question": "Theo tài liệu, Wi-Fi 7 (802.11be) mang lại tốc độ cao và độ trễ thấp một phần là nhờ sử dụng công nghệ nào?", "options": ["Băng thông 320 MHz và Vận hành đa liên kết (MLO).", "Sử dụng đĩa từ quay và giao tiếp PCIe.", "Giao tiếp trường gần và cảm ứng từ trường.", "Băng thông 80 Gbps hai chiều qua cáp kết nối."], "correct": 0, "hint": "Chú ý đến các thuật ngữ chỉ dung lượng truyền tải dữ liệu vô tuyến.", "rationale": "Tài liệu nêu rõ Wi-Fi 7 sử dụng băng thông 320 MHz và công nghệ MLO."}, {"number": 17, "question": "Thiết bị đeo nào sử dụng công nghệ màn hình E-ink không phát sáng xanh, lý tưởng cho việc đọc tài liệu trong thời gian dài?", "options": ["Máy tính bảng (Tablet)", "Đồng hồ thông minh (Smartwatch)", "Máy đọc sách điện tử (e-Reader)", "Thiết bị theo dõi sức khỏe (Fitness Tracker)"], "correct": 2, "hint": "Chữ 'e' trong tên thiết bị này là viết tắt của 'electronic', và chức năng chính của nó là để 'read'.", "rationale": "Tài liệu ghi rõ e-Reader dùng màn hình E-ink, bảo vệ mắt và pin rất trâu."}, {"number": 18, "question": "Trong bộ ứng dụng văn phòng, phần mềm nào phù hợp nhất để tự động hóa các phép tính phức tạp và xử lý số liệu thống kê?", "options": ["Microsoft Word / Google Docs", "Microsoft Excel / Google Sheets", "Microsoft PowerPoint / Google Slides", "Mendeley / Zotero"], "correct": 1, "hint": "Giao diện của phần mềm này đặc trưng bởi các ô vuông tạo thành từ hàng và cột.", "rationale": "Bảng tính (Spreadsheet) là công cụ chuyên biệt để tính toán, lập biểu đồ và phân tích số liệu."}, {"number": 19, "question": "Đặc điểm nào của trình duyệt web Safari (trên thiết bị Apple) được đánh giá cao trong bảng so sánh 1.5?", "options": ["Hỗ trợ đa nền tảng tốt nhất (cài được trên Windows, Android).", "Tiêu thụ RAM ở mức độ Thấp.", "Kho tiện ích mở rộng phong phú và đa dạng nhất thế giới.", "Là trình duyệt có thị phần cao nhất toàn cầu."], "correct": 1, "hint": "Hãy nhớ lại lý do vì sao người dùng MacBook hay dùng trình duyệt mặc định của hãng thay vì Chrome (Chrome nổi tiếng là 'ăn' nhiều bộ nhớ).", "rationale": "Theo Bảng 1.5, mức tiêu thụ RAM của Safari là 'Thấp', ưu việt hơn so với 'Cao' của Chrome."}, {"number": 20, "question": "Phần mềm quản lý tài liệu tham khảo (như Mendeley, Zotero) có chức năng quan trọng nào giúp sinh viên làm luận văn?", "options": ["Kiểm tra lỗi chính tả và ngữ pháp tiếng Anh tự động.", "Tự động tạo danh mục tài liệu và chèn trích dẫn theo chuẩn quốc tế (APA, Harvard).", "Quét và phát hiện tỷ lệ đạo văn trong văn bản.", "Vẽ biểu đồ và phân tích dữ liệu nghiên cứu khoa học."], "correct": 1, "hint": "Công cụ này giúp bạn xử lý những dòng ghi chú 'Tác giả, năm xuất bản, tên sách, nhà xuất bản' một cách tự động.", "rationale": "Tài liệu nhấn mạnh tính năng này giúp sinh viên tiết kiệm thời gian và tránh đạo văn."}, {"number": 21, "question": "Theo bảng 1.6, ứng dụng ghi chú nào có khả năng tổ chức thông tin dưới dạng 'Trang, Cơ sở dữ liệu, Khối'?", "options": ["Microsoft OneNote", "Evernote", "Notion", "Google Keep"], "correct": 2, "hint": "Đây là một ứng dụng rất phổ biến dạo gần đây, nổi tiếng với việc tạo các 'workspace' tùy biến cực mạnh mẽ từ các 'block'.", "rationale": "Bảng 1.6 chỉ rõ Notion sử dụng cách tổ chức độc đáo bằng 'Trang, Cơ sở dữ liệu, Khối'."}, {"number": 22, "question": "Sự khác biệt cốt lõi giữa giao diện GUI và CLI là gì?", "options": ["GUI tốn ít tài nguyên máy tính hơn CLI.", "CLI tương tác bằng lệnh văn bản và tốn ít tài nguyên hơn, còn GUI trực quan bằng đồ họa dễ sử dụng hơn.", "GUI chỉ có trên Windows, còn CLI chỉ có trên Linux.", "CLI dùng cho máy tính bảng, GUI dùng cho máy tính để bàn."], "correct": 1, "hint": "GUI có các nút bấm, hình ảnh. CLI thì trông giống như màn hình của các hacker trong phim (chỉ có chữ đen nền trắng hoặc ngược lại).", "rationale": "Đây là phân tích chính xác dựa trên ưu nhược điểm được nêu trong tài liệu."}, {"number": 23, "question": "Khi xem xét chuẩn kết nối lưu trữ, NVMe (Non-Volatile Memory Express) sử dụng giao tiếp nào để đạt tốc độ vượt trội?", "options": ["Giao tiếp SATA", "Giao tiếp PCIe (PCI Express)", "Giao tiếp USB 3.2", "Giao tiếp RJ45"], "correct": 1, "hint": "Giao tiếp này cũng thường được dùng để cắm card đồ họa (VGA) trên bo mạch chủ nhằm đảm bảo băng thông khổng lồ.", "rationale": "Tài liệu nêu NVMe sử dụng giao tiếp PCIe để cho tốc độ đọc/ghi vượt trội so với chuẩn SATA cũ."}, {"number": 24, "question": "Hệ thống quản lý học tập (LMS) có vai trò gì đối với sinh viên?", "options": ["Là phần mềm chuyên thiết kế slide bài giảng cho giảng viên.", "Là lớp học ảo để nhận tài liệu, làm bài tập, thi cử và xem điểm.", "Là phần mềm họp trực tuyến tương tác qua video thời gian thực.", "Là công cụ tự động trích dẫn tài liệu tham khảo."], "correct": 1, "hint": "Hãy nghĩ về VNU-LMS hay hệ thống trường học của bạn, nơi bạn tải bài giảng và nộp bài tập lớn.", "rationale": "Đúng, LMS (như VNU-LMS, Moodle) là nền tảng quản lý toàn bộ vòng đời học tập trực tuyến."}, {"number": 25, "question": "Điểm chung của các nền tảng họp trực tuyến Zoom, Google Meet và Microsoft Teams ở phiên bản miễn phí (theo Bảng 1.7) là gì?", "options": ["Đều có tính năng ghi lại cuộc họp lưu trên đám mây.", "Đều không giới hạn thời gian cuộc họp.", "Đều hỗ trợ tối đa 100 người tham gia.", "Đều không có chức năng Phòng họp nhỏ (Breakout Rooms)."], "correct": 2, "hint": "Hãy nhìn vào con số tối đa người có thể vào chung một phòng họp mà không phải trả tiền.", "rationale": "Theo Bảng 1.7, cả 3 nền tảng này đều cho phép tối đa 100 người tham gia ở bản miễn phí."}, {"number": 26, "question": "Tại sao việc hiểu sự khác biệt giữa USB-C và Thunderbolt lại quan trọng?", "options": ["Vì USB-C không thể dùng để sạc pin, chỉ truyền dữ liệu.", "Vì USB-C chỉ là kiểu dáng vật lý, còn hiệu năng truyền tải dữ liệu và xuất hình ảnh phụ thuộc vào giao thức (như USB 3.2 hay Thunderbolt) bên trong nó.", "Vì cổng Thunderbolt không tương thích ngược với bất kỳ thiết bị USB nào.", "Vì chỉ có cổng Thunderbolt mới cắm được cả hai chiều."], "correct": 1, "hint": "Hình dáng bên ngoài có thể giống hệt nhau, nhưng 'sức mạnh' tiềm ẩn bên trong dây cáp thì khác.", "rationale": "Chính xác, tài liệu nhấn mạnh vẻ bề ngoài giống nhau (USB-C) không đảm bảo hiệu năng bên trong giống nhau."}, {"number": 27, "question": "Tính năng 'Cộng tác thời gian thực' (cùng chỉnh sửa một tài liệu cùng lúc) được đánh giá RẤT TỐT và tích hợp sẵn một cách tự nhiên nhất trên bộ phần mềm nào?", "options": ["LibreOffice", "Microsoft Office (bản cài offline thuần túy)", "Google Workspace (Docs, Sheets, Slides)", "Adobe Photoshop"], "correct": 2, "hint": "Bộ phần mềm này được sinh ra và hoạt động hoàn toàn trên nền tảng đám mây (trực tuyến).", "rationale": "Theo bảng 1.4, Google Workspace vì là nền tảng hoàn toàn trực tuyến nên có tính năng cộng tác tích hợp sẵn rất mạnh mẽ."}, {"number": 28, "question": "Một người dùng muốn một thiết bị máy tính có hiệu năng đồ họa cực mạnh để dựng phim 4K, khả năng tản nhiệt tốt, dễ nâng cấp và không quan tâm đến tính di động. Thiết bị nào là phù hợp nhất?", "options": ["Máy tính bảng cao cấp (Tablet Pro)", "Máy tính để bàn (Desktop)", "Máy tính xách tay đồ họa (Laptop Workstation)", "Điện thoại thông minh (Smartphone)"], "correct": 1, "hint": "Cỗ máy này thường to, nặng, nhiều quạt gió và phải cắm điện tường liên tục.", "rationale": "Desktop đáp ứng đầy đủ các tiêu chí: tản nhiệt xuất sắc, dễ nâng cấp, hiệu năng cao và không di động."}, {"number": 29, "question": "RAM DDR5 có đặc điểm gì nổi bật so với thế hệ DDR4?", "options": ["Lưu trữ dữ liệu vĩnh viễn không cần điện.", "Băng thông cao hơn đáng kể và tiêu thụ ít năng lượng hơn.", "Chuyên dùng để xử lý AI thay cho NPU.", "Khởi động hệ điều hành nhanh hơn SSD."], "correct": 1, "hint": "Thế hệ mới hơn luôn nhắm tới việc truyền dữ liệu nhanh hơn và tiết kiệm pin hơn.", "rationale": "Tài liệu ghi rõ DDR5 mang lại băng thông tốc độ truyền cao hơn và tiết kiệm điện năng hơn DDR4."}, {"number": 30, "question": "Đọc kỹ cấu hình của một máy tính cao cấp: 'CPU Intel Core Ultra 200-series, RAM DDR5, ổ cứng SSD NVMe, cổng Thunderbolt 5'. Dựa vào tài liệu, nhận định nào sau đây là SAI về đặc tính của hệ thống này?", "options": ["Cổng Thunderbolt 5 cung cấp băng thông hai chiều mặc định 80 Gbps, có thể lên 120 Gbps cho video và hỗ trợ sạc tới 240W.", "Ổ cứng SSD NVMe trong hệ thống này sử dụng đĩa từ quay và giao tiếp PCIe, giúp máy khởi động và truy xuất dữ liệu cực nhanh so với HDD.", "Hệ thống có thể xử lý các tác vụ AI cục bộ hiệu quả, tiết kiệm năng lượng nhờ CPU có tích hợp NPU.", "Dù RAM DDR5 cung cấp băng thông xử lý lớn, dữ liệu trên RAM vẫn sẽ biến mất hoàn toàn khi hệ thống ngắt nguồn điện."], "correct": 1, "hint": "Hãy chú ý thật kỹ vào cơ chế hoạt động vật lý của ổ cứng SSD (Solid State Drive) so với HDD (Hard Disk Drive).", "rationale": "Nhận định này SAI. SSD sử dụng chip nhớ flash, KHÔNG sử dụng đĩa từ quay. Đĩa từ quay là công nghệ của ổ cứng cơ HDD."}];
+
+        let currentIndex = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let isSubmitted = false;
+
+        // Initialize App
+        function initQuiz() {
+            buildGrid();
+            renderQuestion();
+            updateProgress();
+        }
+
+        // Build Sidebar Button Map
+        function buildGrid() {
+            const grid = document.getElementById('questionGrid');
+            grid.innerHTML = '';
+            questions.forEach((q, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'grid-btn';
+                btn.innerText = q.number;
+                btn.id = `grid-btn-${idx}`;
+                if(q.number === 30) {
+                    btn.classList.add('devil-btn');
+                    btn.innerText = "👹";
+                }
+                btn.onclick = () => jumpToQuestion(idx);
+                grid.appendChild(btn);
+            });
+        }
+
+        // Display current question details
+        function renderQuestion() {
+            const q = questions[currentIndex];
+            const quizCard = document.getElementById('quizCard');
+            
+            // Apply Special Devil Styling for Q30
+            if (q.number === 30) {
+                quizCard.classList.add('devil-mode');
+                document.getElementById('qNumberDisplay').innerText = "👿 CÂU 30: SIÊU ÁC QUỶ 👿";
+                document.getElementById('btnHint').innerText = "🔥 Hiến tế để xem gợi ý";
+            } else {
+                quizCard.classList.remove('devil-mode');
+                document.getElementById('qNumberDisplay').innerText = `Câu ${q.number} / ${questions.length}`;
+                document.getElementById('btnHint').innerText = "💡 Xem Gợi Ý";
+            }
+
+            document.getElementById('qTitle').innerText = q.question;
+            
+            // Clear boxes
+            document.getElementById('hintBox').style.display = 'none';
+            document.getElementById('hintBox').innerText = q.hint;
+            
+            const ratBox = document.getElementById('rationaleBox');
+            if (isSubmitted) {
+                ratBox.style.display = 'block';
+                ratBox.innerHTML = `<strong>Giải thích:</strong> ${q.rationale}`;
+            } else {
+                ratBox.style.display = 'none';
+            }
+
+            // Render Options
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+
+            q.options.forEach((opt, optIdx) => {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'option-item';
+
+                // Handle post-submit view styles
+                if (isSubmitted) {
+                    if (optIdx === q.correct) {
+                        wrapper.classList.add('correct');
+                    }
+                    if (userAnswers[currentIndex] === optIdx && optIdx !== q.correct) {
+                        wrapper.classList.add('incorrect-selected');
+                    }
+                }
+
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = 'quiz-option';
+                radio.id = `opt-${optIdx}`;
+                radio.value = optIdx;
+                radio.checked = (userAnswers[currentIndex] === optIdx);
+                radio.disabled = isSubmitted; // Disable editing after submission
+                
+                radio.onchange = () => {
+                    userAnswers[currentIndex] = optIdx;
+                    updateGridStatus();
+                };
+
+                const label = document.createElement('label');
+                label.className = 'option-label';
+                label.htmlFor = `opt-${optIdx}`;
+                label.innerText = opt;
+
+                wrapper.appendChild(radio);
+                wrapper.appendChild(label);
+                container.appendChild(wrapper);
+            });
+
+            // Handle prev/next button disability states
+            document.getElementById('btnPrev').disabled = (currentIndex === 0);
+            document.getElementById('btnNext').disabled = (currentIndex === questions.length - 1);
+
+            // Active indicator on grid map
+            document.querySelectorAll('.grid-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(`grid-btn-${currentIndex}`).classList.add('active');
+        }
+
+        function toggleHint() {
+            const box = document.getElementById('hintBox');
+            box.style.display = (box.style.display === 'none' || box.style.display === '') ? 'block' : 'none';
+        }
+
+        function navigate(step) {
+            currentIndex += step;
+            if (currentIndex < 0) currentIndex = 0;
+            if (currentIndex >= questions.length) currentIndex = questions.length - 1;
+            renderQuestion();
+        }
+
+        function jumpToQuestion(idx) {
+            currentIndex = idx;
+            renderQuestion();
+        }
+
+        function updateGridStatus() {
+            questions.forEach((q, idx) => {
+                const btn = document.getElementById(`grid-btn-${idx}`);
+                if (!isSubmitted) {
+                    if (userAnswers[idx] !== null) {
+                        btn.classList.add('answered');
+                    } else {
+                        btn.classList.remove('answered');
+                    }
+                }
+            });
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const answeredCount = userAnswers.filter(ans => ans !== null).length;
+            const pct = (answeredCount / questions.length) * 100;
+            document.getElementById('topProgressBar').style.width = `${pct}%`;
+        }
+
+        // Evaluate Quiz on Submit
+        function submitQuiz() {
+            if (!isSubmitted) {
+                const unanswered = userAnswers.filter(ans => ans === null).length;
+                if (unanswered > 0) {
+                    if (!confirm(`Bạn còn ${unanswered} câu hỏi chưa trả lời. Bạn có chắc chắn muốn nộp bài không?`)) {
+                        return;
+                    }
+                }
+
+                isSubmitted = true;
+                document.getElementById('btnSubmitAll').disabled = true;
+                document.getElementById('btnSubmitAll').innerText = "ĐÃ NỘP BÀI";
+
+                // Calculate Score
+                let score = 0;
+                questions.forEach((q, idx) => {
+                    const btn = document.getElementById(`grid-btn-${idx}`);
+                    if (userAnswers[idx] === q.correct) {
+                        score++;
+                        btn.classList.add('correct-status');
+                    } else {
+                        btn.classList.add('incorrect-status');
+                    }
+                });
+
+                // Display results dashboard
+                const panel = document.getElementById('resultPanel');
+                const scoreDisplay = document.getElementById('scoreDisplay');
+                const textDisplay = document.getElementById('resultText');
+
+                panel.style.display = 'block';
+                scoreDisplay.innerText = `${score} / ${questions.length}`;
+
+                const scorePct = (score / questions.length) * 100;
+                if (scorePct >= 80) {
+                    panel.classList.remove('fail');
+                    textDisplay.innerHTML = "🎉 Xuất sắc! Bạn đã làm chủ hoàn toàn kiến thức Công nghệ số!";
+                } else if (scorePct >= 50) {
+                    panel.classList.remove('fail');
+                    textDisplay.innerHTML = "👍 Khá tốt! Xem lại các câu sai để ghi nhớ sâu hơn nhé.";
+                } else {
+                    panel.classList.add('fail');
+                    textDisplay.innerHTML = "😢 Bạn cần ôn tập kỹ lại tài liệu và thử sức lại.";
+                }
+
+                // Force review mode for current question card
+                renderQuestion();
+            }
+        }
+
+        // Run application on load
+        window.onload = initQuiz;
+    </script>
+</body>
+</html>
