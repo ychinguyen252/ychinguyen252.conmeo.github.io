@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đấu Trường Tài Chính Nhí - Sinh Tồn & Shop</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #0f172a; color: #f8fafc; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
+        .game-card { background: #1e293b; border-radius: 20px; padding: 25px; width: 100%; max-width: 680px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 3px solid #ef4444; position: relative; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; background: #334155; padding: 12px 20px; border-radius: 12px; }
+        .stat-box { font-weight: bold; font-size: 1.1rem; color: #38bdf8; display: flex; align-items: center; gap: 8px; }
+        
+        /* STORE & HELPER BAR */
+        .action-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 20px; }
+        .btn-action { background: #0f172a; border: 2px solid #38bdf8; color: #f8fafc; padding: 8px 5px; border-radius: 8px; font-size: 0.85rem; font-weight: bold; cursor: pointer; transition: all 0.2s; text-align: center; }
+        .btn-action:hover:not(:disabled) { background: #38bdf8; color: #0f172a; }
+        .btn-action:disabled { border-color: #475569; color: #64748b; cursor: not-allowed; opacity: 0.6; }
+        
+        .topic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .btn-topic { padding: 18px; border: 2px solid #38bdf8; border-radius: 12px; background: #0f172a; color: white; font-size: 1.05rem; font-weight: bold; cursor: pointer; transition: all 0.2s; text-align: center; }
+        .btn-topic:hover { background: #38bdf8; color: #0f172a; transform: translateY(-3px); }
+        
+        .question-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .difficulty-tag { font-size: 0.8rem; padding: 3px 8px; border-radius: 6px; font-weight: bold; }
+        .tag-easy { background: #166534; color: #4ade80; }
+        .tag-hard { background: #991b1b; color: #fca5a5; }
+
+        .question { font-size: 1.15rem; font-weight: bold; color: #f1f5f9; margin-bottom: 20px; line-height: 1.5; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .btn-option { padding: 12px 18px; border: 2px solid #475569; border-radius: 10px; background: #0f172a; color: white; font-size: 1rem; cursor: pointer; text-align: left; transition: all 0.2s; }
+        .btn-option:hover:not(:disabled) { border-color: #38bdf8; background: #1e293b; }
+        .btn-option.correct { background: #166534 !important; border-color: #22c55e !important; color: #dcfce7 !important; font-weight: bold; }
+        .btn-option.wrong { background: #991b1b !important; border-color: #ef4444 !important; color: #fee2e2 !important; font-weight: bold; }
+        .btn-option:disabled { cursor: default; }
+
+        .explanation { margin-top: 15px; padding: 12px; background: #334155; border-left: 4px solid #38bdf8; border-radius: 4px; font-size: 0.95rem; color: #e2e8f0; display: none; }
+        .next-btn { margin-top: 15px; width: 100%; padding: 12px; background: #22c55e; color: white; border: none; border-radius: 10px; font-size: 1rem; font-weight: bold; cursor: pointer; display: none; }
+        .next-btn:hover { background: #16a34a; }
+        
+        .screen { display: none; }
+        .active { display: block; }
+        .result-screen { text-align: center; }
+        .restart-btn { margin-top: 20px; padding: 12px 24px; background: #38bdf8; color: #0f172a; border: none; border-radius: 10px; font-size: 1rem; cursor: pointer; font-weight: bold; }
+        .restart-btn:hover { background: #7dd3fc; }
+        .badge-x2 { background: #f59e0b; color: #0f172a; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; display: none; }
+    </style>
+</head>
+<body>
+
+<div class="game-card">
+    <!-- MÀN HÌNH CHỌN CHỦ ĐỀ -->
+    <div id="topic-screen" class="screen active">
+        <h2 style="text-align: center; color: #38bdf8; margin-top: 0;">🔥 ĐẤU TRƯỜNG SINH TỒN 🔥</h2>
+        <p style="text-align: center; color: #94a3b8; margin-bottom: 25px;">Chế độ: Sai 1 câu = Thua ngay | 30 Câu hỏi (25 Dễ + 5 Khó)</p>
+        <div class="topic-grid" id="topic-grid"></div>
+    </div>
+
+    <!-- MÀN HÌNH THI ĐẤU -->
+    <div id="quiz-screen" class="screen">
+        <div class="header">
+            <div class="stat-box" id="topic-title">Chủ đề</div>
+            <div class="stat-box">
+                🪙 Xu: <span id="score">0</span>
+                <span id="x2-badge" class="badge-x2">X2</span>
+            </div>
+        </div>
+
+        <!-- BẢNG TRỢ GIÚP & SHOP -->
+        <div class="action-bar">
+            <button class="btn-action" id="btn-5050" onclick="use5050()">✂️ 50/50<br><small>(20 Xu)</small></button>
+            <button class="btn-action" id="btn-audience" onclick="useAudience()">👥 Khán Giả<br><small>(20 Xu)</small></button>
+            <button class="btn-action" id="btn-hint" onclick="useHint()">💡 Gợi Ý<br><small>(20 Xu)</small></button>
+            <button class="btn-action" id="btn-x2" onclick="buyX2()" style="border-color: #f59e0b;">⚡ Thẻ X2<br><small>(30 Xu)</small></button>
+        </div>
+
+        <div class="question-header">
+            <span id="question-number" style="color: #94a3b8; font-weight: bold;">Câu 1/30</span>
+            <span id="difficulty-tag" class="difficulty-tag tag-easy">DỄ (10 Xu)</span>
+        </div>
+
+        <div class="question" id="question-text">Đang tải câu hỏi...</div>
+        <div class="options" id="options-container"></div>
+        <div class="explanation" id="explanation-text"></div>
+        <button class="next-btn" id="next-btn" onclick="nextQuestion()">Câu Tiếp Theo ➔</button>
+    </div>
+
+    <!-- MÀN HÌNH KẾT QUẢ -->
+    <div id="result-screen" class="screen result-screen">
+        <h2 id="result-title" style="font-size: 1.8rem;">GAME OVER</h2>
+        <p style="font-size: 1.2rem;">Bạn đã vượt qua: <b id="final-count" style="color: #38bdf8;">0</b>/30 câu hỏi!</p>
+        <p style="font-size: 1.1rem;">Tổng tích lũy: <b id="final-score" style="color: #f59e0b;">0</b> Xu</p>
+        <p id="feedback-text" style="color: #cbd5e1;"></p>
+        <button class="restart-btn" onclick="showTopicScreen()">Chọn Chủ Đề Khác</button>
+    </div>
+</div>
+
+<script>
+    // --- ÂM THANH ---
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playSound(type) {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        if (type === 'correct') {
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.2);
+            gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+            osc.start(); osc.stop(audioCtx.currentTime + 0.2);
+        } else if (type === 'wrong') {
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(60, audioCtx.currentTime + 0.4);
+            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.4);
+            osc.start(); osc.stop(audioCtx.currentTime + 0.4);
+        }
+    }
+
+    // --- CƠ SỞ DỮ LIỆU CHỦ ĐỀ & CÂU HỎI ---
+    const topicsData = [
+        { id: "nhu-cau", name: "🛒 Nhu Cầu & Sở Thích" },
+        { id: "tiet-kiem", name: "🐷 Tiết Kiệm Thông Minh" },
+        { id: "kiem-tien", name: "💼 Lao Động & Kiếm Tiền" },
+        { id: "ngan-sach", name: "📊 Quản Lý Ngân Sách" },
+        { id: "dau-tu", name: "🤝 Đầu Tư & Chia Sẻ" },
+        { id: "an-toan", name: "🛡️ An Toàn Tài Chính" }
+    ];
+
+    // Tạo tự động bộ 30 câu hỏi (25 Dễ + 5 Khó) cho mỗi chủ đề
+    topicsData.forEach(t => {
+        t.questions = [];
+        // 25 Câu dễ
+        for(let i = 1; i <= 25; i++) {
+            t.questions.push({
+                q: `[${t.name}] Câu hỏi thường số ${i}: Lựa chọn nào sau đây thể hiện việc quản lý tiền thông minh?`,
+                options: ["A. Chi tiêu phung phí", "B. Cân nhắc kỹ trước khi mua", "C. Vứt bỏ tiền thừa"],
+                correct: 1,
+                isHard: false,
+                hint: "Hãy chọn phương án thể hiện sự cẩn trọng và suy nghĩ kỹ.",
+                exp: "Luôn cân nhắc kỹ giữa nhu cầu và sở thích trước khi chi tiêu!"
+            });
+        }
+        // 5 Câu khó
+        for(let i = 1; i <= 5; i++) {
+            t.questions.push({
+                q: `🔥 [CÂU HỎI KHÓ ${i}/5] Dự phòng tài chính khẩn cấp nên được ưu tiên sử dụng trong trường hợp nào?`,
+                options: ["A. Đổi điện thoại mới ra mắt", "B. Ốm đau bất ngờ hoặc sự cố gia đình", "C. Đi du lịch nghỉ dưỡng xa xỉ"],
+                correct: 1,
+                isHard: true,
+                hint: "Khoản dự phòng chỉ dùng cho các tình huống khẩn cấp ngoài dự tính.",
+                exp: "Quỹ khẩn cấp bảo vệ gia đình trước các rủi ro không lường trước!"
+            });
+        }
+    });
+
+    let currentTopic = null;
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let hasX2 = false;
+
+    function initTopicScreen() {
+        const grid = document.getElementById("topic-grid");
+        grid.innerHTML = "";
+        topicsData.forEach((t, idx) => {
+            const btn = document.createElement("button");
+            btn.className = "btn-topic";
+            btn.innerHTML = `${t.name}<br><small style="font-weight:normal; font-size:0.8rem; color:#94a3b8;">30 Câu (25 Dễ + 5 Khó)</small>`;
+            btn.onclick = () => startTopic(idx);
+            grid.appendChild(btn);
+        });
+    }
+
+    function showTopicScreen() {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('topic-screen').classList.add('active');
+    }
+
+    function startTopic(index) {
+        currentTopic = topicsData[index];
+        currentQuestionIndex = 0;
+        score = 0;
+        hasX2 = false;
+        
+        document.getElementById("topic-title").innerText = currentTopic.name;
+        document.getElementById("score").innerText = score;
+        document.getElementById("x2-badge").style.display = "none";
+        
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('quiz-screen').classList.add('active');
+        
+        loadQuestion();
+    }
+
+    function updateActionButtons() {
+        document.getElementById("btn-5050").disabled = score < 20;
+        document.getElementById("btn-audience").disabled = score < 20;
+        document.getElementById("btn-hint").disabled = score < 20;
+        document.getElementById("btn-x2").disabled = score < 30 || hasX2;
+    }
+
+    function loadQuestion() {
+        const q = currentTopic.questions[currentQuestionIndex];
+        
+        document.getElementById("question-number").innerText = `Câu ${currentQuestionIndex + 1}/30`;
+        
+        const tag = document.getElementById("difficulty-tag");
+        if(q.isHard) {
+            tag.innerText = "🔥 KHÓ (20 Xu)";
+            tag.className = "difficulty-tag tag-hard";
+        } else {
+            tag.innerText = "DỄ (10 Xu)";
+            tag.className = "difficulty-tag tag-easy";
+        }
+
+        document.getElementById("question-text").innerText = q.q;
+        
+        const container = document.getElementById("options-container");
+        container.innerHTML = "";
+        document.getElementById("explanation-text").style.display = "none";
+        document.getElementById("next-btn").style.display = "none";
+
+        q.options.forEach((opt, idx) => {
+            const btn = document.createElement("button");
+            btn.className = "btn-option";
+            btn.innerText = opt;
+            btn.onclick = () => checkAnswer(idx);
+            container.appendChild(btn);
+        });
+
+        updateActionButtons();
+    }
+
+    // --- CÁC QUYỀN TRỢ GIÚP & TRỢ NĂNG SHOP ---
+    function use5050() {
+        if (score < 20) return;
+        score -= 20;
+        document.getElementById("score").innerText = score;
+        
+        const q = currentTopic.questions[currentQuestionIndex];
+        const buttons = document.querySelectorAll(".btn-option");
+        
+        let removed = 0;
+        buttons.forEach((btn, idx) => {
+            if (idx !== q.correct && removed < 2) {
+                btn.style.visibility = "hidden";
+                removed++;
+            }
+        });
+        updateActionButtons();
+    }
+
+    function useAudience() {
+        if (score < 20) return;
+        score -= 20;
+        document.getElementById("score").innerText = score;
+        
+        const q = currentTopic.questions[currentQuestionIndex];
+        const buttons = document.querySelectorAll(".btn-option");
+        
+        buttons.forEach((btn, idx) => {
+            const pct = (idx === q.correct) ? " [📊 70% Khán giả chọn]" : " [📊 15% Khán giả chọn]";
+            btn.innerText += pct;
+        });
+        updateActionButtons();
+    }
+
+    function useHint() {
+        if (score < 20) return;
+        score -= 20;
+        document.getElementById("score").innerText = score;
+        
+        const q = currentTopic.questions[currentQuestionIndex];
+        const exp = document.getElementById("explanation-text");
+        exp.innerText = "💡 Gợi ý: " + q.hint;
+        exp.style.display = "block";
+        updateActionButtons();
+    }
+
+    function buyX2() {
+        if (score < 30 || hasX2) return;
+        score -= 30;
+        hasX2 = true;
+        document.getElementById("score").innerText = score;
+        document.getElementById("x2-badge").style.display = "inline-block";
+        updateActionButtons();
+    }
+
+    function checkAnswer(selectedIndex) {
+        const q = currentTopic.questions[currentQuestionIndex];
+        const buttons = document.querySelectorAll(".btn-option");
+        buttons.forEach(btn => btn.disabled = true);
+
+        if (selectedIndex === q.correct) {
+            buttons[selectedIndex].classList.add("correct");
+            
+            // Tính điểm
+            let baseReward = q.isHard ? 20 : 10;
+            if (hasX2) {
+                baseReward *= 2;
+                hasX2 = false; // Thẻ X2 dùng 1 lần
+                document.getElementById("x2-badge").style.display = "none";
+            }
+            
+            score += baseReward;
+            document.getElementById("score").innerText = score;
+            playSound('correct');
+
+            const exp = document.getElementById("explanation-text");
+            exp.innerText = `✨ CHÍNH XÁC (+${baseReward} Xu)! ` + q.exp;
+            exp.style.display = "block";
+
+            if (currentQuestionIndex < currentTopic.questions.length - 1) {
+                document.getElementById("next-btn").style.display = "block";
+            } else {
+                setTimeout(() => showResult(true), 1500);
+            }
+        } else {
+            buttons[selectedIndex].classList.add("wrong");
+            buttons[q.correct].classList.add("correct");
+            playSound('wrong');
+
+            const exp = document.getElementById("explanation-text");
+            exp.innerText = "💥 SAI RỒI! " + q.exp;
+            exp.style.display = "block";
+
+            setTimeout(() => showResult(false), 2000);
+        }
+    }
+
+    function nextQuestion() {
+        currentQuestionIndex++;
+        loadQuestion();
+    }
+
+    function showResult(isWin) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('result-screen').classList.add('active');
+
+        document.getElementById("final-count").innerText = isWin ? currentQuestionIndex + 1 : currentQuestionIndex;
+        document.getElementById("final-score").innerText = score;
+
+        const title = document.getElementById("result-title");
+        const feedback = document.getElementById("feedback-text");
+
+        if (isWin) {
+            title.innerText = "🏆 HOÀN THÀNH XUẤT SẮC! 🏆";
+            title.style.color = "#22c55e";
+            feedback.innerText = `Bá đạo! Bạn đã chinh phục toàn bộ 30 câu hỏi (bao gồm cả 5 câu siêu khó)!`;
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+        } else {
+            title.innerText = "💀 BẠN ĐÃ DỪNG CUỘC CHƠI 💀";
+            title.style.color = "#ef4444";
+            feedback.innerText = `Hãy tích lũy Xu ở các lượt chơi sau để mua thêm Trợ giúp khi gặp câu khó nhé!`;
+        }
+    }
+
+    initTopicScreen();
+</script>
+</body>
+</html>
