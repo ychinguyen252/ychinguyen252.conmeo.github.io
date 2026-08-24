@@ -10,22 +10,27 @@
         
         /* BẢNG MÀU PASTEL XANH LÁ (MINT / SAGE / EMERALD) */
         :root {
-            --bg-main: #e8f5e9;        /* Xanh lá rất nhạt (Nền chính) */
+            --bg-main: #e8f5e9;        /* Xanh lá rất nhạt */
             --card-bg: #ffffff;        /* Trắng kem */
-            --primary-dark: #2e7d32;   /* Xanh lá đậm (Tiêu đề/Nút nhấn) */
-            --primary-medium: #66bb6a; /* Xanh lá vừa (Thành tố nhấn) */
-            --primary-light: #c8e6c9;  /* Xanh nhạt (Khung/Nền thẻ) */
+            --primary-dark: #2e7d32;   /* Xanh lá đậm */
+            --primary-medium: #66bb6a; /* Xanh lá vừa */
+            --primary-light: #c8e6c9;  /* Xanh nhạt */
             --accent-mint: #a5d6a7;     /* Xanh Mint pastel */
-            --danger-pastel: #e57373;  /* Đỏ pastel (Cảnh báo/Thua) */
-            --warning-gold: #fbc02d;    /* Vàng pastel (Thẻ X2) */
+            --danger-pastel: #e57373;  /* Đỏ pastel */
+            --warning-gold: #fbc02d;    /* Vàng pastel */
             --text-dark: #1b5e20;      /* Chữ xanh sẫm */
             --text-muted: #4e7d52;     /* Chữ phụ */
         }
 
         body { background-color: var(--bg-main); color: var(--text-dark); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
-        .game-card { background: var(--card-bg); border-radius: 24px; padding: 25px; width: 100%; max-width: 680px; box-shadow: 0 15px 35px rgba(46, 125, 50, 0.12); border: 3px solid var(--accent-mint); position: relative; }
+        .game-card { background: var(--card-bg); border-radius: 24px; padding: 25px; width: 100%; max-width: 720px; box-shadow: 0 15px 35px rgba(46, 125, 50, 0.12); border: 3px solid var(--accent-mint); position: relative; }
         
         /* HEADER & THÔNG SỐ */
+        .timer-box { font-weight: bold; min-width: 118px; }
+        .timer-box.warning { color: #b45309; }
+        .timer-box.danger { color: #dc2626; animation: pulse 1s infinite; }
+        @keyframes pulse { 50% { opacity: .55; } }
+
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; background: var(--bg-main); padding: 12px 20px; border-radius: 16px; border: 1px solid var(--primary-light); }
         .stat-box { font-weight: bold; font-size: 1.1rem; color: var(--primary-dark); display: flex; align-items: center; gap: 8px; }
         
@@ -46,9 +51,9 @@
         .tag-easy { background: var(--primary-light); color: var(--primary-dark); }
         .tag-hard { background: #ffcdd2; color: #c62828; }
 
-        .question { font-size: 1.15rem; font-weight: bold; color: var(--text-dark); margin-bottom: 20px; line-height: 1.5; }
+        .question { font-size: 1.1rem; font-weight: bold; color: var(--text-dark); margin-bottom: 20px; line-height: 1.5; white-space: pre-line; }
         .options { display: flex; flex-direction: column; gap: 10px; }
-        .btn-option { padding: 14px 18px; border: 2px solid var(--primary-light); border-radius: 12px; background: #ffffff; color: var(--text-dark); font-size: 1rem; cursor: pointer; text-align: left; transition: all 0.2s; }
+        .btn-option { padding: 14px 18px; border: 2px solid var(--primary-light); border-radius: 12px; background: #ffffff; color: var(--text-dark); font-size: 0.98rem; cursor: pointer; text-align: left; transition: all 0.2s; line-height: 1.4; }
         .btn-option:hover:not(:disabled) { border-color: var(--primary-medium); background: var(--bg-main); }
         .btn-option.correct { background: #d4edda !important; border-color: #28a745 !important; color: #155724 !important; font-weight: bold; }
         .btn-option.wrong { background: #f8d7da !important; border-color: #dc3545 !important; color: #721c24 !important; font-weight: bold; }
@@ -68,7 +73,7 @@
         /* BẢNG LỊCH SỬ CHƠI */
         .history-box { margin-top: 25px; background: var(--bg-main); border-radius: 16px; padding: 15px; border: 1px solid var(--primary-light); }
         .history-title { font-weight: bold; color: var(--primary-dark); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-        .history-list { list-style: none; padding: 0; margin: 0; max-height: 150px; overflow-y: auto; text-align: left; }
+        .history-list { list-style: none; padding: 0; margin: 0; max-height: 160px; overflow-y: auto; text-align: left; }
         .history-item { font-size: 0.85rem; padding: 8px 10px; border-bottom: 1px solid var(--primary-light); display: flex; justify-content: space-between; color: var(--text-muted); }
         .history-item:last-child { border-bottom: none; }
         .clear-btn { background: none; border: none; color: var(--danger-pastel); font-weight: bold; cursor: pointer; font-size: 0.8rem; }
@@ -79,8 +84,8 @@
 <div class="game-card">
     <!-- MÀN HÌNH CHỌN CHỦ ĐỀ -->
     <div id="topic-screen" class="screen active">
-        <h2 style="text-align: center; color: var(--primary-dark); margin-top: 0;">🌿 ĐẤU TRƯỜNG SINH TỒN 🌿</h2>
-        <p style="text-align: center; color: var(--text-muted); margin-bottom: 20px;">Chế độ: Sai 1 câu = Thua ngay | 30 Câu hỏi (25 Dễ + 5 Khó)</p>
+        <h2 style="text-align: center; color: var(--primary-dark); margin-top: 0;">🌿 ĐẤU TRƯỜNG SINH TỒN TÀI CHÍNH 🌿</h2>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 20px;">Thử thách bộ câu hỏi chuyên sâu | Sai 1 câu = Thua ngay</p>
         <div class="topic-grid" id="topic-grid"></div>
 
         <!-- KHU VỰC LỊCH SỬ CHƠI -->
@@ -99,6 +104,7 @@
     <div id="quiz-screen" class="screen">
         <div class="header">
             <div class="stat-box" id="topic-title">Chủ đề</div>
+            <div class="stat-box timer-box" id="timer-box">⏱️ 35:00</div>
             <div class="stat-box">
                 🪙 Xu: <span id="score">0</span>
                 <span id="x2-badge" class="badge-x2">X2</span>
@@ -107,15 +113,15 @@
 
         <!-- BẢNG TRỢ GIÚP & SHOP -->
         <div class="action-bar">
-            <button class="btn-action" id="btn-5050" onclick="use5050()">✂️ 50/50<br><small>(20 Xu)</small></button>
-            <button class="btn-action" id="btn-audience" onclick="useAudience()">👥 Khán Giả<br><small>(20 Xu)</small></button>
-            <button class="btn-action" id="btn-hint" onclick="useHint()">💡 Gợi Ý<br><small>(20 Xu)</small></button>
-            <button class="btn-action" id="btn-x2" onclick="buyX2()" style="border-color: var(--warning-gold);">⚡ Thẻ X2<br><small>(30 Xu)</small></button>
+            <button class="btn-action" id="btn-5050" onclick="use5050()">✂️ 50/50<br><small>(50 Xu)</small></button>
+            <button class="btn-action" id="btn-audience" onclick="useAudience()">👥 Khán Giả<br><small>(50 Xu)</small></button>
+            <button class="btn-action" id="btn-hint" onclick="useHint()">💡 Gợi Ý<br><small>(50 Xu)</small></button>
+            <button class="btn-action" id="btn-x2" onclick="buyX2()" style="border-color: var(--warning-gold);">⚡ Thẻ X2<br><small>(50 Xu)</small></button>
         </div>
 
         <div class="question-header">
-            <span id="question-number" style="color: var(--text-muted); font-weight: bold;">Câu 1/30</span>
-            <span id="difficulty-tag" class="difficulty-tag tag-easy">DỄ (10 Xu)</span>
+            <span id="question-number" style="color: var(--text-muted); font-weight: bold;">Câu 1</span>
+            <span id="difficulty-tag" class="difficulty-tag tag-easy">DỄ (5 Xu)</span>
         </div>
 
         <div class="question" id="question-text">Đang tải câu hỏi...</div>
@@ -127,7 +133,7 @@
     <!-- MÀN HÌNH KẾT QUẢ -->
     <div id="result-screen" class="screen result-screen">
         <h2 id="result-title" style="font-size: 1.8rem; color: var(--primary-dark);">GAME OVER</h2>
-        <p style="font-size: 1.2rem;">Bạn đã vượt qua: <b id="final-count" style="color: var(--primary-dark);">0</b>/30 câu hỏi!</p>
+        <p style="font-size: 1.2rem;">Bạn đã vượt qua: <b id="final-count" style="color: var(--primary-dark);">0</b> câu hỏi!</p>
         <p style="font-size: 1.1rem;">Tổng tích lũy: <b id="final-score" style="color: #d97706;">0</b> Xu</p>
         <p id="feedback-text" style="color: var(--text-muted);"></p>
         <button class="restart-btn" onclick="showTopicScreen()">Về Màn Hình Chính</button>
@@ -135,7 +141,7 @@
 </div>
 
 <script>
-    // --- ÂM THANH ---
+    // --- ÂM THANH HIỆU ỨNG ---
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     function playSound(type) {
         if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -161,42 +167,206 @@
         }
     }
 
-    // --- CƠ SỞ DỮ LIỆU CHỦ ĐỀ & CÂU HỎI ---
-    const topicsData = [
-        { id: "nhu-cau", name: "🛒 Nhu Cầu & Sở Thích" },
-        { id: "tiet-kiem", name: "🐷 Tiết Kiệm Thông Minh" },
-        { id: "kiem-tien", name: "💼 Lao Động & Kiếm Tiền" },
-        { id: "ngan-sach", name: "📊 Quản Lý Ngân Sách" },
-        { id: "dau-tu", name: "🤝 Đầu Tư & Chia Sẻ" },
-        { id: "an-toan", name: "🛡️ An Toàn Tài Chính" }
-    ];
+    // --- NGHÂN HÀNG CÂU HỎI ĐẦY ĐỦ ---
+    const rawQuestionsData = {
+        "nhu-cau": [
+            { q: "Mai có 5 triệu đồng tiết kiệm. Chiếc laptop hiện tại của Mai vẫn hoạt động nhưng chậm, ảnh hưởng đến việc học và làm bài. Một mẫu laptop mới đang giảm giá 40%. Khoản mua này được xem là gì?", options: ["A. Hoàn toàn là nhu cầu", "B. Hoàn toàn là sở thích", "C. Có thể là nhu cầu hoặc sở thích tùy mức độ cần thiết và khả năng tài chính", "D. Không nên mua vì mọi khoản chi cho công nghệ đều là sở thích"], correct: 2, isHard: true, hint: "Hãy xem xét cả hiệu suất học tập và ngân sách tiết kiệm hiện có.", exp: "Phụ thuộc vào mức độ cấp thiết cho việc học và số tiền dự phòng còn lại." },
+            { q: "Một người nói: “Tôi chỉ mua chiếc áo này vì đang giảm 70%, nên chắc chắn tôi đã tiết kiệm được tiền.” Nhận định nào hợp lý nhất?", options: ["A. Đúng, vì giảm giá luôn giúp tiết kiệm", "B. Đúng, vì giá sau giảm thấp hơn giá ban đầu", "C. Chưa chắc, vì nếu không có nhu cầu mua thì vẫn là một khoản chi tiêu", "D. Sai, vì không nên mua hàng giảm giá"], correct: 2, isHard: true, hint: "Chi tiền cho thứ không cần thiết thì dù giảm giá vẫn là mất tiền.", exp: "Nếu không có nhu cầu thực sự, việc mua hàng giảm giá vẫn tạo ra chi phí phát sinh." },
+            { q: "Nam thường mua trà sữa mỗi ngày với giá 45.000 đồng. Nam cho rằng đây là “nhu cầu thiết yếu” vì nếu không uống, Nam cảm thấy khó chịu. Nhận định nào chính xác nhất?", options: ["A. Đây chắc chắn là nhu cầu vì Nam cảm thấy khó chịu", "B. Đây có thể là sở thích vì cảm giác muốn có không đồng nghĩa với nhu cầu thiết yếu", "C. Đây là đầu tư", "D. Đây là chi phí cố định"], correct: 1, isHard: false, hint: "Phân biệt nhu cầu duy trì sự sống và thói quen/sở thích cá nhân.", exp: "Trà sữa là mong muốn (want), không phải nhu cầu thiết yếu (need) để duy trì thể trạng cơ bản." },
+            { q: "Một người có ngân sách 10 triệu đồng/tháng. Sau khi chi trả các nhu cầu thiết yếu và tiết kiệm, người đó còn 2 triệu đồng. Người này muốn dùng toàn bộ 2 triệu để mua đồ mình thích. Quyết định nào dưới đây hợp lý nhất?", options: ["A. Không nên mua bất cứ thứ gì vì sở thích luôn gây lãng phí", "B. Có thể chi tiêu cho sở thích vì các nhu cầu và mục tiêu tiết kiệm đã được đáp ứng", "C. Nên vay thêm tiền để mua nhiều hơn", "D. Phải tiết kiệm toàn bộ vì mọi khoản chi khác đều không cần thiết"], correct: 1, isHard: false, hint: "Khi nhu cầu cơ bản và tiết kiệm đã xong, phần thặng dư có thể linh hoạt.", exp: "Cân bằng cuộc sống bằng cách thưởng cho bản thân trong hạn mức ngân sách cho phép." },
+            { q: "Điểm khác biệt quan trọng nhất giữa “muốn mua” và “có khả năng mua” là:", options: ["A. Không có sự khác biệt", "B. “Muốn mua” liên quan đến mong muốn, còn “có khả năng mua” phụ thuộc vào nguồn lực tài chính", "C. “Có khả năng mua” luôn đồng nghĩa với “nên mua”", "D. Chỉ người giàu mới có khả năng mua"], correct: 1, isHard: false, hint: "Ý chí mong muốn khác với nguồn tiền thực tế sẵn có.", exp: "Mong muốn chỉ là sở thích, còn khả năng chi trả đòi hỏi nguồn tài chính thực tế." },
+            { q: "Một sinh viên mua điện thoại mới bằng khoản vay trả góp, dù điện thoại cũ vẫn hoạt động tốt. Động cơ chính là vì bạn bè đều sử dụng mẫu điện thoại đó. Đây là ví dụ rõ nhất của:", options: ["A. Chi tiêu theo nhu cầu thiết yếu", "B. Chi tiêu chịu ảnh hưởng từ áp lực xã hội", "C. Chi tiêu cho đầu tư", "D. Chi phí cơ hội bằng 0"], correct: 1, isHard: false, hint: "Chịu tác động bởi bạn bè và tâm lý áp lực đồng lứa (peer pressure).", exp: "Mua sắm để hòa nhập hoặc thể hiện bằng bạn bằng bè gọi là chi tiêu do áp lực xã hội." },
+            { q: "Nếu mua một món đồ trị giá 3 triệu đồng, bạn phải từ bỏ cơ hội tham gia một khóa học quan trọng cũng có giá 3 triệu đồng. Khái niệm tài chính nào được thể hiện rõ nhất?", options: ["A. Lạm phát", "B. Lãi suất", "C. Chi phí cơ hội", "D. Khấu hao"], correct: 2, isHard: true, hint: "Lợi ích bị bỏ qua khi chọn phương án này thay vì phương án khác.", exp: "Chi phí cơ hội là giá trị của lựa chọn tốt nhất bị bỏ lỡ." },
+            { q: "Hành vi nào dưới đây cho thấy một người có khả năng phân biệt tốt giữa nhu cầu và sở thích?", options: ["A. Luôn mua sản phẩm rẻ nhất", "B. Luôn từ chối mua những thứ không thiết yếu", "C. Đánh giá mức độ cần thiết, khả năng tài chính và mục tiêu dài hạn trước khi chi tiêu", "D. Chỉ mua những sản phẩm bạn bè đang sử dụng"], correct: 2, isHard: false, hint: "Đánh giá đa chiều trước khi đưa ra quyết định mua.", exp: "Người tiêu dùng thông minh luôn suy xét cả nhu cầu, khả năng tài chính và mục tiêu tương lai." },
+            { q: "Lan nhận được thưởng 10 triệu đồng và ngay lập tức nâng cấp điện thoại, đồng hồ và quần áo dù không cần thiết. Sau đó, Lan không còn tiền dự phòng khi xe bị hỏng. Sai lầm chính của Lan là:", options: ["A. Có quá nhiều tiền", "B. Không cân bằng giữa chi tiêu hiện tại và nhu cầu tài chính trong tương lai", "C. Không mua sản phẩm đủ đắt", "D. Sử dụng tiền thưởng"], correct: 1, isHard: true, hint: "Bỏ qua các rủi ro hoặc nhu cầu có thể phát sinh trong tương lai.", exp: "Tiêu hết tiền cho sở thích hiện tại dẫn đến mất an toàn tài chính khi có sự cố." },
+            { q: "Một người thường xuyên tự nhủ: “Mình xứng đáng được mua món này sau một ngày mệt mỏi.” Nếu hành vi này lặp lại thường xuyên và gây khó khăn tài chính, nguyên nhân có khả năng cao nhất là:", options: ["A. Chi tiêu theo cảm xúc", "B. Đầu tư rủi ro thấp", "C. Lạm phát", "D. Đa dạng hóa tài sản"], correct: 0, isHard: true, hint: "Sử dụng việc mua sắm như một công cụ giải tỏa tâm trạng.", exp: "Chi tiêu cảm xúc (emotional spending) diễn ra khi dùng mua sắm làm phần thưởng bù đắp tinh thần." },
+            { q: "Đâu là tình huống khó xác định nhất giữa nhu cầu và sở thích?", options: ["A. Mua thuốc điều trị bệnh", "B. Mua thực phẩm", "C. Mua điện thoại mới để thay chiếc điện thoại hỏng hoàn toàn", "D. Mua một chiếc laptop đắt hơn nhiều so với mức cần thiết cho công việc"], correct: 3, isHard: true, hint: "Chiếc laptop có yếu tố nhu cầu (làm việc) pha lẫn sở thích (cấu hình cao quá mức).", exp: "Ranh giới mờ nhạt khi món đồ vừa đáp ứng nhu cầu cơ bản vừa chứa đựng sở thích nâng cấp đắt đỏ." },
+            { q: "Một sản phẩm được quảng cáo là “chỉ còn 2 giờ cuối để mua với giá đặc biệt”. Chiến thuật này chủ yếu tác động vào:", options: ["A. Tư duy phân tích dài hạn", "B. Cảm giác khan hiếm và sợ bỏ lỡ cơ hội", "C. Khả năng tiết kiệm tự động", "D. Thu nhập thụ động"], correct: 1, isHard: false, hint: "Tâm lý FOMO (Fear Of Missing Out).", exp: "Đồng hồ đếm ngược kích thích cảm giác khan hiếm, thúc đẩy mua sắm bốc đồng." },
+            { q: "Việc lập “ngân sách cho sở thích” có ý nghĩa gì?", options: ["A. Loại bỏ hoàn toàn chi tiêu cho nhu cầu", "B. Cho phép chi tiêu cho sở thích trong giới hạn đã được lên kế hoạch", "C. Bắt buộc tiêu hết số tiền đã dự trù", "D. Chỉ dành cho người có thu nhập cao"], correct: 1, isHard: false, hint: "Giúp thỏa mãn bản thân mà không làm lệch mục tiêu tài chính.", exp: "Giúp kiểm soát mong muốn cá nhân nằm trong vùng an toàn tài chính." },
+            { q: "Một người có thu nhập tăng 20% nhưng chi tiêu cũng tăng 30% do nâng cấp lối sống. Hiện tượng này có thể được gọi là:", options: ["A. Lifestyle inflation (lạm phát lối sống)", "B. Deflation", "C. Diversification", "D. Depreciation"], correct: 0, isHard: true, hint: "Thói quen tiêu dùng tăng vọt theo đà tăng thu nhập.", exp: "Lạm phát lối sống xảy ra khi chi tiêu gia tăng tương ứng hoặc vượt quá mức tăng thu nhập." },
+            { q: "Tại sao một khoản chi tiêu cho sở thích vẫn có thể được xem là hợp lý?", options: ["A. Vì mọi sở thích đều cần thiết", "B. Vì sở thích không ảnh hưởng đến tài chính", "C. Vì con người cần cân bằng giữa mục tiêu tài chính và chất lượng cuộc sống", "D. Vì sở thích luôn mang lại lợi nhuận"], correct: 2, isHard: false, hint: "Sức khỏe tinh thần và chất lượng sống.", exp: "Chi tiêu hợp lý cho sở thích giúp tái tạo năng lượng và cân bằng cuộc sống." },
+            { q: "Một người liên tục mua đồ giảm giá nhưng tổng chi tiêu hằng tháng vẫn vượt ngân sách. Điều này chứng tỏ:", options: ["A. Giá giảm luôn gây thiệt hại", "B. Tiết kiệm trên từng sản phẩm không đồng nghĩa với giảm tổng chi tiêu", "C. Không nên mua sản phẩm giá rẻ", "D. Người đó có thu nhập thấp"], correct: 1, isHard: true, hint: "Mua quá nhiều đồ rẻ vẫn dẫn tới tổng số tiền chi ra rất lớn.", exp: "Số lượng mua quá nhiều sẽ làm tăng tổng chi tiêu dù mỗi món đều được giảm giá." },
+            { q: "Khi đánh giá một món đồ là nhu cầu hay sở thích, yếu tố nào ít quan trọng nhất?", options: ["A. Hoàn cảnh cá nhân", "B. Mức độ cần thiết", "C. Khả năng tài chính", "D. Số lượng người nổi tiếng sử dụng sản phẩm"], correct: 3, isHard: false, hint: "Ảnh hưởng từ KOLs không phản ánh đúng giá trị sử dụng thực tế của bạn.", exp: "Người nổi tiếng quảng cáo không quyết định nhu cầu hay khả năng tài chính của cá nhân bạn." },
+            { q: "Một người có thể chi trả tiền thuê nhà nhưng chọn mua nhà trả góp với khoản thanh toán vượt quá khả năng tài chính. Sai lầm chính là:", options: ["A. Không mua nhà sớm hơn", "B. Đánh đồng mong muốn nâng cao chất lượng cuộc sống với khả năng chi trả thực tế", "C. Không có nhu cầu về nhà ở", "D. Có quá nhiều khoản tiết kiệm"], correct: 1, isHard: true, hint: "Gánh nặng nợ vượt quá sức chịu đựng của dòng tiền hằng tháng.", exp: "Nhầm lẫn giữa mong muốn sở hữu nhà và năng lực gánh nợ thực tế." },
+            { q: "Quy tắc nào dưới đây giúp hạn chế mua sắm bốc đồng hiệu quả nhất?", options: ["A. Chỉ mua khi có giảm giá", "B. Đưa ra quyết định mua ngay khi nhìn thấy sản phẩm", "C. Chờ một khoảng thời gian và đánh giá lại mức độ cần thiết", "D. Luôn hỏi ý kiến người bán"], correct: 2, isHard: false, hint: "Áp dụng quy tắc trì hoãn 24 giờ hoặc 30 ngày.", exp: "Trì hoãn thời gian mua giúp làm nguội cảm xúc bốc đồng và nhìn nhận rõ nhu cầu." },
+            { q: "Một người cho rằng: “Nếu mình có đủ tiền để mua thì đó là nhu cầu.” Nhận định này:", options: ["A. Hoàn toàn đúng", "B. Sai vì khả năng chi trả không quyết định bản chất của nhu cầu", "C. Đúng nếu người đó có thu nhập cao", "D. Đúng với tất cả sản phẩm"], correct: 1, isHard: true, hint: "Khả năng tài chính và tính cấp thiết là hai khái niệm độc lập.", exp: "Nhiều tiền chỉ giúp bạn mua được sở thích đắt đỏ, không biến nó thành nhu cầu thiết yếu." },
+            { q: "Minh có 3 triệu đồng tiền nhàn rỗi. Minh muốn mua một đôi giày phiên bản giới hạn vì sợ sau này không còn hàng, dù đã có nhiều đôi giày tương tự. Yếu tố tâm lý nào ảnh hưởng mạnh nhất đến quyết định này?", options: ["A. Hiệu ứng khan hiếm", "B. Chi phí cố định", "C. Đa dạng hóa", "D. Lạm phát"], correct: 0, isHard: true, hint: "Sự lo sợ mất đi cơ hội do số lượng bị giới hạn.", exp: "Hiệu ứng khan hiếm thôi thúc mua sắm vì cảm giác sản phẩm sắp hết hàng." },
+            { q: "Một người luôn ưu tiên mua những sản phẩm đắt tiền vì cho rằng “giá cao chắc chắn đồng nghĩa với chất lượng tốt”. Đây là ví dụ về:", options: ["A. Đánh giá dựa trên khả năng tài chính", "B. Thiên kiến trong quyết định tiêu dùng", "C. Chi phí cơ hội", "D. Quản lý nhu cầu hiệu quả"], correct: 1, isHard: false, hint: "Sự định kiến ngầm định giữa giá cả và giá trị thực.", exp: "Đó là một thiên kiến nhận thức, khiến người mua dễ bị thổi phồng giá trị thực tế." },
+            { q: "An dự định mua một chiếc máy tính bảng trị giá 15 triệu đồng để học tập. Tuy nhiên, sau khi tìm hiểu, An nhận thấy một chiếc máy 7 triệu đồng đã đáp ứng được 95% nhu cầu sử dụng. Quyết định tài chính hợp lý nhất là:", options: ["A. Mua chiếc 15 triệu vì đắt hơn chắc chắn tốt hơn", "B. Mua chiếc 7 triệu và đánh giá việc sử dụng phần tiền còn lại cho các mục tiêu khác", "C. Vay tiền để mua chiếc 15 triệu", "D. Không mua bất kỳ sản phẩm nào"], correct: 1, isHard: false, hint: "Tối ưu hóa hiệu quả trên chi phí bỏ ra.", exp: "Lựa chọn sản phẩm 7 triệu giúp đáp ứng đủ nhu cầu và tối ưu 8 triệu còn lại cho mục tiêu khác." },
+            { q: "Một người thường xuyên mua sản phẩm chỉ vì thấy người khác trên mạng xã hội có cuộc sống tốt hơn. Hành vi này chịu ảnh hưởng nhiều nhất bởi:", options: ["A. So sánh xã hội", "B. Lạm phát", "C. Lãi suất kép", "D. Đa dạng hóa tài sản"], correct: 0, isHard: false, hint: "Tâm lý tự so sánh bản thân với hình ảnh người khác đăng lên mạng.", exp: "So sánh xã hội (Social Comparison) thúc đẩy chi tiêu để chứng tỏ bản thân." },
+            { q: "Trước khi mua một món đồ giá trị cao, câu hỏi nào sau đây toàn diện nhất?", options: ["A. Sản phẩm này có đang giảm giá không?", "B. Bạn bè mình có sử dụng không?", "C. Món đồ này có thực sự cần thiết, phù hợp ngân sách và ảnh hưởng đến mục tiêu tài chính không?", "D. Sản phẩm này có thương hiệu nổi tiếng không?"], correct: 2, isHard: false, hint: "Câu hỏi tổng hòa được nhu cầu, ngân sách và mục tiêu dài hạn.", exp: "Xem xét toàn diện cả 3 yếu tố: Tính cần thiết, ngân sách hiện tại và mục tiêu tương lai." },
+            { q: "Thu nhập của Hà tăng từ 10 triệu lên 15 triệu đồng/tháng. Thay vì giữ mức chi tiêu cũ, Hà tăng tiền ăn ngoài, mua sắm và nâng cấp các dịch vụ cá nhân khiến Hà vẫn không tiết kiệm được. Điều này cho thấy:", options: ["A. Hà đã quản lý tốt thu nhập tăng thêm", "B. Hà đang trải qua lạm phát lối sống", "C. Hà đã đầu tư hiệu quả", "D. Hà có quá ít nhu cầu"], correct: 1, isHard: true, hint: "Chi tiêu tăng đồng nhịp với thu nhập làm mất khả năng tiết kiệm.", exp: "Tăng chi tiêu tương ứng với mức tăng thu nhập chính là hiện tượng lạm phát lối sống." },
+            { q: "Một người đã mua một chiếc áo trị giá 2 triệu đồng nhưng sau đó nhận ra mình hiếm khi mặc. Người đó vẫn tiếp tục mua thêm nhiều áo cùng thương hiệu vì nghĩ rằng “đã đầu tư nhiều tiền vào thương hiệu này rồi”. Đây có thể là:", options: ["A. Chi phí cơ hội", "B. Hiệu ứng chi phí chìm", "C. Lạm phát", "D. Đa dạng hóa"], correct: 1, isHard: true, hint: "Cố bám theo một quyết định sai lầm vì tiếc số tiền đã chi trong quá khứ.", exp: "Nảy sinh từ bẫy chi phí chìm (Sunk Cost Fallacy) khi cố bao biện cho khoản tiền đã mất." },
+            { q: "Một người có thể sống thoải mái mà không cần một món đồ, nhưng món đồ đó giúp tiết kiệm đáng kể thời gian và tăng hiệu quả công việc. Nhận định hợp lý nhất là:", options: ["A. Đây chắc chắn là sở thích", "B. Đây chắc chắn là nhu cầu thiết yếu", "C. Giá trị của món đồ cần được đánh giá dựa trên lợi ích thực tế, không chỉ dựa trên việc có thể sống thiếu nó hay không", "D. Không nên mua vì không phải nhu cầu cơ bản"], correct: 2, isHard: true, hint: "Cân nhắc giá trị gia tăng (tiết kiệm thời gian, tăng năng suất).", exp: "Công cụ giúp tối ưu hóa thời gian và công việc xứng đáng được đầu tư nếu mang lại giá trị thực tế." },
+            { q: "Lan muốn mua một chiếc điện thoại mới với giá 20 triệu đồng. Lan có đủ tiền mặt nhưng nếu mua, quỹ khẩn cấp của Lan sẽ gần như bằng 0. Quyết định nào hợp lý nhất?", options: ["A. Mua ngay vì Lan có đủ tiền", "B. Mua trả góp để không cần suy nghĩ về số tiền", "C. Cân nhắc trì hoãn việc mua để duy trì quỹ khẩn cấp", "D. Vay thêm tiền để có quỹ khẩn cấp"], correct: 2, isHard: true, hint: "Bảo vệ quỹ khẩn cấp luôn là ưu tiên an toàn tài chính hàng đầu.", exp: "Không nên hy sinh toàn bộ quỹ khẩn cấp chỉ để mua sắm thiết bị cá nhân." },
+            { q: "Nguyên tắc nào thể hiện cách tiếp cận cân bằng nhất giữa nhu cầu, sở thích và quản lý tài chính cá nhân?", options: ["A. Luôn ưu tiên sở thích để tận hưởng cuộc sống", "B. Loại bỏ hoàn toàn mọi khoản chi tiêu không thiết yếu", "C. Đáp ứng nhu cầu thiết yếu, bảo vệ các mục tiêu tài chính quan trọng và dành một phần ngân sách hợp lý cho sở thích", "D. Chỉ mua những gì người khác cho là cần thiết"], correct: 2, isHard: false, hint: "Một mô hình tài chính lành mạnh và bền vững.", exp: "Chi tiêu tài chính thông minh là sự kết hợp hài hòa giữa Nhu cầu - Tiết kiệm - Sở thích." }
+        ],
+        "tiet-kiem": [
+            { q: "Một người gửi 100 triệu đồng vào tài khoản tiết kiệm với lãi suất 5%/năm. Nếu lạm phát trong cùng năm là 6%, điều nào phản ánh chính xác nhất?", options: ["A. Người đó vẫn có lợi nhuận thực 5%", "B. Giá trị danh nghĩa của tiền tăng nhưng sức mua thực tế có thể giảm", "C. Người đó chắc chắn không bị ảnh hưởng bởi lạm phát", "D. Khoản tiết kiệm đã tăng giá trị thực 1%"], correct: 1, isHard: true, hint: "So sánh giữa lãi suất nhận được và tỷ lệ lạm phát.", exp: "Lãi suất 5% thấp hơn lạm phát 6% khiến sức mua thực tế bị sụt giảm khoảng 1%." },
+            { q: "Lý do quan trọng nhất để xây dựng quỹ khẩn cấp là gì?", options: ["A. Tăng khả năng mua sắm khi có khuyến mãi", "B. Đầu tư vào các tài sản rủi ro cao", "C. Giảm nhu cầu vay nợ khi xảy ra sự kiện bất ngờ", "D. Đảm bảo có thể chi tiêu nhiều hơn mỗi tháng"], correct: 2, isHard: false, hint: "Tấm đệm đỡ cho các rủi ro bất ngờ về y tế, thất nghiệp...", exp: "Quỹ khẩn cấp bảo vệ bạn khỏi các khoản nợ xấu khi gặp sự cố ngoài dự tính." },
+            { q: "Lan có thu nhập 15 triệu đồng/tháng và chi phí thiết yếu khoảng 9 triệu đồng. Lan nên xác định mục tiêu quỹ khẩn cấp chủ yếu dựa trên:", options: ["A. Tổng số tiền Lan muốn mua sắm", "B. Chi phí thiết yếu và mức độ ổn định của thu nhập", "C. Thu nhập của những người bạn", "D. Số tiền còn lại sau khi mua sắm"], correct: 1, isHard: false, hint: "Tính theo số tháng sinh hoạt phí cơ bản (thường từ 3-6 tháng).", exp: "Quy mô quỹ khẩn cấp dựa trên chi phí thiết yếu hàng tháng để duy trì cuộc sống tối thiểu." },
+            { q: "Hai người cùng tiết kiệm 2 triệu đồng mỗi tháng. Người A bắt đầu từ năm 22 tuổi, người B bắt đầu từ năm 30 tuổi. Lợi thế lớn nhất của người A là:", options: ["A. Không chịu ảnh hưởng bởi lạm phát", "B. Có nhiều thời gian để hưởng lợi từ lãi kép", "C. Không cần tiết kiệm thường xuyên", "D. Luôn có mức lợi suất cao hơn"], correct: 1, isHard: false, hint: "Yếu tố thời gian trong công thức lãi kép.", exp: "Bắt đầu sớm giúp người A có thêm 8 năm tích lũy kỳ diệu nhờ sức mạnh lãi kép." },
+            { q: "Đâu là ví dụ rõ nhất về tiết kiệm thông minh?", options: ["A. Cất toàn bộ tiền mặt ở nhà", "B. Chỉ tiết kiệm khi cuối tháng còn tiền", "C. Tự động chuyển một khoản tiền vào quỹ tiết kiệm ngay khi nhận thu nhập", "D. Dùng toàn bộ tiền thưởng để mua đồ giảm giá"], correct: 2, isHard: false, hint: "Áp dụng nguyên tắc 'Pay yourself first' một cách tự động.", exp: "Tiết kiệm tự động ngay khi có thu nhập giúp đảm bảo tính kỷ luật cao nhất." },
+            { q: "Một người cho rằng: “Tôi sẽ bắt đầu tiết kiệm khi kiếm được nhiều tiền hơn.” Rủi ro lớn nhất của tư duy này là:", options: ["A. Người đó sẽ phải đóng thuế nhiều hơn", "B. Mức chi tiêu có thể tăng theo thu nhập và việc tiết kiệm luôn bị trì hoãn", "C. Thu nhập chắc chắn sẽ giảm", "D. Người đó không thể có tài khoản ngân hàng"], correct: 1, isHard: true, hint: "Bẫy lạm phát lối sống khiến chi tiêu tăng cùng thu nhập.", exp: "Không hình thành thói quen sớm sẽ khiến chi tiêu tăng vọt khi thu nhập tăng." },
+            { q: "Hà có 50 triệu đồng muốn dùng mua nhà trong 2 năm tới. Lựa chọn nào phù hợp nhất?", options: ["A. Đầu tư toàn bộ vào tài sản có biến động mạnh", "B. Ưu tiên bảo toàn vốn và lựa chọn các kênh có tính thanh khoản phù hợp", "C. Không cần quan tâm đến mức độ rủi ro", "D. Chi tiêu toàn bộ trước khi đầu tư"], correct: 1, isHard: false, hint: "Mục tiêu ngắn hạn (2 năm) cần sự an toàn vốn tuyệt đối.", exp: "Mục tiêu tài chính ngắn hạn cần ưu tiên thanh khoản và bảo toàn số tiền gốc." },
+            { q: "Một người gửi tiết kiệm với lãi suất danh nghĩa 8%/năm, trong khi lạm phát là 3%/năm. Xấp xỉ, lợi suất thực là:", options: ["A. 11%", "B. 8%", "C. 5%", "D. 3%"], correct: 2, isHard: false, hint: "Lợi suất thực = Lãi suất danh nghĩa - Lạm phát.", exp: "8% - 3% = 5% lợi suất thực tế nhận được." },
+            { q: "Đâu là nguyên nhân khiến việc “tiết kiệm số tiền còn lại vào cuối tháng” thường kém hiệu quả?", options: ["A. Thu nhập luôn bằng 0", "B. Chi tiêu có thể mở rộng và khiến cuối tháng không còn tiền", "C. Ngân hàng không cho gửi tiền cuối tháng", "D. Tiết kiệm cuối tháng luôn bị tính phí"], correct: 1, isHard: false, hint: "Quy luật Parkinson về chi tiêu mở rộng theo thu nhập.", exp: "Nếu không trích tiết kiệm trước, các khoản chi tiêu vô hình sẽ ngốn sạch tiền vào cuối tháng." },
+            { q: "Một người có 20 triệu tiền tiết kiệm nhưng đồng thời có khoản nợ tiêu dùng lãi suất cao. Hành động nào hợp lý nhất?", options: ["A. Giữ toàn bộ tiền tiết kiệm và chỉ trả mức tối thiểu cho khoản nợ", "B. Cân nhắc sử dụng một phần tiền phù hợp để giảm khoản nợ lãi suất cao", "C. Vay thêm tiền để tăng khoản tiết kiệm", "D. Không cần quan tâm đến lãi suất khoản nợ"], correct: 1, isHard: true, hint: "So sánh tiền lãi thu được từ tiết kiệm và tiền lãi phải trả cho khoản nợ.", exp: "Lãi suất vay tiêu dùng thường rất cao, trả nợ sớm giúp ngắt dòng tiền bị bào mòn." },
+            { q: "Khái niệm “pay yourself first” trong quản lý tài chính cá nhân có nghĩa là:", options: ["A. Luôn tiêu tiền cho bản thân trước", "B. Ưu tiên tiết kiệm hoặc đầu tư trước khi chi tiêu cho các khoản không thiết yếu", "C. Chỉ mua những món đồ đắt tiền", "D. Không cần trả các hóa đơn"], correct: 1, isHard: false, hint: "Trả tiền cho tương lai của chính mình trước khi trả cho người bán hàng.", exp: "Trích tiền vào quỹ tiết kiệm/đầu tư ngay khi nhận lương." },
+            { q: "Nam gửi 100 triệu đồng với lãi suất 7%/năm và để toàn bộ tiền lãi nhập vào gốc mỗi năm. Yếu tố nào giúp khoản tiền tăng nhanh hơn?", options: ["A. Lạm phát", "B. Lãi đơn", "C. Lãi kép", "D. Khấu hao"], correct: 2, isHard: false, hint: "Lãi nhập gốc để tiếp tục sinh lãi.", exp: "Lãi kép giúp tiền tăng trưởng theo hàm số mũ khi tiền lãi quay lại làm tăng gốc." },
+            { q: "Một người liên tục rút tiền từ quỹ khẩn cấp để mua đồ giảm giá. Vấn đề chính là:", options: ["A. Quỹ khẩn cấp có quy mô quá lớn", "B. Người đó đang sử dụng sai mục đích của quỹ khẩn cấp", "C. Người đó tiết kiệm quá nhiều", "D. Mua hàng giảm giá luôn là sai"], correct: 1, isHard: false, hint: "Vi phạm tính kỷ luật của quỹ dự phòng.", exp: "Quỹ khẩn cấp chỉ dùng cho sự cố bất ngờ, không dùng cho việc chi tiêu mua sắm." },
+            { q: "Đâu là cách tốt nhất để xác định mục tiêu tiết kiệm?", options: ["A. Đặt mục tiêu càng lớn càng tốt", "B. Chỉ tiết kiệm khi có động lực", "C. Xác định số tiền, thời hạn và mục đích cụ thể", "D. Sao chép mục tiêu tiết kiệm của người khác"], correct: 2, isHard: false, hint: "Tiêu chuẩn SMART trong đặt mục tiêu.", exp: "Mục tiêu cụ thể, có con số và thời gian giúp tăng khả năng thực thi thành công." },
+            { q: "Mai muốn tiết kiệm 60 triệu đồng trong 12 tháng. Bỏ qua lãi suất, mỗi tháng Mai cần tiết kiệm trung bình:", options: ["A. 3 triệu đồng", "B. 4 triệu đồng", "C. 5 triệu đồng", "D. 6 triệu đồng"], correct: 2, isHard: false, hint: "Phép chia cơ bản: 60 chia cho 12.", exp: "60 triệu / 12 tháng = 5 triệu đồng/tháng." },
+            { q: "Một người giữ toàn bộ tiền nhàn rỗi trong tài khoản không sinh lời trong 10 năm. Rủi ro lớn nhất là:", options: ["A. Không thể tiếp cận tiền khi cần", "B. Sức mua của số tiền có thể giảm do lạm phát", "C. Không có đủ thanh khoản", "D. Quỹ khẩn cấp sẽ tự động biến mất"], correct: 1, isHard: true, hint: "Tác động bào mòn theo thời gian của giá cả hàng hóa.", exp: "Lạm phát qua 10 năm sẽ làm giảm đáng kể sức mua thực tế của lượng tiền mặt nằm yên." },
+            { q: "Vì sao không nên đánh giá hiệu quả tiết kiệm chỉ dựa vào số tiền danh nghĩa?", options: ["A. Vì tiền không có giá trị", "B. Vì cần xem xét sức mua thực tế và tác động của lạm phát", "C. Vì lãi suất không quan trọng", "D. Vì số tiền tiết kiệm luôn giảm"], correct: 1, isHard: true, hint: "Mối quan hệ giữa con số ghi trên tiền và lượng hàng hóa mua được.", exp: "Con số tăng không có nghĩa là mua được nhiều hàng hóa hơn nếu lạm phát cao hơn." },
+            { q: "Thu nhập của Minh không ổn định vì làm nghề tự do. So với người có thu nhập ổn định, Minh nên:", options: ["A. Có quỹ khẩn cấp lớn hơn", "B. Không cần quỹ khẩn cấp", "C. Chi tiêu nhiều hơn khi có thu nhập cao", "D. Chỉ bắt đầu tiết kiệm khi thất nghiệp"], correct: 0, isHard: true, hint: "Bù đắp cho sự thiếu ổn định của dòng tiền hàng tháng.", exp: "Thu nhập biến động cần quỹ khẩn cấp dày hơn (6-12 tháng) để phòng ngừa rủi ro." },
+            { q: "Một người có thói quen tiết kiệm 10% thu nhập. Khi thu nhập tăng 50%, người này giữ nguyên số tiền tiết kiệm tuyệt đối. Điều này dẫn đến:", options: ["A. Tỷ lệ tiết kiệm trên thu nhập giảm", "B. Tỷ lệ tiết kiệm tăng", "C. Không có bất kỳ thay đổi nào", "D. Lãi suất tiết kiệm tăng tự động"], correct: 0, isHard: true, hint: "So sánh tỉ lệ % mới với 10% ban đầu.", exp: "Số tiền giữ nguyên trên một Mẫu Số (thu nhập) lớn hơn làm cho Tỷ Lệ % giảm xuống." },
+            { q: "Ứng dụng ngân hàng tự động chuyển 2 triệu vào tài khoản tiết kiệm mỗi tháng. Lợi ích lớn nhất là:", options: ["A. Đảm bảo lợi nhuận cao", "B. Giảm sự phụ thuộc vào ý chí và hình thành thói quen tiết kiệm đều đặn", "C. Loại bỏ hoàn toàn rủi ro lạm phát", "D. Giúp người dùng không cần quản lý tài chính"], correct: 1, isHard: false, hint: "Tự động hóa giúp thắng được sự trì hoãn của con người.", exp: "Hệ thống tự động loại bỏ rào cản tâm lý và xây dựng tính kỷ luật bền vững." },
+            { q: "Khoản A tính lãi kép hằng năm, khoản B tính lãi đơn (cùng gốc, cùng lãi suất 6%/năm). Sau nhiều năm:", options: ["A. Khoản B luôn lớn hơn", "B. Hai khoản luôn bằng nhau", "C. Khoản A có xu hướng tăng nhanh hơn theo thời gian", "D. Không thể so sánh"], correct: 2, isHard: true, hint: "Lãi kép sinh ra tiền lãi trên phần lãi tích lũy.", exp: "Theo thời gian, đường cong tăng trưởng của lãi kép (A) sẽ vượt xa lãi đơn (B)." },
+            { q: "Gửi tiền lãi suất 4%/năm trong khi lạm phát trung bình 5%/năm. Xét sức mua, sau một năm người này:", options: ["A. Chắc chắn giàu hơn 4%", "B. Có thể mất khoảng 1% sức mua thực tế", "C. Không bị ảnh hưởng bởi lạm phát", "D. Tăng sức mua khoảng 9%"], correct: 1, isHard: true, hint: "4% - 5% = -1%.", exp: "Sức mua bị suy giảm khoảng 1% do tỷ lệ lạm phát cao hơn mức lãi tiết kiệm." },
+            { q: "Linh chọn Tiết kiệm 5 triệu ngay hôm nay thay vì chờ 5 năm nữa. Lợi thế là:", options: ["A. Luôn có lãi suất cao hơn", "B. Có thời gian dài hơn để số tiền sinh lời", "C. Không chịu thuế", "D. Không bị ảnh hưởng bởi lạm phát"], correct: 1, isHard: true, hint: "Giá trị thời gian của tiền (Time value of money).", exp: "Tiền tiết kiệm sớm nhận được nhiều chu kỳ sinh lời từ lãi kép hơn." },
+            { q: "Một người tiết kiệm nhiều tiền nhưng không có bảo hiểm, quỹ khẩn cấp hay kế hoạch dài hạn. Nhận định đúng nhất:", options: ["A. Tiết kiệm nhiều tiền đồng nghĩa với quản lý tài chính tốt", "B. Tiết kiệm chỉ là một phần của quản lý tài chính toàn diện", "C. Người đó chắc chắn không gặp rủi ro tài chính", "D. Không cần lập kế hoạch nếu có nhiều tiền"], correct: 1, isHard: true, hint: "Tiết kiệm chỉ là 1 trụ cột trong bức tranh tài chính.", exp: "Quản lý tài chính toàn diện bao gồm cả bảo vệ (bảo hiểm, quỹ rủi ro) và tăng trưởng." },
+            { q: "Khóa toàn bộ tiền gửi 5 năm để lấy lãi cao, sau 3 tháng gặp sự cố cần tiền gấp. Sai lầm chính là:", options: ["A. Chọn sản phẩm có lãi suất cao", "B. Không cân nhắc nhu cầu thanh khoản trước khi gửi tiền", "C. Có quá nhiều tiền tiết kiệm", "D. Không tiêu hết tiền trước khi gửi"], correct: 1, isHard: true, hint: "Tính thanh khoản = khả năng chuyển đổi thành tiền mặt nhanh chóng.", exp: "Không tính toán tính thanh khoản khiến khoản tiền bị đóng băng khi phát sinh sự cố khẩn cấp." },
+            { q: "Hùng tiết kiệm 30% thu nhập, Lan tiết kiệm 20% nhưng thu nhập Lan gấp 3 lần Hùng. Nhận định đúng nhất:", options: ["A. Hùng chắc chắn tiết kiệm được nhiều tiền hơn", "B. Lan chắc chắn có tỷ lệ tiết kiệm cao hơn", "C. Lan có thể tiết kiệm số tiền tuyệt đối nhiều hơn dù tỷ lệ tiết kiệm thấp hơn", "D. Không thể so sánh"], correct: 2, isHard: true, hint: "So sánh con số tuyệt đối (Ví dụ: 30% * 10 triệu vs 20% * 30 triệu).", exp: "Giả sử Hùng kiếm 10tr (tiết kiệm 3tr), Lan kiếm 30tr (tiết kiệm 6tr) -> Lan tiết kiệm nhiều hơn về số tiền tuyệt đối." },
+            { q: "Chia 100tr: 30tr quỹ khẩn cấp, 40tr trả nợ lãi cao, 20tr mục tiêu dài hạn, 10tr chi tiêu. Thể hiện nguyên tắc gì?", options: ["A. Đa dạng hóa mọi khoản chi", "B. Ưu tiên cân bằng giữa an toàn, nghĩa vụ tài chính và mục tiêu cá nhân", "C. Chỉ tập trung vào lợi nhuận cao", "D. Không cần lập kế hoạch"], correct: 1, isHard: true, hint: "Phân bổ hợp lý theo thứ tự ưu tiên tài chính.", exp: "Một chiến lược phân bổ nguồn vốn toàn diện và khoa học." },
+            { q: "Rút tiền tiết kiệm liên tục để chi tiêu không cần thiết thể hiện vấn đề ở:", options: ["A. Tỷ lệ tiết kiệm", "B. Kỷ luật duy trì khoản tiết kiệm", "C. Mục đích và cách quản lý tài khoản", "D. Mức độ tự động hóa"], correct: 1, isHard: true, hint: "Thiếu sự cam kết giữ vững mục tiêu ban đầu.", exp: "Thiếu tính kỷ luật làm đứt gãy quá trình tích lũy tài chính." },
+            { q: "Chiến lược phù hợp nhất để giảm ăn mòn tiền tiết kiệm bởi lạm phát trong dài hạn:", options: ["A. Luôn giữ toàn bộ tiền dưới dạng tiền mặt", "B. Không theo dõi lạm phát", "C. Phân bổ tiền phù hợp giữa quỹ dự phòng, tiết kiệm và các kênh đầu tư", "D. Chỉ mua những sản phẩm đang giảm giá"], correct: 2, isHard: true, hint: "Kết hợp tiết kiệm an toàn và đầu tư tăng trưởng.", exp: "Đầu tư giúp tạo lợi suất vượt trội hơn tỷ lệ lạm phát trong dài hạn." },
+            { q: "Có dư 5tr/tháng nhưng không có quỹ khẩn cấp, thường phải rút ra khi có chi phí bất ngờ. Đánh giá hợp lý nhất:", options: ["A. Người đó đã có hệ thống tiết kiệm hiệu quả", "B. Người đó có khả năng để dành tiền nhưng hệ thống tiết kiệm chưa bền vững", "C. Người đó không có khả năng tiết kiệm", "D. Không cần thay đổi"], correct: 1, isHard: true, hint: "Có thặng dư dòng tiền nhưng thiếu cấu trúc bảo vệ.", exp: "Thiếu quỹ dự phòng riêng biệt khiến việc tiết kiệm bị gián đoạn liên tục." }
+        ],
+        "kiem-tien": [
+            { q: "Thu nhập nào dưới đây có tính không ổn định nhất?", options: ["A. Lương cơ bản nhận hằng tháng theo hợp đồng dài hạn", "B. Tiền lãi từ tài khoản tiết kiệm cố định", "C. Thu nhập từ công việc tự do theo từng dự án", "D. Trợ cấp được nhận cố định hằng tháng"], correct: 2, isHard: false, hint: "Công việc tự do (Freelance) phụ thuộc vào hợp đồng từng thời điểm.", exp: "Thu nhập Freelance biến động theo số lượng và giá trị dự án nhận được." },
+            { q: "So sánh Công việc A (15tr ổn định) và Công việc B (22tr dao động, không bảo hiểm). Cần cân nhắc gì ngoài tiền?", options: ["A. Màu sắc của nơi làm việc", "B. Tính ổn định, phúc lợi và mức độ rủi ro", "C. Số lượng đồng nghiệp", "D. Khoảng cách giữa các phòng làm việc"], correct: 1, isHard: false, hint: "Đánh giá tổng thể gói thu nhập bao gồm an sinh và rủi ro.", exp: "Rủi ro mất việc và chi phí tự mua bảo hiểm có thể bù trừ hết mức chênh lệch lương." },
+            { q: "Tăng lương 10%, lạm phát 8%. Thu nhập thực tế biến động ra sao?", options: ["A. Tăng khoảng 18%", "B. Tăng khoảng 10%", "C. Chỉ tăng nhẹ, khoảng 2%", "D. Giảm 8%"], correct: 2, isHard: false, hint: "10% - 8% = 2%.", exp: "Tỷ lệ tăng thực tế xấp xỉ bằng mức tăng lương trừ đi tỷ lệ lạm phát." },
+            { q: "Đầu tư vào giáo dục và kỹ năng chuyên môn được gọi là gì?", options: ["A. Tiêu dùng không cần thiết", "B. Đầu tư vào vốn con người", "C. Chi phí chìm", "D. Lạm phát cá nhân"], correct: 1, isHard: false, hint: "Vốn con người (Human Capital).", exp: "Nâng cao tri thức và kỹ năng là hình thức đầu tư vào vốn con người bền vững nhất." },
+            { q: "Làm thêm 10h/tuần (50k/h) vs Dành 10h học kỹ năng tăng thu nhập tương lai. Yếu tố quan trọng nhất cần xét:", options: ["A. Chi phí cơ hội của thời gian", "B. Màu sắc của công việc", "C. Ý kiến của bạn bè", "D. Số lượng giờ trong ngày"], correct: 0, isHard: false, hint: "Số tiền nhỏ hiện tại vs Giá trị lớn trong tương lai.", exp: "Cân nhắc chi phí cơ hội giữa thu nhập tức thì và tiềm năng tăng trưởng tương lai." },
+            { q: "Đâu là ví dụ rõ nhất về thu nhập chủ động?", options: ["A. Cổ tức từ cổ phiếu", "B. Lãi từ tiền gửi", "C. Tiền lương nhận được khi làm việc", "D. Tiền tăng giá của tài sản"], correct: 2, isHard: false, hint: "Đổi thời gian và sức lao động trực tiếp lấy tiền.", exp: "Tiền lương đòi hỏi sự có mặt và lao động trực tiếp của bạn." },
+            { q: "Làm thêm giờ liên tục khiến kiệt sức và giảm hiệu suất công việc. Điều này chứng tỏ:", options: ["A. Làm nhiều giờ luôn đồng nghĩa với năng suất cao", "B. Thu nhập tăng luôn quan trọng hơn sức khỏe", "C. Tối ưu thu nhập cần cân bằng với năng suất và tính bền vững", "D. Càng làm nhiều thì càng không có rủi ro"], correct: 2, isHard: false, hint: "Sức khỏe là nền tảng để tạo ra thu nhập lâu dài.", exp: "Đánh đổi sức khỏe lấy thu nhập ngắn hạn là chiến lược không bền vững." },
+            { q: "Tại sao chỉ phụ thuộc vào một nguồn thu nhập lại có rủi ro?", options: ["A. Vì tất cả nguồn thu nhập đều giống nhau", "B. Vì khi nguồn thu nhập đó bị gián đoạn, tài chính cá nhân có thể bị ảnh hưởng nghiêm trọng", "C. Vì không thể tiết kiệm từ một nguồn thu nhập", "D. Vì chỉ người có nhiều việc mới có thu nhập"], correct: 1, isHard: false, hint: "Tình huống công ty cắt giảm nhân sự hoặc gặp sự cố bất ngờ.", exp: "Mất đi nguồn thu duy nhất khiến dòng tiền cá nhân sụp đổ ngay lập tức." },
+            { q: "Một người có kỹ năng hiếm và được thị trường đánh giá cao sẽ có:", options: ["A. Khả năng tạo thu nhập cao hơn", "B. Chắc chắn không bị thất nghiệp", "C. Không cần tiếp tục học hỏi", "D. Không bị ảnh hưởng bởi công nghệ"], correct: 0, isHard: false, hint: "Quy luật cung cầu trên thị trường lao động.", exp: "Kỹ năng hiếm có nguồn cung ít nên thị trường trả mức giá (lương) cao hơn." },
+            { q: "Freelancer tháng này kiếm 40tr, tháng sau 15tr. Cách quản lý chi tiêu tốt nhất:", options: ["A. Chi tiêu theo tháng có thu nhập cao nhất", "B. Dựa vào mức thu nhập trung bình hoặc thận trọng và xây dựng quỹ dự phòng", "C. Chi tiêu toàn bộ 40 triệu đồng ngay tháng đầu", "D. Không cần theo dõi thu nhập"], correct: 1, isHard: false, hint: "Lập ngân sách dựa trên mức thu nhập tối thiểu hoặc trung bình.", exp: "Dùng tháng thu nhập cao để bù đắp cho tháng thu nhập thấp và trích quỹ dự phòng." },
+            { q: "So sánh công việc lương thấp hơn nhưng có bảo hiểm, đào tạo và thưởng với công việc khác:", options: ["A. Chỉ so sánh lương cơ bản", "B. Xem xét tổng giá trị của gói thu nhập và phúc lợi", "C. Chỉ quan tâm đến số giờ làm việc", "D. Bỏ qua mọi khoản thưởng"], correct: 1, isHard: false, hint: "Total Rewards (Tổng đãi ngộ).", exp: "Tính toán tổng giá trị bao gồm lương, thưởng, bảo hiểm và cơ hội thăng tiến." },
+            { q: "Đâu là ví dụ phù hợp nhất về đòn bẩy thu nhập?", options: ["A. Làm thêm nhiều giờ hơn mỗi ngày", "B. Phát triển kỹ năng có thể giúp tăng giá trị tạo ra trong mỗi giờ làm việc", "C. Giảm thời gian học tập", "D. Tiêu nhiều tiền hơn để có động lực"], correct: 1, isHard: false, hint: "Tăng giá trị tạo ra trên mỗi đơn vị thời gian làm việc.", exp: "Nâng cao năng suất giúp gia tăng thu nhập mà không cần tăng thêm số giờ làm việc." },
+            { q: "Được đề nghị tăng lương từ 15tr lên 18tr nhưng phải làm thêm 20 giờ/tuần. Quyết định hợp lý nhất:", options: ["A. Luôn nhận vì lương cao hơn", "B. Luôn từ chối vì phải làm nhiều hơn", "C. So sánh mức tăng thu nhập với thời gian, sức khỏe và giá trị cơ hội bị mất", "D. Chọn theo ý kiến của đồng nghiệp"], correct: 2, isHard: false, hint: "Tính mức lương theo giờ mới xem có thực sự tăng hay không.", exp: "Tăng 3 triệu nhưng làm thêm 80 giờ/tháng làm giảm mức lương nhận được trên mỗi giờ." },
+            { q: "Đầu tư 5 triệu học kỹ năng mới, sau đó thu nhập tăng 2 triệu/tháng. Khái niệm phù hợp nhất:", options: ["A. Lợi tức từ vốn con người", "B. Chi phí chìm", "C. Lạm phát", "D. Khấu hao tài sản"], correct: 0, isHard: false, hint: "Thu về lợi nhuận từ việc nâng cao năng lực bản thân.", exp: "Khoản thu nhập tăng thêm là lợi tức thu được từ việc nâng cao giá trị bản thân." },
+            { q: "Tình trạng thất nghiệp tạm thời do đang chuyển đổi giữa hai công việc được gọi là:", options: ["A. Thất nghiệp cơ cấu", "B. Thất nghiệp ma sát", "C. Thất nghiệp chu kỳ", "D. Thất nghiệp tự nguyện vĩnh viễn"], correct: 1, isHard: true, hint: "Thất nghiệp trong thời gian ngắn để tìm công việc phù hợp hơn.", exp: "Thất nghiệp ma sát (Frictional unemployment) xảy ra khi người lao động dịch chuyển giữa các công việc." },
+            { q: "Lương cao nhưng tốn nhiều chi phí đi lại, ăn uống, trang phục. Đánh giá tài chính dựa trên:", options: ["A. Thu nhập danh nghĩa", "B. Thu nhập ròng sau các chi phí liên quan", "C. Số lượng đồng nghiệp", "D. Chức danh công việc"], correct: 1, isHard: false, hint: "Số tiền thực tế còn lại bỏ vào túi.", exp: "Thu nhập ròng phản ánh chính xác lượng tiền thực tế bạn tích lũy được." },
+            { q: "Thu nhập tăng nhưng mức sống tăng nhanh hơn thu nhập, khả năng tài chính sẽ:", options: ["A. Luôn được cải thiện", "B. Không cải thiện đáng kể", "C. Chắc chắn tăng gấp đôi", "D. Không bao giờ gặp rủi ro"], correct: 1, isHard: false, hint: "Cân đối giữa Dòng Tiền Vào và Dòng Tiền Ra.", exp: "Chi tiêu tăng nhanh hơn thu nhập khiến tích lũy tài chính đi lùi." },
+            { q: "Công việc lương cao nhưng kỹ năng dễ lỗi thời. Chiến lược phù hợp nhất:", options: ["A. Không cần học thêm vì đang có thu nhập cao", "B. Liên tục cập nhật kỹ năng để duy trì khả năng cạnh tranh", "C. Tiêu hết thu nhập hiện tại", "D. Chỉ phụ thuộc vào kinh nghiệm cũ"], correct: 1, isHard: false, hint: "Thích nghi với sự thay đổi công nghệ trên thị trường.", exp: "Chủ động học tập suốt đời giúp duy trì giá trị bản thân trước sự thay đổi của công nghệ." },
+            { q: "Đâu là yếu tố phản ánh năng suất lao động tốt hơn?", options: ["A. Số giờ làm việc nhiều nhất", "B. Giá trị hoặc kết quả tạo ra trên mỗi đơn vị thời gian hoặc nguồn lực", "C. Số lần đi làm", "D. Số lượng email đã gửi"], correct: 1, isHard: false, hint: "Kết quả đầu ra (Output) trên Chi phí đầu vào (Input).", exp: "Năng suất đo lường bằng kết quả tạo ra chứ không phải số giờ ngồi làm việc." },
+            { q: "Làm công việc A nhận 100k/h. Bỏ qua công việc B trả 150k/h. Chi phí cơ hội của việc chọn A là:", options: ["A. 50.000 đồng", "B. 100.000 đồng", "C. 150.000 đồng", "D. 250.000 đồng"], correct: 2, isHard: false, hint: "Giá trị của phương án tốt nhất bị bỏ qua.", exp: "Chi phí cơ hội chính là 150.000 đồng từ công việc B mà bạn đã từ bỏ." },
+            { q: "Lương 20tr, đóng thuế/phí còn 17tr. Chi phí trực tiếp đi làm là 2tr. Số tiền còn lại trước chi phí sinh hoạt:", options: ["A. 15 triệu đồng", "B. 17 triệu đồng", "C. 18 triệu đồng", "D. 20 triệu đồng"], correct: 0, isHard: true, hint: "17 triệu - 2 triệu = ?", exp: "17 triệu (sau thuế) - 2 triệu (chi phí công việc) = 15 triệu đồng." },
+            { q: "Từ chối việc 30tr để làm việc 25tr vì việc hai dạy kỹ năng giá trị tương lai. Nhận định hợp lý:", options: ["A. Người đó chắc chắn đưa ra quyết định sai", "B. Thu nhập hiện tại là yếu tố duy nhất cần xem xét", "C. Người đó đang đánh đổi một phần thu nhập hiện tại để đầu tư vào vốn con người", "D. Kỹ năng không có giá trị kinh tế"], correct: 2, isHard: true, hint: "Chấp nhận bớt thu nhập ngắn hạn để đổi lấy sự bứt phá dài hạn.", exp: "Hi sinh 5 triệu hiện tại để tích lũy kỹ năng giúp gia tăng thu nhập đột phá trong tương lai." },
+            { q: "Lương tăng 5%/năm, lạm phát 7%/năm. Trong dài hạn, sức mua thực tế sẽ:", options: ["A. Có sức mua thực tế tăng", "B. Có nguy cơ giảm sức mua thực tế", "C. Không bị ảnh hưởng bởi lạm phát", "D. Có mức lương thực tế tăng 12%"], correct: 1, isHard: true, hint: "5% < 7%.", exp: "Mức tăng lương thấp hơn lạm phát làm suy giảm sức mua thực tế theo thời gian." },
+            { q: "Có 3 nguồn thu: Lương 70%, Freelance 20%, Tài sản 10%. Lợi ích lớn nhất khi mất việc chính:", options: ["A. Đảm bảo thu nhập không bao giờ giảm", "B. Giảm sự phụ thuộc vào một nguồn thu nhập duy nhất", "C. Không cần quỹ khẩn cấp", "D. Không cần tiếp tục làm việc"], correct: 1, isHard: true, hint: "Tác dụng của đa dạng hóa nguồn thu nhập.", exp: "30% thu nhập còn lại giúp bạn duy trì sinh hoạt trong thời gian tìm việc mới." },
+            { q: "Dành hết giờ rảnh làm thêm kiếm 5tr/tháng thay vì học kỹ năng giúp tăng 10tr/tháng tương lai. Đánh giá dựa trên:", options: ["A. Chi phí cơ hội giữa thu nhập hiện tại và lợi ích dài hạn", "B. Mức độ nổi tiếng của công việc", "C. Số giờ rảnh của bạn bè", "D. Số tiền hiện có trong tài khoản"], correct: 0, isHard: true, hint: "So sánh 5 triệu ngay bây giờ vs 10 triệu lâu dài.", exp: "Đánh giá chi phí cơ hội giữa lợi ích ngắn hạn và tiềm năng phát triển dài hạn." },
+            { q: "So sánh: Người 1 (30tr/tháng, hợp đồng ngắn hạn) vs Người 2 (25tr/tháng, hợp đồng dài hạn, đủ phúc lợi):", options: ["A. Người thứ nhất chắc chắn có tình hình tài chính tốt hơn", "B. Người thứ hai chắc chắn có thu nhập cao hơn", "C. Cần so sánh tổng giá trị thu nhập sau khi xem xét tính ổn định, phúc lợi và rủi ro", "D. Không thể so sánh hai công việc"], correct: 2, isHard: true, hint: "Tính ổn định và phúc lợi có giá trị quy đổi tài chính.", exp: "Cần tính toán cả giá trị an sinh xã hội, bảo hiểm và độ an toàn công việc." },
+            { q: "Tại sao kỹ năng có khả năng mở rộng quy mô (scalable) tạo tiềm năng thu nhập lớn hơn?", options: ["A. Vì luôn yêu cầu làm nhiều giờ hơn", "B. Vì giá trị tạo ra có thể không hoàn toàn phụ thuộc vào số giờ lao động trực tiếp", "C. Vì không cần học tập", "D. Vì không có rủi ro thị trường"], correct: 1, isHard: true, hint: "Tạo ra sản phẩm một lần và bán cho hàng triệu người (Ví dụ: Viết phần mềm).", exp: "Sản phẩm có thể nhân rộng giúp tạo thu nhập đột phá mà không bị giới hạn bởi thời gian." },
+            { q: "Việc 1: 500k/ngày (làm 12 giờ). Việc 2: 400k/ngày (làm 6 giờ). Xét theo thu nhập/giờ, việc nào hiệu quả hơn?", options: ["A. Công việc thứ nhất", "B. Công việc thứ hai", "C. Hai công việc như nhau", "D. Không thể tính toán"], correct: 1, isHard: true, hint: "Tính lương theo giờ: Việc 1 = 41.6k/h, Việc 2 = 66.6k/h.", exp: "Việc 2 đạt ~66.6k/giờ, cao hơn đáng kể so với việc 1 (~41.6k/giờ)." },
+            { q: "Được tăng lương 15% ở thành phố mới nhưng chi phí sinh hoạt tại đó cao hơn 25%. Quyết định phù hợp:", options: ["A. Chuyển việc ngay vì lương tăng", "B. Từ chối ngay vì chi phí tăng", "C. So sánh thu nhập thực, chi phí sinh hoạt và các yếu tố tài chính khác", "D. Chỉ hỏi ý kiến bạn bè"], correct: 2, isHard: true, hint: "So sánh Tỷ lệ % tăng lương với Tỷ lệ % tăng chi phí sinh hoạt.", exp: "Tăng 15% lương không đủ bù đắp 25% chi phí sinh hoạt gia tăng." },
+            { q: "Nhận định thể hiện tư duy dài hạn tốt nhất về việc kiếm tiền:", options: ["A. Luôn chọn công việc có lương cao nhất tại thời điểm hiện tại", "B. Chỉ tập trung vào số giờ làm việc", "C. Cân bằng giữa thu nhập hiện tại, khả năng phát triển kỹ năng, mức độ bền vững và cơ hội trong tương lai", "D. Chỉ làm một công việc duy nhất để tránh rủi ro"], correct: 2, isHard: false, hint: "Tư duy toàn diện và bền vững.", exp: "Cân bằng giữa tài chính hiện tại và tiềm năng phát triển nghề nghiệp lâu dài." }
+        ],
+        "ngan-sach": [
+            { q: "Thu nhập 20tr, chi tiêu 18tr nhưng phần lớn là chi ngẫu hứng. Kết luận chính xác nhất:", options: ["A. Người đó đã quản lý ngân sách tốt vì vẫn còn dư tiền", "B. Người đó có thể gặp khó khăn nếu phát sinh chi phí bất ngờ", "C. Người đó không cần lập ngân sách", "D. Người đó có mức tiết kiệm cao"], correct: 1, isHard: false, hint: "Chi tiêu ngẫu hứng gây thiếu hụt khi sự cố phát sinh.", exp: "Không kiểm soát được dòng tiền sẽ khiến ngân sách sụp đổ khi có chi phí phát sinh bất ngờ." },
+            { q: "Khoản nào dưới đây có khả năng là chi phí cố định?", options: ["A. Tiền ăn ngoài", "B. Tiền mua quần áo", "C. Tiền thuê nhà cố định hàng tháng", "D. Tiền giải trí"], correct: 2, isHard: false, hint: "Khoản tiền không thay đổi hằng tháng.", exp: "Tiền thuê nhà theo hợp đồng là khoản chi cố định hàng tháng." },
+            { q: "Tại sao phân biệt chi phí cố định và chi phí biến đổi lại quan trọng?", options: ["A. Giúp dự đoán và điều chỉnh ngân sách dễ dàng hơn", "B. Giúp thu nhập tự động tăng", "C. Giúp loại bỏ hoàn toàn mọi khoản chi", "D. Giúp không cần theo dõi tiền"], correct: 0, isHard: false, hint: "Nắm rõ khoản nào có thể cắt giảm ngay khi cần.", exp: "Giúp dễ dàng thắt chặt các chi phí biến đổi khi tài chính gặp khó khăn." },
+            { q: "Thu nhập giảm từ 15tr xuống 12tr. Khoản nào nên xem xét cắt giảm trước?", options: ["A. Chi phí thiết yếu", "B. Khoản chi tiêu cá nhân không thiết yếu", "C. Khoản trả nợ bắt buộc", "D. Tất cả đều không được thay đổi"], correct: 1, isHard: false, hint: "Cắt giảm mong muốn (Wants) trước nhu cầu (Needs).", exp: "Ưu tiên cắt giảm các khoản giải trí, chi tiêu cá nhân không bắt buộc." },
+            { q: "Lập ngân sách nhưng luôn chi vượt 20% kế hoạch. Nguyên nhân cao nhất là:", options: ["A. Thu nhập quá cao", "B. Ngân sách không phản ánh đúng hành vi và chi phí thực tế", "C. Người đó tiết kiệm quá nhiều", "D. Không có bất kỳ nguyên nhân nào"], correct: 1, isHard: false, hint: "Đặt ra hạn mức phi thực tế so với thói quen sinh hoạt.", exp: "Lập kế hoạch quá thắt chặt hoặc xa rời thực tế khiến bản ngân sách bị phá vỡ." },
+            { q: "Mục đích quan trọng nhất của việc lập ngân sách:", options: ["A. Không được tiêu tiền", "B. Kiểm soát và phân bổ nguồn tiền theo mục tiêu", "C. Tăng thu nhập ngay lập tức", "D. Loại bỏ hoàn toàn mọi khoản chi giải trí"], correct: 1, isHard: false, hint: "Điều hướng dòng tiền phục vụ cho mục tiêu của bạn.", exp: "Ngân sách là công cụ điều phối tiền bạc giúp bạn đạt mục tiêu cá nhân." },
+            { q: "Thu nhập không ổn định nên lập ngân sách dựa trên:", options: ["A. Tháng có thu nhập cao nhất", "B. Mức thu nhập trung bình hoặc mức thu nhập thấp có thể dự đoán", "C. Thu nhập của bạn bè", "D. Khoản tiền họ muốn kiếm được"], correct: 1, isHard: false, hint: "Xây dựng kịch bản an toàn tài chính.", exp: "Lập ngân sách trên sàn thu nhập thấp giúp bạn tránh rơi vào bẫy thiếu hụt dòng tiền." },
+            { q: "Tổng chi tiêu hằng tháng lớn hơn thu nhập kéo dài sẽ dẫn đến:", options: ["A. Tài sản luôn tăng", "B. Có thể phải sử dụng tiết kiệm hoặc vay nợ", "C. Thu nhập tự động tăng", "D. Chi phí sẽ tự biến mất"], correct: 1, isHard: false, hint: "Thâm hụt ngân sách hằng tháng.", exp: "Chi nhiều hơn thu buộc bạn phải rút tiền tiết kiệm hoặc gánh nợ xấu." },
+            { q: "Thu nhập cố định 25tr nhưng số tiền còn lại mỗi tháng biến động mạnh. Cho thấy cần:", options: ["A. Tăng ngay thu nhập", "B. Theo dõi chi tiêu chi tiết để xác định nguyên nhân biến động", "C. Ngừng sử dụng ngân sách", "D. Không cần quan tâm"], correct: 1, isHard: false, hint: "Ghi chép chi tiêu để phát hiện 'lỗ rò tài chính'.", exp: "Nhật ký chi tiêu giúp tìm ra các khoản chi biến đổi thất thoát vô lý." },
+            { q: "Quy tắc ngân sách 50/30/20 phân bổ như thế nào?", options: ["A. 50% tiết kiệm – 30% đầu tư – 20% chi tiêu", "B. 50% nhu cầu – 30% mong muốn – 20% tiết kiệm/trả nợ", "C. 50% đầu tư – 30% nhu cầu – 20% giải trí", "D. 50% mong muốn – 30% tiết kiệm – 20% nhu cầu"], correct: 1, isHard: false, hint: "Nhu cầu (Needs) - Mong muốn (Wants) - Tích lũy (Savings).", exp: "50% Nhu cầu thiết yếu, 30% Sở thích cá nhân và 20% Tiết kiệm/Trả nợ." },
+            { q: "Chi phí thuê nhà đã chiếm 55% thu nhập khi dùng quy tắc 50/30/20. Cho thấy:", options: ["A. Phương pháp 50/30/20 không phù hợp tuyệt đối với mọi hoàn cảnh", "B. Người đó không cần quản lý ngân sách", "C. Người đó phải ngừng trả tiền thuê nhà", "D. Thu nhập sẽ tự động tăng"], correct: 0, isHard: true, hint: "Mỗi phương pháp cần điều chỉnh linh hoạt theo thực tế.", exp: "Các quy tắc tài chính chỉ là khung tham khảo, cần linh hoạt điều chỉnh theo chi phí thực tế." },
+            { q: "Khoản chi nào có thể được xem là chi phí biến đổi?", options: ["A. Tiền thuê nhà cố định", "B. Tiền điện thay đổi theo mức sử dụng", "C. Khoản trả nợ cố định", "D. Phí thuê bao cố định"], correct: 1, isHard: false, hint: "Chi phí thay đổi dựa trên mức độ sử dụng.", exp: "Tiền điện tăng giảm tùy thuộc vào nhu cầu tiêu dùng hằng tháng." },
+            { q: "Trả nợ chiếm 40%, thiết yếu 45%, chỉ còn 15% cho khoản khác. Vấn đề lớn nhất:", options: ["A. Người đó tiết kiệm quá nhiều", "B. Tỷ lệ nợ cao làm giảm tính linh hoạt của ngân sách", "C. Người đó có quá ít chi phí", "D. Không có bất kỳ rủi ro nào"], correct: 1, isHard: true, hint: "Gánh nặng trả nợ quá lớn gây nghẽn dòng tiền.", exp: "Nợ chiếm 40% làm mất đi khả năng phòng vệ và tiết kiệm cho tương lai." },
+            { q: "Khoản chi 'Khác' không rõ ràng chiếm 20% ngân sách sẽ dẫn đến:", options: ["A. Khó xác định các khoản chi gây thất thoát tiền", "B. Tiết kiệm tự động tăng", "C. Không cần theo dõi chi tiêu", "D. Thu nhập tăng nhanh hơn"], correct: 0, isHard: false, hint: "Thiếu tính minh bạch trong quản lý tài chính.", exp: "Đưa quá nhiều tiền vào mục không tên gây thất thoát ngân sách nghiêm trọng." },
+            { q: "Dự định tiết kiệm 5tr/tháng nhưng thường xuyên không đạt. Giải pháp tốt nhất:", options: ["A. Chờ đến cuối tháng rồi mới tiết kiệm", "B. Thiết lập chuyển tiền tự động ngay khi nhận thu nhập", "C. Tăng chi tiêu để có động lực", "D. Không cần đặt mục tiêu cụ thể"], correct: 1, isHard: false, hint: "Tự động hóa hành vi tích lũy.", exp: "Chuyển tiền tự động ngay đầu tháng giúp đảm bảo hoàn thành mục tiêu tiết kiệm." }
+        ]
+    };
 
-    topicsData.forEach(t => {
-        t.questions = [];
-        for(let i = 1; i <= 25; i++) {
-            t.questions.push({
-                q: `[${t.name}] Câu ${i}: Lựa chọn nào thể hiện quản lý tiền thông minh?`,
-                options: ["A. Chi tiêu phung phí", "B. Cân nhắc kỹ trước khi mua", "C. Vứt bỏ tiền thừa"],
-                correct: 1, isHard: false,
-                hint: "Chọn phương án thể hiện sự cẩn trọng.",
-                exp: "Luôn cân nhắc kỹ giữa nhu cầu và sở thích trước khi chi tiêu!"
-            });
-        }
-        for(let i = 1; i <= 5; i++) {
-            t.questions.push({
-                q: `🔥 [KHÓ ${i}/5] Quỹ dự phòng tài chính dùng khi nào?`,
-                options: ["A. Mua điện thoại mới", "B. Ốm đau hoặc sự cố bất ngờ", "C. Đi du lịch nghỉ dưỡng"],
-                correct: 1, isHard: true,
-                hint: "Chỉ dùng cho tình huống khẩn cấp.",
-                exp: "Quỹ khẩn cấp bảo vệ gia đình trước các rủi ro không lường trước!"
-            });
-        }
+    Object.assign(rawQuestionsData, {
+        "dau-tu": [
+            {q:"Điểm khác biệt cơ bản nhất giữa tiết kiệm và đầu tư là:",options:["A. Tiết kiệm luôn có lợi nhuận cao hơn đầu tư","B. Đầu tư thường đi kèm với rủi ro nhằm tìm kiếm khả năng sinh lời cao hơn","C. Tiết kiệm không bao giờ sinh lãi","D. Đầu tư không thể bị mất tiền"],correct:1,isHard:false,hint:"Đầu tư thường hướng đến lợi nhuận cao hơn nhưng rủi ro cũng lớn hơn.",exp:"Đầu tư thường đi kèm rủi ro để tìm kiếm khả năng sinh lời cao hơn."},
+            {q:"Một người đầu tư toàn bộ 500 triệu đồng vào cổ phiếu của một công ty duy nhất. Rủi ro lớn nhất là:",options:["A. Rủi ro thanh khoản bằng 0","B. Thiếu đa dạng hóa danh mục đầu tư","C. Lạm phát giảm","D. Lợi nhuận chắc chắn thấp"],correct:1,isHard:false,hint:"Không nên bỏ tất cả trứng vào một giỏ.",exp:"Đầu tư tập trung vào một tài sản làm tăng rủi ro tập trung."},
+            {q:"Tại sao nhà đầu tư thường yêu cầu lợi nhuận kỳ vọng cao hơn đối với các tài sản có rủi ro cao?",options:["A. Vì rủi ro cao luôn tạo ra lợi nhuận cao","B. Vì lợi nhuận cao hơn có thể là phần bù cho mức độ rủi ro lớn hơn","C. Vì tài sản rủi ro không thể giảm giá","D. Vì lợi nhuận không liên quan đến rủi ro"],correct:1,isHard:false,hint:"Lợi nhuận kỳ vọng có thể là phần bù rủi ro.",exp:"Rủi ro cao hơn thường đòi hỏi mức lợi nhuận kỳ vọng cao hơn."},
+            {q:"Một nhà đầu tư bán toàn bộ tài sản sau khi thị trường giảm 10% chỉ vì lo sợ sẽ tiếp tục giảm. Hành vi này thể hiện rõ nhất:",options:["A. Đầu tư theo kế hoạch dài hạn","B. Ra quyết định dựa trên cảm xúc","C. Đa dạng hóa danh mục","D. Quản lý rủi ro hiệu quả"],correct:1,isHard:false,hint:"Nỗi sợ có thể chi phối quyết định.",exp:"Biến động ngắn hạn có thể khiến nhà đầu tư ra quyết định cảm tính."},
+            {q:"Nếu một khoản đầu tư tăng 20% trong năm đầu và giảm 20% trong năm thứ hai, kết quả cuối cùng so với số vốn ban đầu là:",options:["A. Không thay đổi","B. Tăng 4%","C. Giảm 4%","D. Tăng 20%"],correct:2,isHard:true,hint:"Tính theo 120% rồi giảm 20%.",exp:"1,2 × 0,8 = 0,96 nên giá trị giảm 4%."},
+            {q:"Một nhà đầu tư có 100 triệu đồng và phân bổ 50 triệu vào A, 30 triệu vào B, 20 triệu vào C. Mục tiêu chính có thể là:",options:["A. Loại bỏ hoàn toàn mọi rủi ro","B. Đa dạng hóa và giảm sự phụ thuộc vào một khoản đầu tư duy nhất","C. Đảm bảo tất cả tài sản tăng giá","D. Tăng thuế phải trả"],correct:1,isHard:false,hint:"Phân bổ vào nhiều tài sản.",exp:"Đa dạng hóa giúp giảm sự phụ thuộc vào một khoản đầu tư duy nhất."},
+            {q:"Nhận định nào đúng nhất về mối quan hệ giữa rủi ro và lợi nhuận?",options:["A. Rủi ro cao luôn tạo ra lợi nhuận cao","B. Rủi ro thấp luôn gây thua lỗ","C. Lợi nhuận kỳ vọng cao thường đi kèm với mức độ bất định cao hơn","D. Không có mối liên hệ nào"],correct:2,isHard:false,hint:"Từ khóa là lợi nhuận kỳ vọng và bất định.",exp:"Rủi ro cao không đảm bảo lợi nhuận cao, nhưng thường đi kèm mức bất định lớn hơn."},
+            {q:"Một người dự định dùng tiền trong vòng 6 tháng để trả học phí. Việc đầu tư toàn bộ số tiền này vào tài sản có biến động mạnh có thể không phù hợp chủ yếu vì:",options:["A. Không thể sinh lời","B. Thời gian đầu tư quá ngắn để chịu được biến động lớn","C. Học phí không phải mục tiêu tài chính","D. Tất cả khoản đầu tư đều phải kéo dài 10 năm"],correct:1,isHard:true,hint:"Xem xét thời hạn cần sử dụng tiền.",exp:"Mục tiêu ngắn hạn thường không phù hợp với biến động mạnh."},
+            {q:"Một khoản đầu tư có lợi suất 12% trong khi lạm phát là 5%. Xấp xỉ, lợi suất thực là:",options:["A. 17%","B. 12%","C. 7%","D. 5%"],correct:2,isHard:false,hint:"Lấy lợi suất danh nghĩa trừ lạm phát.",exp:"Xấp xỉ lợi suất thực = 12% - 5% = 7%."},
+            {q:"Không bỏ tất cả trứng vào một giỏ trong đầu tư có ý nghĩa gần nhất là:",options:["A. Không được đầu tư","B. Chỉ đầu tư vào tài sản đắt tiền","C. Đa dạng hóa danh mục đầu tư","D. Chỉ đầu tư một lần"],correct:2,isHard:false,hint:"Phân tán rủi ro.",exp:"Đây là nguyên tắc đa dạng hóa danh mục."},
+            {q:"Một người đầu tư chỉ vì thấy người nổi tiếng quảng cáo và hứa hẹn lợi nhuận cao. Rủi ro lớn nhất là:",options:["A. Không có thời gian đầu tư","B. Ra quyết định mà không tự nghiên cứu mức độ rủi ro và tính phù hợp","C. Lợi nhuận sẽ quá thấp","D. Không thể mua tài sản"],correct:1,isHard:false,hint:"Đừng chỉ dựa vào quảng cáo.",exp:"Cần tự đánh giá thông tin, rủi ro và mức độ phù hợp."},
+            {q:"Nếu giá trị một khoản đầu tư giảm 50%, khoản đầu tư đó cần tăng bao nhiêu phần trăm để quay lại giá trị ban đầu?",options:["A. 50%","B. 75%","C. 100%","D. 150%"],correct:2,isHard:true,hint:"Từ 50 lên 100 là tăng gấp đôi.",exp:"Giảm 50% từ 100 còn 50; cần tăng 100% để quay lại 100."},
+            {q:"Một người thường xuyên kiểm tra danh mục mỗi giờ và mua bán liên tục. Rủi ro chính là:",options:["A. Dễ đưa ra quyết định cảm tính dựa trên biến động ngắn hạn","B. Không biết giá tài sản","C. Không thể đầu tư dài hạn","D. Luôn nhận được lợi nhuận cao"],correct:0,isHard:false,hint:"Quá tập trung vào biến động ngắn hạn.",exp:"Theo dõi quá sát có thể dẫn đến hành vi mua bán cảm tính."},
+            {q:"Yếu tố nào nên được xác định trước khi lựa chọn một khoản đầu tư?",options:["A. Màu sắc ứng dụng","B. Mục tiêu, thời gian đầu tư và mức chấp nhận rủi ro","C. Số lượng bạn bè đang đầu tư","D. Số lượt quảng cáo"],correct:1,isHard:false,hint:"Mỗi người có mục tiêu và mức chịu rủi ro khác nhau.",exp:"Ba yếu tố này là nền tảng để chọn khoản đầu tư phù hợp."},
+            {q:"Một người đầu tư 100 triệu đồng và sau một năm nhận về 110 triệu đồng. Bỏ qua phí và thuế, lợi nhuận là:",options:["A. 5%","B. 10%","C. 11%","D. 110%"],correct:1,isHard:false,hint:"Lãi 10 trên vốn 100.",exp:"10/100 = 10%."},
+            {q:"Giữ khoản đầu tư lỗ 30% chỉ vì đã lỗ nhiều và bán sẽ rất đau là biểu hiện của:",options:["A. Hiệu ứng chi phí chìm và sợ hiện thực hóa khoản lỗ","B. Đa dạng hóa","C. Lãi kép","D. Thanh khoản cao"],correct:0,isHard:true,hint:"Quá khứ đã mất không nên là lý do duy nhất cho quyết định hiện tại.",exp:"Đây là thiên kiến tâm lý liên quan đến chi phí chìm và tâm lý tránh hiện thực hóa khoản lỗ."},
+            {q:"Một khoản đầu tư có lợi nhuận rất cao trong quá khứ. Điều đó có nghĩa là:",options:["A. Chắc chắn tiếp tục cao trong tương lai","B. Có thể tham khảo nhưng không đảm bảo kết quả tương lai","C. Không cần đánh giá rủi ro","D. Không thể giảm giá"],correct:1,isHard:false,hint:"Quá khứ không đảm bảo tương lai.",exp:"Hiệu quả trong quá khứ chỉ là dữ liệu tham khảo."},
+            {q:"Một khoản đầu tư chiếm 90% tài sản và 10% còn lại là tiền mặt. Rủi ro lớn nhất là:",options:["A. Rủi ro tập trung tài sản","B. Không có thu nhập","C. Lạm phát bằng 0","D. Tiết kiệm quá nhiều"],correct:0,isHard:true,hint:"Tỷ trọng quá lớn ở một nơi.",exp:"Danh mục quá tập trung dễ chịu thiệt hại lớn khi tài sản chính giảm."},
+            {q:"Đâu là ví dụ rõ nhất về việc chia sẻ rủi ro tài chính?",options:["A. Một người giữ toàn bộ tiền mặt","B. Nhiều người cùng đóng góp vào quỹ chung theo quy định rõ ràng để hỗ trợ khi có sự kiện xảy ra","C. Một người vay tiền không thông báo","D. Một người đầu tư toàn bộ vào một công ty"],correct:1,isHard:false,hint:"Rủi ro được nhiều người cùng chia sẻ.",exp:"Cơ chế đóng góp chung có thể phân tán gánh nặng tài chính."},
+            {q:"Tại sao cần kiểm tra mức độ phù hợp của khoản đầu tư với mục tiêu cá nhân?",options:["A. Vì mọi người có cùng mức chấp nhận rủi ro","B. Vì cùng một khoản đầu tư có thể phù hợp với người này nhưng không phù hợp với người khác","C. Vì khoản đầu tư luôn an toàn","D. Vì không cần xác định mục tiêu"],correct:1,isHard:false,hint:"Tính phù hợp mang tính cá nhân.",exp:"Mục tiêu, thời hạn và khả năng chịu rủi ro khác nhau."},
+            {q:"Một người đầu tư 200 triệu. Năm đầu tăng 30%, năm thứ hai giảm 20%. Giá trị cuối năm thứ hai là:",options:["A. 200 triệu","B. 208 triệu","C. 210 triệu","D. 220 triệu"],correct:1,isHard:true,hint:"200 × 1,3 × 0,8.",exp:"200 × 1,3 = 260; 260 × 0,8 = 208 triệu."},
+            {q:"Danh mục có 60% A và 40% B. A tăng 10%, B giảm 5%. Lợi suất danh mục xấp xỉ là:",options:["A. 2%","B. 4%","C. 6%","D. 8%"],correct:1,isHard:true,hint:"0,6×10% + 0,4×(-5%).",exp:"6% - 2% = 4%."},
+            {q:"Một khoản đầu tư tăng từ 100 triệu lên 130 triệu trong 3 năm. Bỏ qua lãi kép, tổng lợi nhuận là:",options:["A. 10%","B. 20%","C. 30%","D. 130%"],correct:2,isHard:true,hint:"Lãi là 30 trên vốn 100.",exp:"Tổng lợi nhuận là 30%."},
+            {q:"Hai khoản đầu tư cùng lợi nhuận kỳ vọng nhưng A có biến động thấp hơn B. Nhà đầu tư thận trọng thường có xu hướng:",options:["A. Ưu tiên A vì biến động thấp hơn","B. Luôn chọn B","C. Chọn ngẫu nhiên","D. Đầu tư toàn bộ vào cả hai không phân tích"],correct:0,isHard:false,hint:"Mức độ chấp nhận rủi ro thấp.",exp:"Nếu các yếu tố khác giống nhau, nhà đầu tư thận trọng thường ưu tiên biến động thấp hơn."},
+            {q:"Bán tài sản lời quá sớm nhưng giữ tài sản lỗ quá lâu gần với:",options:["A. Hiệu ứng disposition","B. Đa dạng hóa","C. Lãi kép","D. Bảo hiểm tài chính"],correct:0,isHard:true,hint:"Một thiên kiến hành vi trong đầu tư.",exp:"Hiệu ứng disposition là xu hướng chốt lời sớm và giữ khoản lỗ quá lâu."},
+            {q:"Đầu tư 100 triệu, năm đầu giảm 30%, năm sau tăng 30%. Giá trị cuối cùng là:",options:["A. 100 triệu","B. 91 triệu","C. 100,1 triệu","D. 130 triệu"],correct:1,isHard:true,hint:"100 × 0,7 × 1,3.",exp:"100 × 0,7 × 1,3 = 91 triệu."},
+            {q:"Danh mục gồm nhiều tài sản nhưng tất cả bị ảnh hưởng bởi cùng một yếu tố kinh tế. Điều này cho thấy:",options:["A. Đã đa dạng hóa hiệu quả chắc chắn","B. Đa dạng hóa theo số lượng chưa chắc giảm được mọi rủi ro","C. Không còn rủi ro","D. Càng nhiều tài sản lợi nhuận luôn cao"],correct:1,isHard:true,hint:"Xem mức độ tương quan rủi ro.",exp:"Nhiều tài sản cùng chịu một cú sốc vẫn có thể giảm đồng thời."},
+            {q:"Có 500 triệu và cần dùng 400 triệu trong 2 năm để mua nhà nhưng đầu tư phần đó vào tài sản biến động mạnh. Sai lầm lớn nhất là:",options:["A. Không có đủ tiền mặt mua nhà ngay","B. Không phù hợp giữa rủi ro và thời gian cần dùng tiền","C. Đầu tư quá ít","D. Không đầu tư toàn bộ 500 triệu"],correct:1,isHard:true,hint:"Khớp thời hạn mục tiêu với mức độ rủi ro.",exp:"Tiền cho mục tiêu ngắn hạn cần cân nhắc rủi ro biến động và thanh khoản."},
+            {q:"Tài sản đang giảm giá nhưng các yếu tố cơ bản vẫn tốt. Trước khi bán, cách tiếp cận hợp lý nhất là:",options:["A. Bán ngay","B. Mua thêm ngay không phân tích","C. Đánh giá nguyên nhân giảm giá, mục tiêu và mức rủi ro chấp nhận","D. Làm theo số đông"],correct:2,isHard:true,hint:"Không phản ứng chỉ dựa vào biến động giá.",exp:"Quyết định nên dựa trên phân tích và mục tiêu đầu tư."},
+            {q:"Nguyên tắc quan trọng nhất để đầu tư và chia sẻ tài chính bền vững là:",options:["A. Chạy theo lợi nhuận cao nhất","B. Dựa vào lời khuyên chưa kiểm chứng","C. Xác định rõ mục tiêu, hiểu rủi ro, phân bổ hợp lý và chỉ cam kết số tiền phù hợp","D. Đầu tư càng nhiều càng tốt"],correct:2,isHard:false,hint:"Mục tiêu + rủi ro + phân bổ.",exp:"Đầu tư bền vững cần phù hợp với khả năng tài chính và mức chấp nhận rủi ro."}
+        ],
+        "an-toan": [
+            {q:"Bạn nhận được tin nhắn tự xưng là ngân hàng yêu cầu nhấn link để xác minh tài khoản. Dấu hiệu đáng nghi ngờ nhất là:",options:["A. Tin nhắn yêu cầu phản hồi nhanh","B. Có nhắc tên ngân hàng","C. Có đường link yêu cầu xác minh thông tin tài khoản","D. Gửi buổi sáng"],correct:2,isHard:false,hint:"Cẩn trọng với link và trang đăng nhập giả.",exp:"Link xác minh có thể dẫn đến website giả mạo để đánh cắp thông tin."},
+            {q:"Mục đích chính của phishing là:",options:["A. Tăng tốc Internet","B. Lừa người dùng cung cấp thông tin nhạy cảm","C. Tăng bảo mật tài khoản","D. Kiểm tra số dư"],correct:1,isHard:false,hint:"Nhắm vào mật khẩu và thông tin tài chính.",exp:"Phishing thường giả mạo tổ chức để đánh cắp thông tin."},
+            {q:"Người tự xưng nhân viên ngân hàng yêu cầu OTP để hủy giao dịch đáng ngờ. Bạn nên:",options:["A. Cung cấp ngay","B. Chỉ cung cấp 2 số cuối","C. Không cung cấp OTP và liên hệ ngân hàng qua kênh chính thức","D. Gửi OTP sau cuộc gọi"],correct:2,isHard:false,hint:"OTP là thông tin xác thực nhạy cảm.",exp:"Không cung cấp OTP cho người gọi và xác minh độc lập."},
+            {q:"Quét QR nhận thưởng rồi bị yêu cầu đăng nhập ngân hàng. Rủi ro lớn nhất là:",options:["A. Điện thoại hết pin","B. QR dẫn đến trang giả mạo đánh cắp thông tin","C. Nhận quá nhiều tiền","D. Tài khoản tự bảo vệ"],correct:1,isHard:false,hint:"QR không tự chứng minh website là an toàn.",exp:"QR giả có thể dẫn người dùng tới trang phishing."},
+            {q:"Tại sao không nên dùng cùng một mật khẩu cho nhiều tài khoản?",options:["A. Mật khẩu ngắn hơn","B. Một tài khoản lộ có thể làm các tài khoản khác gặp nguy cơ","C. Không thể nhớ mật khẩu","D. Ứng dụng không cho phép"],correct:1,isHard:false,hint:"Tránh rủi ro lan truyền khi rò rỉ.",exp:"Dùng lại mật khẩu làm tăng nguy cơ bị chiếm nhiều tài khoản."},
+            {q:"Cuộc gọi video từ người thân yêu cầu chuyển tiền gấp nhưng hình ảnh, giọng nói bất thường. Bạn nên:",options:["A. Chuyển ngay","B. Xác minh bằng kênh liên lạc khác trước","C. Chụp màn hình rồi chuyển","D. Chỉ gửi một nửa"],correct:1,isHard:true,hint:"Deepfake có thể giả giọng và hình ảnh.",exp:"Cần xác minh qua một kênh độc lập đã biết trước."},
+            {q:"Biện pháp giúp giảm thiệt hại nếu mật khẩu bị lộ là:",options:["A. Tắt điện thoại","B. Bật xác thực hai yếu tố (2FA)","C. Dùng một mật khẩu cho mọi tài khoản","D. Chia sẻ mật khẩu"],correct:1,isHard:false,hint:"Thêm một lớp xác minh.",exp:"2FA tạo thêm rào cản khi mật khẩu bị lộ."},
+            {q:"Website đầu tư cam kết lợi nhuận 30% mỗi tháng và không có rủi ro. Dấu hiệu đáng nghi ngờ nhất là:",options:["A. Thiết kế đẹp","B. Cam kết lợi nhuận cao và không rủi ro","C. Có nhiều người theo dõi","D. Có ứng dụng"],correct:1,isHard:false,hint:"Lợi nhuận cao không rủi ro là dấu hiệu cảnh báo.",exp:"Đầu tư luôn có rủi ro và cam kết bất thường cần được kiểm chứng."},
+            {q:"Một người gửi nhầm bạn 10 triệu rồi yêu cầu chuyển lại vào tài khoản khác. Rủi ro là:",options:["A. Không có rủi ro","B. Có thể liên quan giao dịch gian lận hoặc chiếm đoạt tiền","C. Chuyển càng nhanh càng tốt","D. Chắc chắn là quà"],correct:1,isHard:true,hint:"Không nên chuyển tiền theo hướng dẫn người lạ.",exp:"Hãy liên hệ ngân hàng và xử lý qua kênh chính thức."},
+            {q:"Khi dùng Wi-Fi công cộng để truy cập dịch vụ tài chính, cách an toàn nhất là:",options:["A. Đăng nhập mọi tài khoản","B. Hạn chế giao dịch nhạy cảm và ưu tiên kết nối an toàn","C. Chia sẻ mật khẩu","D. Lưu mật khẩu công khai"],correct:1,isHard:false,hint:"Wi-Fi công cộng có thể tiềm ẩn rủi ro.",exp:"Nên hạn chế hoạt động tài chính nhạy cảm trên mạng không tin cậy."},
+            {q:"Ứng dụng ghi chú chi tiêu yêu cầu quyền danh bạ, camera, micro và vị trí. Điều này có thể cho thấy:",options:["A. Chắc chắn an toàn","B. Cần xem xét tính cần thiết của các quyền","C. Giúp tiết kiệm hơn","D. Càng nhiều quyền càng tốt"],correct:1,isHard:true,hint:"Nguyên tắc quyền tối thiểu.",exp:"Quyền ứng dụng nên phù hợp với chức năng thực tế."},
+            {q:"Điều nào không nên chia sẻ với người khác?",options:["A. Mã OTP","B. Tên ngân hàng","C. Số tổng đài công khai","D. Thông tin lãi suất"],correct:0,isHard:false,hint:"Mã xác thực là bí mật.",exp:"OTP có thể được dùng để xác nhận giao dịch hoặc truy cập tài khoản."},
+            {q:"Email nói tài khoản sẽ bị khóa hôm nay nếu không đăng nhập ngay. Chiêu thức tâm lý chủ yếu là:",options:["A. Tạo cảm giác cấp bách và sợ hãi","B. Khuyến khích tiết kiệm","C. Tăng hiểu biết tài chính","D. Đa dạng hóa rủi ro"],correct:0,isHard:false,hint:"Kẻ lừa đảo muốn bạn không kịp suy nghĩ.",exp:"Tạo áp lực thời gian là thủ thuật social engineering phổ biến."},
+            {q:"Trước khi chuyển tiền cho tài khoản mới, bước quan trọng nhất là:",options:["A. Kiểm tra lượt thích","B. Xác minh danh tính, mục đích và thông tin người nhận","C. Chuyển thử toàn bộ","D. Hỏi người lạ"],correct:1,isHard:false,hint:"Kiểm tra độc lập trước khi giao dịch.",exp:"Xác minh giúp giảm nguy cơ chuyển nhầm hoặc bị lừa."},
+            {q:"Đăng công khai ảnh chứa số tài khoản, số dư và thông tin cá nhân có rủi ro chính là:",options:["A. Tăng lợi nhuận","B. Tạo điều kiện thu thập thông tin để lừa đảo hoặc giả mạo","C. Tăng số dư","D. Không có rủi ro"],correct:1,isHard:false,hint:"Ghép nhiều mảnh thông tin có thể tạo ra hồ sơ giả mạo.",exp:"Dữ liệu công khai có thể bị khai thác cho social engineering."},
+            {q:"Social engineering trong lừa đảo tài chính chủ yếu là:",options:["A. Xây dựng cầu đường","B. Khai thác tâm lý để thao túng lấy thông tin hoặc tiền","C. Tạo mật khẩu mạnh","D. Đầu tư công nghệ"],correct:1,isHard:false,hint:"Con người là mục tiêu bị thao túng.",exp:"Kẻ xấu lợi dụng niềm tin, sợ hãi hoặc cấp bách."},
+            {q:"Người tự xưng công an nói bạn liên quan vụ án và yêu cầu chuyển tiền để xác minh tài sản. Bạn nên:",options:["A. Chuyển tiền","B. Giữ bí mật và làm theo","C. Không chuyển tiền, kết thúc cuộc gọi và xác minh qua kênh chính thức","D. Cung cấp tài khoản"],correct:2,isHard:false,hint:"Không chuyển tiền chỉ vì cuộc gọi gây áp lực.",exp:"Hãy xác minh độc lập qua cơ quan và kênh chính thức."},
+            {q:"Dấu hiệu cho thấy khoản đầu tư có thể là lừa đảo là:",options:["A. Giải thích rõ rủi ro","B. Cho phép tự tìm hiểu","C. Cam kết lợi nhuận cao, ổn định và thúc giục nộp tiền ngay","D. Công bố minh bạch"],correct:2,isHard:false,hint:"Lợi nhuận bất thường + cấp bách.",exp:"Đây là tổ hợp dấu hiệu cảnh báo thường gặp."},
+            {q:"Phát hiện giao dịch ngân hàng mình không thực hiện, việc ưu tiên đầu tiên là:",options:["A. Chờ vài ngày","B. Liên hệ ngay ngân hàng qua kênh chính thức","C. Đăng mạng xã hội","D. Chuyển tiền còn lại cho người lạ"],correct:1,isHard:false,hint:"Cần báo sớm để được hỗ trợ.",exp:"Liên hệ ngân hàng nhanh chóng để kiểm tra và bảo vệ tài khoản."},
+            {q:"Tại sao cập nhật phần mềm thường xuyên quan trọng với an toàn tài chính?",options:["A. Điện thoại đẹp hơn","B. Bản cập nhật có thể sửa lỗ hổng bảo mật","C. Tăng số dư","D. Giúp kiếm tiền"],correct:1,isHard:false,hint:"Cập nhật có thể vá lỗi.",exp:"Các bản vá bảo mật giúp giảm nguy cơ khai thác lỗ hổng."},
+            {q:"Email có tên hiển thị giống ngân hàng nhưng tên miền thêm một ký tự. Đây là dấu hiệu của:",options:["A. Email chính thức","B. Giả mạo tên miền để phishing","C. 2FA","D. Xác thực sinh trắc học"],correct:1,isHard:true,hint:"Kiểm tra địa chỉ email thật.",exp:"Tên miền gần giống là kỹ thuật giả mạo phổ biến."},
+            {q:"Cuộc gọi đến từ số quen thuộc trong danh bạ nhưng yêu cầu thông tin nhạy cảm. Nhận định đúng nhất là:",options:["A. Số quen thuộc chắc chắn an toàn","B. Không cần xác minh","C. Số hiển thị có thể bị giả mạo, cần xác minh qua phương thức khác","D. Hỏi tên là đủ"],correct:2,isHard:true,hint:"Caller ID không phải bằng chứng tuyệt đối.",exp:"Cần xác minh qua kênh độc lập."},
+            {q:"Kẻ lừa đảo biết họ tên, ngày sinh, số điện thoại và thông tin gia đình. Nguy cơ lớn nhất là:",options:["A. Không thể lừa đảo","B. Có thể dùng để giả mạo hoặc vượt qua một số bước xác minh","C. Tài khoản tự khóa","D. Ngân hàng tự chuyển tiền"],correct:1,isHard:true,hint:"Thông tin cá nhân có thể bị dùng để tăng độ tin cậy khi giả mạo.",exp:"Càng nhiều dữ liệu, kẻ xấu càng dễ thực hiện social engineering."},
+            {q:"Trang hoàn tiền giống website thật nhưng yêu cầu mật khẩu và OTP. Dấu hiệu giả mạo mạnh nhất là:",options:["A. Logo đẹp","B. Yêu cầu thông tin nhạy cảm vượt nhu cầu hoàn tiền","C. Người bán phản hồi nhanh","D. Màu giống thương hiệu"],correct:1,isHard:true,hint:"Xem thông tin được yêu cầu có hợp lý không.",exp:"Yêu cầu OTP và mật khẩu trong bối cảnh bất thường là cảnh báo lớn."},
+            {q:"Lưu mật khẩu trên máy tính công cộng để đăng nhập nhanh có rủi ro chính là:",options:["A. Máy chạy chậm","B. Người khác có thể truy cập tài khoản và thông tin tài chính","C. Mật khẩu mạnh hơn","D. Không đăng nhập được"],correct:1,isHard:false,hint:"Thiết bị công cộng có nhiều người dùng.",exp:"Thông tin lưu lại có thể bị người khác sử dụng."},
+            {q:"Tin nhắn trúng thưởng 1 tỷ nhưng phải nộp 10 triệu phí xử lý để nhận giải. Đánh giá hợp lý nhất là:",options:["A. Chuyển phí","B. Có thể là lừa đảo vì yêu cầu nộp tiền trước cho lợi ích chưa xác minh","C. Hỏi nộp nhiều hơn","D. Cung cấp OTP"],correct:1,isHard:false,hint:"Cẩn trọng với yêu cầu trả tiền trước.",exp:"Giải thưởng không được xác minh kèm yêu cầu phí trước là dấu hiệu đáng nghi."},
+            {q:"Cài ứng dụng đầu tư từ link tin nhắn và ứng dụng yêu cầu đọc SMS, danh bạ. Rủi ro tổng hợp lớn nhất là:",options:["A. Có thể thu thập dữ liệu nhạy cảm và chiếm quyền tài khoản","B. Đầu tư hiệu quả hơn","C. Có thêm dung lượng","D. Lãi suất tăng"],correct:0,isHard:true,hint:"Nguồn cài đặt và quyền ứng dụng đều đáng ngờ.",exp:"Ứng dụng độc hại có thể thu thập dữ liệu và mã xác thực."},
+            {q:"Nhận video deepfake của người quen yêu cầu chuyển tiền. Cách xác minh đáng tin cậy nhất là:",options:["A. Chỉ nhìn kỹ khuôn mặt","B. Chuyển ít tiền để thử","C. Chủ động liên hệ qua kênh độc lập đã biết trước","D. Làm theo vì video rất thật"],correct:2,isHard:true,hint:"Không dựa hoàn toàn vào nội dung có thể bị giả.",exp:"Kênh liên lạc độc lập giúp xác minh danh tính tốt hơn."},
+            {q:"Dùng cùng một mật khẩu mạnh cho 10 tài khoản. Nếu một dịch vụ bị rò rỉ, biện pháp tốt hơn trong tương lai là:",options:["A. Giữ nguyên mật khẩu","B. Dùng mật khẩu riêng cho tài khoản quan trọng và kết hợp trình quản lý mật khẩu cùng 2FA","C. Dán mật khẩu công khai","D. Chỉ đổi tên tài khoản"],correct:1,isHard:true,hint:"Mạnh thôi chưa đủ nếu bị tái sử dụng.",exp:"Mật khẩu độc nhất và 2FA giúp giảm rủi ro lan truyền."},
+            {q:"Nguyên tắc quan trọng nhất để bảo vệ an toàn tài chính trong môi trường số là:",options:["A. Tin ngay khi người liên hệ biết thông tin cá nhân","B. Làm nhanh mọi yêu cầu cấp bách","C. Dừng lại, kiểm tra độc lập và không cung cấp thông tin nhạy cảm hoặc chuyển tiền khi chưa xác minh","D. Luôn làm theo người gọi"],correct:2,isHard:false,hint:"Dừng lại và xác minh.",exp:"Kiểm tra độc lập là nguyên tắc phòng vệ quan trọng trước lừa đảo số."}
+        ]
     });
+
+
+    const topicsData = [
+        { id: "nhu-cau", name: "🛒 Nhu Cầu & Sở Thích", questions: rawQuestionsData["nhu-cau"] },
+        { id: "tiet-kiem", name: "🐷 Tiết Kiệm Thông Minh", questions: rawQuestionsData["tiet-kiem"] },
+        { id: "kiem-tien", name: "💼 Lao Động & Kiếm Tiền", questions: rawQuestionsData["kiem-tien"] },
+        { id: "ngan-sach", name: "📊 Quản Lý Ngân Sách", questions: rawQuestionsData["ngan-sach"] },
+        { id: "dau-tu", name: "🤝 Đầu Tư & Chia Sẻ", questions: rawQuestionsData["dau-tu"] },
+        { id: "an-toan", name: "🛡️ An Toàn Tài Chính", questions: rawQuestionsData["an-toan"] }
+    ];
 
     let currentTopic = null;
     let currentQuestionIndex = 0;
     let score = 0;
     let hasX2 = false;
+    let topicTimer = null;
+    let timeLeft = 35 * 60;
 
     // --- QUẢN LÝ LỊCH SỬ CHƠI (LOCALSTORAGE) ---
     function loadHistory() {
@@ -211,12 +381,12 @@
         historyList.innerHTML = history.map(item => `
             <li class="history-item">
                 <span><b>${item.topic}</b> (${item.time})</span>
-                <span><b>${item.count}/30 câu</b> - <span style="color: #d97706; font-weight:bold;">${item.score} Xu</span></span>
+                <span><b>${item.count}/${item.total} câu</b> - <span style="color: #d97706; font-weight:bold;">${item.score} Xu</span></span>
             </li>
         `).join("");
     }
 
-    function saveHistory(topicName, questionCount, finalScore) {
+    function saveHistory(topicName, questionCount, totalQ, finalScore) {
         const history = JSON.parse(localStorage.getItem("finance_quiz_history") || "[]");
         const now = new Date();
         const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')} ${now.getDate()}/${now.getMonth()+1}`;
@@ -224,11 +394,12 @@
         history.unshift({
             topic: topicName,
             count: questionCount,
+            total: totalQ,
             score: finalScore,
             time: timeStr
         });
 
-        if (history.length > 10) history.pop(); // Chỉ lưu 10 lượt chơi gần nhất
+        if (history.length > 10) history.pop(); // Lưu 10 lượt gần nhất
         localStorage.setItem("finance_quiz_history", JSON.stringify(history));
     }
 
@@ -243,7 +414,7 @@
         topicsData.forEach((t, idx) => {
             const btn = document.createElement("button");
             btn.className = "btn-topic";
-            btn.innerHTML = `${t.name}<br><small style="font-weight:normal; font-size:0.8rem; color:var(--text-muted);">30 Câu (25 Dễ + 5 Khó)</small>`;
+            btn.innerHTML = `${t.name}<br><small style="font-weight:normal; font-size:0.8rem; color:var(--text-muted);">${t.questions.length} Câu Trắc Nghiệm</small>`;
             btn.onclick = () => startTopic(idx);
             grid.appendChild(btn);
         });
@@ -261,6 +432,7 @@
         currentQuestionIndex = 0;
         score = 0;
         hasX2 = false;
+        startTopicTimer();
         
         document.getElementById("topic-title").innerText = currentTopic.name;
         document.getElementById("score").innerText = score;
@@ -272,23 +444,55 @@
         loadQuestion();
     }
 
+    function formatTime(seconds) {
+        const m = Math.floor(seconds / 60).toString().padStart(2, "0");
+        const sec = (seconds % 60).toString().padStart(2, "0");
+        return `${m}:${sec}`;
+    }
+
+    function updateTimerDisplay() {
+        const box = document.getElementById("timer-box");
+        box.innerText = `⏱️ ${formatTime(timeLeft)}`;
+        box.classList.toggle("warning", timeLeft <= 5 * 60 && timeLeft > 60);
+        box.classList.toggle("danger", timeLeft <= 60);
+    }
+
+    function startTopicTimer() {
+        clearInterval(topicTimer);
+        timeLeft = 35 * 60;
+        updateTimerDisplay();
+        topicTimer = setInterval(() => {
+            timeLeft--;
+            updateTimerDisplay();
+            if (timeLeft <= 0) {
+                clearInterval(topicTimer);
+                showResult(false, true);
+            }
+        }, 1000);
+    }
+
+    function stopTopicTimer() {
+        clearInterval(topicTimer);
+        topicTimer = null;
+    }
+
     function updateActionButtons() {
-        document.getElementById("btn-5050").disabled = score < 20;
-        document.getElementById("btn-audience").disabled = score < 20;
-        document.getElementById("btn-hint").disabled = score < 20;
-        document.getElementById("btn-x2").disabled = score < 30 || hasX2;
+        document.getElementById("btn-5050").disabled = score < 50;
+        document.getElementById("btn-audience").disabled = score < 50;
+        document.getElementById("btn-hint").disabled = score < 50;
+        document.getElementById("btn-x2").disabled = score < 50 || hasX2;
     }
 
     function loadQuestion() {
         const q = currentTopic.questions[currentQuestionIndex];
-        document.getElementById("question-number").innerText = `Câu ${currentQuestionIndex + 1}/30`;
+        document.getElementById("question-number").innerText = `Câu ${currentQuestionIndex + 1}/${currentTopic.questions.length}`;
         
         const tag = document.getElementById("difficulty-tag");
         if(q.isHard) {
-            tag.innerText = "🔥 KHÓ (20 Xu)";
+            tag.innerText = "🔥 KHÓ/VẬN DỤNG (10 Xu)";
             tag.className = "difficulty-tag tag-hard";
         } else {
-            tag.innerText = "DỄ (10 Xu)";
+            tag.innerText = "DỄ/CƠ BẢN (5 Xu)";
             tag.className = "difficulty-tag tag-easy";
         }
 
@@ -311,8 +515,8 @@
     }
 
     function use5050() {
-        if (score < 20) return;
-        score -= 20;
+        if (score < 50) return;
+        score -= 50;
         document.getElementById("score").innerText = score;
         const q = currentTopic.questions[currentQuestionIndex];
         const buttons = document.querySelectorAll(".btn-option");
@@ -327,31 +531,31 @@
     }
 
     function useAudience() {
-        if (score < 20) return;
-        score -= 20;
+        if (score < 50) return;
+        score -= 50;
         document.getElementById("score").innerText = score;
         const q = currentTopic.questions[currentQuestionIndex];
         const buttons = document.querySelectorAll(".btn-option");
         buttons.forEach((btn, idx) => {
-            btn.innerText += (idx === q.correct) ? " [📊 70% Khán giả]" : " [📊 15% Khán giả]";
+            btn.innerText += (idx === q.correct) ? " [📊 70% Chọn]" : " [📊 10% Chọn]";
         });
         updateActionButtons();
     }
 
     function useHint() {
-        if (score < 20) return;
-        score -= 20;
+        if (score < 50) return;
+        score -= 50;
         document.getElementById("score").innerText = score;
         const q = currentTopic.questions[currentQuestionIndex];
         const exp = document.getElementById("explanation-text");
-        exp.innerText = "💡 Gợi ý: " + q.hint;
+        exp.innerText = "💡 Gợi ý: " + (q.hint || "Hãy đọc kỹ các phương án!");
         exp.style.display = "block";
         updateActionButtons();
     }
 
     function buyX2() {
-        if (score < 30 || hasX2) return;
-        score -= 30;
+        if (score < 50 || hasX2) return;
+        score -= 50;
         hasX2 = true;
         document.getElementById("score").innerText = score;
         document.getElementById("x2-badge").style.display = "inline-block";
@@ -365,7 +569,7 @@
 
         if (selectedIndex === q.correct) {
             buttons[selectedIndex].classList.add("correct");
-            let baseReward = q.isHard ? 20 : 10;
+            let baseReward = q.isHard ? 10 : 5;
             if (hasX2) {
                 baseReward *= 2;
                 hasX2 = false;
@@ -393,7 +597,7 @@
             exp.innerText = "💥 SAI RỒI! " + q.exp;
             exp.style.display = "block";
 
-            setTimeout(() => showResult(false), 2000);
+            setTimeout(() => showResult(false), 2500);
         }
     }
 
@@ -402,27 +606,32 @@
         loadQuestion();
     }
 
-    function showResult(isWin) {
+    function showResult(isWin, isTimeUp = false) {
+        stopTopicTimer();
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
         document.getElementById('result-screen').classList.add('active');
 
-        const finalCount = isWin ? currentQuestionIndex + 1 : currentQuestionIndex;
+        const totalQ = currentTopic.questions.length;
+        const finalCount = isWin ? totalQ : currentQuestionIndex;
         document.getElementById("final-count").innerText = finalCount;
         document.getElementById("final-score").innerText = score;
 
-        // Lưu kết quả vào lịch sử
-        saveHistory(currentTopic.name, finalCount, score);
+        // Lưu lịch sử đấu
+        saveHistory(currentTopic.name, finalCount, totalQ, score);
 
         const title = document.getElementById("result-title");
         const feedback = document.getElementById("feedback-text");
 
         if (isWin) {
             title.innerText = "🏆 HOÀN THÀNH XUẤT SẮC! 🏆";
-            feedback.innerText = `Bá đạo! Bạn đã chinh phục toàn bộ 30 câu hỏi của ${currentTopic.name}!`;
-            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+            feedback.innerText = `Bá đạo! Bạn đã chinh phục toàn bộ ${totalQ} câu hỏi của chủ đề ${currentTopic.name}!`;
+            confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+        } else if (isTimeUp) {
+            title.innerText = "⏰ HẾT 35 PHÚT! ⏰";
+            feedback.innerText = `Thời gian của chủ đề đã kết thúc. Bạn đã hoàn thành ${finalCount}/${totalQ} câu.`;
         } else {
             title.innerText = "💀 BẠN ĐÃ DỪNG CUỘC CHƠI 💀";
-            feedback.innerText = `Lần sau hãy sử dụng Xu để mua Trợ giúp khi gặp câu khó nhé!`;
+            feedback.innerText = `Đừng nản lòng! Hãy sử dụng Xu tích lũy mua trợ giúp ở lần chơi tới nhé!`;
         }
     }
 
