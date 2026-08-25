@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Học Từ Vựng & Cụm Từ Tiếng Anh</title>
+    <style>
+        :root {
+            --bg-color: #f0f7f9;
+            --card-bg: #ffffff;
+            --primary: #92c7a3;
+            --primary-dark: #3a7ca5;
+            --accent: #2c5282;
+            --text-color: #2d3748;
+            --light-blue: #e0f2fe;
+            --correct: #48bb78;
+            --wrong: #f56565;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            --radius: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            padding: 1.2rem 1rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            color: var(--primary-dark);
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        nav button {
+            background-color: var(--bg-color);
+            border: 2px solid var(--primary-dark);
+            color: var(--primary-dark);
+            padding: 8px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        nav button:hover, nav button.active {
+            background-color: var(--primary-dark);
+            color: white;
+        }
+
+        main {
+            flex: 1;
+            max-width: 900px;
+            width: 100%;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 1.8rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .category-filter {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+            justify-content: center;
+        }
+
+        .cat-btn {
+            background-color: #edf2f7;
+            border: 1px solid #cbd5e0;
+            color: #4a5568;
+            padding: 5px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .cat-btn.active {
+            background-color: var(--primary-dark);
+            color: white;
+            border-color: var(--primary-dark);
+        }
+
+        /* FLASHCARD */
+        .flashcard-container {
+            perspective: 1000px;
+            width: 100%;
+            max-width: 580px;
+            height: 320px;
+            margin: 0 auto 1.5rem;
+            cursor: pointer;
+        }
+
+        .flashcard {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            border-radius: var(--radius);
+            background: var(--card-bg);
+            border: 2px solid #bee3f8;
+            text-align: center;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            background-color: var(--light-blue);
+        }
+
+        .flashcard .tag {
+            font-size: 0.75rem;
+            background: #bee3f8;
+            color: #2b6cb0;
+            padding: 3px 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .flashcard .word { font-size: 1.5rem; font-weight: bold; color: var(--primary-dark); }
+        .flashcard .ipa { font-style: italic; color: #718096; margin-top: 4px; font-size: 0.95rem; }
+        .flashcard .meaning { font-size: 1.25rem; font-weight: 600; color: var(--accent); }
+        .flashcard .example { margin-top: 15px; font-size: 0.95rem; color: #4a5568; line-height: 1.4; }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn {
+            background-color: var(--primary-dark);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .btn:hover { background-color: #2b6cb0; }
+        .btn-reset { background-color: #e53e3e; margin-top: 20px; }
+        .btn-reset:hover { background-color: #c53030; }
+
+        /* GAMES */
+        .matching-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .match-card {
+            background: var(--card-bg);
+            border: 2px solid #cbd5e0;
+            padding: 14px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .match-card:hover { border-color: var(--primary-dark); }
+        .match-card.selected { border-color: var(--primary-dark); background-color: var(--light-blue); }
+        .match-card.matched { visibility: hidden; }
+
+        .quiz-option {
+            display: block;
+            width: 100%;
+            padding: 12px 15px;
+            margin: 8px 0;
+            background: #f7fafc;
+            border: 1px solid #cbd5e0;
+            border-radius: 8px;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+
+        .quiz-option:hover { background: var(--light-blue); border-color: var(--primary-dark); }
+
+        .fill-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--primary-dark);
+            border-radius: 8px;
+            font-size: 1rem;
+            margin: 15px 0;
+            outline: none;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        .feedback.correct { color: var(--correct); }
+        .feedback.wrong { color: var(--wrong); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Vocab Study & Practice</h1>
+        <nav>
+            <button class="nav-btn active" id="btn-tab-learn" onclick="switchTab('learn', event)">📖 Học từ vựng</button>
+            <button class="nav-btn" id="btn-tab-game1" onclick="switchTab('game1', event)">🧩 Game 1: Nối từ</button>
+            <button class="nav-btn" id="btn-tab-game2" onclick="switchTab('game2', event)">❓ Game 2: Trắc nghiệm</button>
+            <button class="nav-btn" id="btn-tab-game3" onclick="switchTab('game3', event)">✏️ Game 3: Điền từ khuyết</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- TAB HỌC TỪ VỰNG -->
+        <section id="learn" class="tab-content active">
+            <div class="category-filter" id="cat-filter"></div>
+            
+            <div class="flashcard-container" onclick="flipCard()">
+                <div class="flashcard" id="flashcard">
+                    <div class="card-face card-front">
+                        <span class="tag" id="fc-tag">Chủ đề</span>
+                        <div class="word" id="fc-word">Word</div>
+                        <div class="ipa" id="fc-ipa">/ipa/</div>
+                        <p style="margin-top:20px; font-size: 0.8rem; color:#a0aec0;">(Bấm thẻ để lật xem nghĩa & ví dụ)</p>
+                    </div>
+                    <div class="card-face card-back">
+                        <div class="meaning" id="fc-meaning">Nghĩa tiếng Việt</div>
+                        <div class="example" id="fc-example">Ví dụ...</div>
+                    </div>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="btn" onclick="prevCard()">◄ Trước</button>
+                <span id="card-indicator" style="font-weight: bold; min-width: 80px; text-align: center;">1 / 1</span>
+                <button class="btn" onclick="nextCard()">Sau ►</button>
+            </div>
+            <div style="text-align: center;">
+                <button class="btn btn-reset" onclick="resetProgress()">🗑️ Xóa lịch sử học (Bắt đầu lại)</button>
+            </div>
+        </section>
+
+        <!-- GAME 1: NỐI TỪ -->
+        <section id="game1" class="tab-content">
+            <div class="card">
+                <h2 style="margin-bottom: 10px;">Trò chơi Nối từ</h2>
+                <p style="margin-bottom: 15px; color: #718096; font-size: 0.9rem;">Chọn 1 từ tiếng Anh và 1 nghĩa tiếng Việt tương ứng để ghép thành cặp đúng.</p>
+                <div class="matching-grid" id="match-grid"></div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn" onclick="initMatchingGame()">Chơi ván mới 🔄</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- GAME 2: TRẮC NGHIỆM -->
+        <section id="game2" class="tab-content">
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span id="quiz-tag" class="tag" style="background:#e2e8f0; padding:2px 8px; border-radius:6px; font-size:0.8rem; font-weight:bold; color:#4a5568;">Chủ đề</span>
+                    <span id="quiz-progress" style="font-weight: bold; color: var(--primary-dark);">Câu 1</span>
+                </div>
+                <h3 id="quiz-question" style="margin: 10px 0 15px; color: var(--primary-dark);">Câu hỏi?</h3>
+                <div id="quiz-options"></div>
+                <div id="quiz-feedback" class="feedback"></div>
+                <button class="btn" id="quiz-next-btn" style="margin-top: 15px; display: none;" onclick="nextQuizQuestion()">Câu tiếp theo ►</button>
+            </div>
+        </section>
+
+        <!-- GAME 3: ĐIỀN TỪ KHUYẾT THIẾU -->
+        <section id="game3" class="tab-content">
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 10px;">
+                    <h2 style="color: var(--primary-dark);">Điền từ khuyết thiếu</h2>
+                    <span id="fill-progress" style="font-weight: bold; color: var(--primary-dark);">Câu 1</span>
+                </div>
+                <p style="margin-bottom: 15px; color: #718096; font-size: 0.9rem;">Nhập từ/cụm từ tiếng Anh phù hợp vào chỗ trống trong câu ví dụ:</p>
+                
+                <p id="fill-meaning" style="font-weight: bold; color: var(--accent); margin-bottom: 12px; font-size: 1.1rem; background: #ebf8ff; padding: 10px; border-radius: 8px; border-left: 4px solid var(--primary-dark);"></p>
+                <p id="fill-sentence" style="font-size: 1.15rem; line-height: 1.5; font-weight: 500;"></p>
+                
+                <input type="text" id="fill-input" class="fill-input" placeholder="Gõ từ/cụm từ còn thiếu vào đây..." autocomplete="off">
+                <button class="btn" id="fill-submit-btn" onclick="checkFillAnswer()">Kiểm tra kết quả</button>
+                
+                <div id="fill-feedback" class="feedback"></div>
+                <button class="btn" id="fill-next-btn" style="margin-top: 15px; display: none;" onclick="nextFillQuestion()">Câu tiếp theo ►</button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const vocabulary = [
+            // Đợt 1: Bài Nghệ thuật
+            { category: "Nghệ thuật & Tác phẩm", word: "encompass", ipa: "/ɪnˈkʌmpəs/", meaning: "Bao gồm, chứa đựng", example: "Modern Art encompasses the work of Van Gogh, Cézanne, and Picasso." },
+            { category: "Nghệ thuật & Tác phẩm", word: "artistic traditions", ipa: "/ɑːˈtɪstɪk trəˈdɪʃənz/", meaning: "Truyền thống nghệ thuật", example: "Warhol developed his artistic skills and tastes while at home as a child." },
+            { category: "Nghệ thuật & Tác phẩm", word: "in favour of", ipa: "/ɪn ˈfeɪvər əv/", meaning: "Nghiêng về, ủng hộ/chọn cái gì hơn", example: "Modern Art discarded traditions in favour of experimentation." },
+            { category: "Nghệ thuật & Tác phẩm", word: "conceptualise", ipa: "/kənˈseptʃuəlaɪz/", meaning: "Khái niệm hóa, định hình ý tưởng", example: "Modern Art conceptualised the functions of art in new ways." },
+            { category: "Nghệ thuật & Tác phẩm", word: "born to", ipa: "/bɔːrn tuː/", meaning: "Sinh ra trong (gia đình/hoàn cảnh)", example: "Both artists were born to working-class families of European heritage." },
+            { category: "Nghệ thuật & Tác phẩm", word: "gravitate towards", ipa: "/ˈɡrævɪteɪt təˈwɔːdz/", meaning: "Hướng về, bị thu hút về phía", example: "Both artists eventually gravitated towards New York." },
+            { category: "Nghệ thuật & Tác phẩm", word: "have in common", ipa: "/hæv ɪn ˈkɑːmən/", meaning: "Có điểm chung", example: "Artistically, they had innovation and risk-taking in common." },
+            { category: "Nghệ thuật & Tác phẩm", word: "take chances", ipa: "/teɪk ˈtʃænsɪz/", meaning: "Nắm bắt cơ hội, chấp nhận mạo hiểm", example: "Both artists were willing to take chances and be different." },
+            { category: "Nghệ thuật & Tác phẩm", word: "embrace", ipa: "/ɪmˈbreɪs/", meaning: "Đón nhận, ôm xuyết", example: "They embraced popular culture in their art." },
+            { category: "Nghệ thuật & Tác phẩm", word: "orthodoxical", ipa: "/ˌɔːrθəˈdɑːksɪkl/", meaning: "Chính thống, theo quy tắc truyền thống", example: "They rejected orthodoxical views of 'high' and 'low' art." },
+            { category: "Nghệ thuật & Tác phẩm", word: "rise to fame", ipa: "/raɪz tuː feɪm/", meaning: "Trở nên nổi tiếng", example: "Warhol rose to fame with his Campbell's Soup Can series." },
+            { category: "Nghệ thuật & Tác phẩm", word: "confound", ipa: "/kənˈfaʊnd/", meaning: "Bối rối, làm kinh ngạc", example: "His sculpture exhibition confounded critics." },
+            { category: "Nghệ thuật & Tác phẩm", word: "cement credentials", ipa: "/sɪˈment krəˈdenʃlz/", meaning: "Củng cố uy tín / Vững chắc vị thế", example: "The exhibition helped cement Warhol's credentials as a status-quo challenger." },
+            { category: "Nghệ thuật & Tác phẩm", word: "the status quo", ipa: "/ðə ˈsteɪtəs ˈkwoʊ/", meaning: "Hiện trạng, tình trạng hiện tại", example: "Warhol's work challenged the status quo in art." },
+            { category: "Nghệ thuật & Tác phẩm", word: "prolific", ipa: "/prəˈlɪfɪk/", meaning: "Sáng tác nhiều, hiệu suất cao", example: "Both artists were prolific, with long and influential careers." },
+            { category: "Nghệ thuật & Tác phẩm", word: "adopt", ipa: "/əˈdɑːpt/", meaning: "Tiếp nhận, ứng dụng, theo đuổi", example: "Warhol's work has been adopted by several generations." },
+            { category: "Nghệ thuật & Tác phẩm", word: "seek the limelight", ipa: "/siːk ðə ˈlaɪmlaɪt/", meaning: "Tìm kiếm sự chú ý của công chúng", example: "Warhol sought the limelight through books, magazines, and TV shows." },
+
+            // Đợt 2: Khuyến khích & Thúc đẩy
+            { category: "Nói về khuyến khích", word: "encourage someone to do something", ipa: "/ɪnˈkɜːrɪdʒ/", meaning: "Khuyến khích ai làm gì", example: "I encourage her to step out of her comfort zone." },
+            { category: "Nói về khuyến khích", word: "talk someone into doing something", ipa: "/tɔːk ˈsʌmwʌn ˈɪntuː/", meaning: "Thuyết phục ai làm gì", example: "They talked him into joining the new project." },
+            { category: "Nói về khuyến khích", word: "give someone a gentle push", ipa: "/ɡɪv ə ˈdʒentl pʊʃ/", meaning: "Thúc đẩy ai một cách nhẹ nhàng", example: "She just needed me to give her a gentle push." },
+            { category: "Nói về khuyến khích", word: "motivate someone to take action", ipa: "/ˈmoʊtɪveɪt tuː teɪk ˈækʃn/", meaning: "Thúc đẩy ai hành động", example: "His speech motivated everyone to take action immediately." },
+            { category: "Nói về khuyến khích", word: "convince someone to give it a try", ipa: "/kənˈvɪns tuː ɡɪv ɪt ə traɪ/", meaning: "Thuyết phục ai thử một lần", example: "I managed to convince her to give it a try." },
+            { category: "Nói về khuyến khích", word: "encourage someone to step out of their comfort zone", ipa: "/step aʊt əv ðer ˈkʌmfərt zoʊn/", meaning: "Khuyến khích ai bước ra khỏi vùng an toàn", example: "We should encourage students to step out of their comfort zone." },
+
+            // Đợt 3: Không muốn làm / Do dự
+            { category: "Nói người đó không muốn làm", word: "be reluctant to do something", ipa: "/bɪ rɪˈlʌktənt tuː/", meaning: "Miễn cưỡng làm gì", example: "He was reluctant to share his private thoughts." },
+            { category: "Nói người đó không muốn làm", word: "feel hesitant about doing something", ipa: "/fiːl ˈhezɪtənt əˈbaʊt/", meaning: "Cảm thấy ngần ngại", example: "She felt hesitant about moving to a new city." },
+            { category: "Nói người đó không muốn làm", word: "have second thoughts about something", ipa: "/hæv ˈsekənd θɔːts/", meaning: "Bắt đầu do dự về điều gì", example: "I am having second thoughts about changing my job." },
+            { category: "Nói người đó không muốn làm", word: "be completely against the idea", ipa: "/bɪ kəmˈpliːtli əˈɡenst/", meaning: "Hoàn toàn phản đối ý tưởng đó", example: "Her parents were completely against the idea." },
+            { category: "Nói người đó không muốn làm", word: "lack confidence in doing something", ipa: "/læk ˈkɑːnfɪdəns ɪn/", meaning: "Thiếu tự tin khi làm gì", example: "She lacks confidence when speaking in public." },
+
+            // Đợt 4: Phản ứng
+            { category: "Nói về phản ứng", word: "be initially reluctant", ipa: "/bɪ ɪˈnɪʃəli rɪˈlʌktənt/", meaning: "Ban đầu miễn cưỡng", example: "Although she was initially reluctant, she eventually agreed." },
+            { category: "Nói về phản ứng", word: "eventually come around", ipa: "/ɪˈventʃuəli kʌm əˈraʊnd/", meaning: "Cuối cùng thay đổi suy nghĩ", example: "Don't worry, he will eventually come around." },
+            { category: "Nói về phản ứng", word: "have a change of heart", ipa: "/hæv ə tʃeɪndʒ əv hɑːrt/", meaning: "Thay đổi quyết định / quan điểm", example: "At the last minute, she had a change of heart." },
+            { category: "Nói về phản ứng", word: "give it a shot", ipa: "/ɡɪv ɪt ə ʃɑːt/", meaning: "Thử làm", example: "I decided to give it a shot and apply for the job." },
+            { category: "Nói về phản ứng", word: "take my advice", ipa: "/teɪk maɪ ədˈvaɪs/", meaning: "Nghe lời khuyên của tôi", example: "I'm glad she took my advice." },
+            { category: "Nói về phản ứng", word: "gain confidence", ipa: "/ɡeɪn ˈkɑːnfɪdəns/", meaning: "Trở nên tự tin hơn", example: "With practice, you will gain confidence." },
+            { category: "Nói về phản ứng", word: "end up enjoying it", ipa: "/end ʌp ɪnˈdʒɔɪɪŋ ɪt/", meaning: "Cuối cùng lại thích việc đó", example: "She ended up enjoying the concert very much." },
+
+            // Đợt 5: Lý do
+            { category: "Nói lý do", word: "I could tell that...", ipa: "/aɪ kʊd tel ðæt/", meaning: "Tôi có thể nhận ra rằng...", example: "I could tell that she was feeling nervous." },
+            { category: "Nói lý do", word: "I didn't want him/her to miss out on...", ipa: "/aɪ dɪdnt wɑːnt tuː mɪs aʊt ɑːn/", meaning: "Tôi không muốn bạn ấy bỏ lỡ...", example: "I didn't want her to miss out on such a great opportunity." },
+            { category: "Nói lý do", word: "I genuinely believed that...", ipa: "/aɪ ˈdʒenjuɪnli bɪˈliːvd ðæt/", meaning: "Tôi thực sự tin rằng...", example: "I genuinely believed that he could win." },
+            { category: "Nói lý do", word: "I wanted to help him/her overcome his/her fear", ipa: "/ˈoʊvərˈkʌm hɪz/hər fɪr/", meaning: "Tôi muốn giúp bạn ấy vượt qua nỗi sợ", example: "I wanted to help her overcome her fear of public speaking." },
+            { category: "Nói lý do", word: "I thought it would be a valuable experience for him/her", ipa: "/ˈvæljuəbl ɪkˈspɪriəns/", meaning: "Tôi nghĩ đó sẽ là một trải nghiệm đáng giá đối với bạn ấy", example: "I thought it would be a valuable experience for her." },
+            { category: "Nói lý do", word: "believe in her potential", ipa: "/bɪˈliːv ɪn hər pəˈtenʃl/", meaning: "Tin vào tiềm năng / khả năng của cô ấy", example: "I always believe in her potential." },
+            { category: "Nói lý do", word: "place value on something", ipa: "/pleɪs ˈvæljuː ɑːn ˈsʌmθɪŋ/", meaning: "Coi trọng / Đặt giá trị vào điều gì", example: "They place great value on education and personal growth." },
+
+            // Đợt 6: World Book Day (Mới Thêm)
+            { category: "World Book Day", word: "challenge", ipa: "/ˈtʃælɪndʒ/", meaning: "Thử thách, thách thức", example: "Teachers choose titles that challenge them enough." },
+            { category: "World Book Day", word: "push someone towards something", ipa: "/pʊʃ ˈsʌmwʌn təˈwɔːdz/", meaning: "Thúc đẩy / Khuyến khích ai hướng đến điều gì", example: "Teachers should push students towards more challenging books." },
+            { category: "World Book Day", word: "acquire", ipa: "/əˈkwaɪə(r)/", meaning: "Có được, đạt được (độc giả/kỹ năng)", example: "The book acquires more readers thanks to the film's success." },
+            { category: "World Book Day", word: "make it to the big screen", ipa: "/meɪk ɪt tuː ðə bɪɡ skriːn/", meaning: "Được chuyển thể lên màn ảnh rộng (thành phim)", example: "The novel made it to the big screen last year." },
+            { category: "World Book Day", word: "conjure up", ipa: "/ˈkʌndʒər ʌp/", meaning: "Gợi lên, tạo ra trong tâm trí", example: "The story conjures up a dark vision of the future." },
+            { category: "World Book Day", word: "police state", ipa: "/pəˈliːs steɪt/", meaning: "Nhà nước cảnh sát (kiểm soát chặt chẽ người dân)", example: "The citizens live under a strict police state." },
+            { category: "World Book Day", word: "contemporary", ipa: "/kənˈtempərəri/", meaning: "Đương đại, thuộc thời hiện đại", example: "She is a famous contemporary writer." },
+            { category: "World Book Day", word: "predictable", ipa: "/prɪˈdɪktəbl/", meaning: "Có thể đoán trước", example: "This is the least predictable member of the list." },
+            { category: "World Book Day", word: "earn someone a following", ipa: "/ɜːrn ˈsʌmwʌn ə ˈfɑːloʊɪŋ/", meaning: "Giúp ai có được lượng người hâm mộ", example: "The novel earned it a devoted following." },
+            { category: "World Book Day", word: "get one's life back on track", ipa: "/ɡet wʌnz laɪf bæk ɑːn træk/", meaning: "Đưa cuộc sống trở lại đúng hướng / ổn định", example: "He got his life back on track after a difficult period." },
+            { category: "World Book Day", word: "become the centre of attention", ipa: "/bɪˈkʌm ðə ˈsentər əv əˈtenʃn/", meaning: "Trở thành tâm điểm của sự chú ý", example: "She quickly became the centre of attention at the event." },
+            { category: "World Book Day", word: "be based on", ipa: "/bɪ beɪst ɑːn/", meaning: "Dựa trên", example: "It is based on the author's real life." },
+            { category: "World Book Day", word: "struggle to agree", ipa: "/ˈstrʌɡl tuː əˈɡriː/", meaning: "Khó đạt được sự đồng thuận", example: "The judges struggled to agree on which book to choose." },
+            { category: "World Book Day", word: "mature readership", ipa: "/məˈtʃʊr ˈriːdərʃɪp/", meaning: "Nhóm độc giả trưởng thành hơn", example: "The book is aimed at a more mature readership." },
+            { category: "World Book Day", word: "successive", ipa: "/səkˈsesɪv/", meaning: "Liên tiếp, kế tiếp", example: "Each successive book gained more popularity." },
+            { category: "World Book Day", word: "stand up to authority", ipa: "/stænd ʌp tuː əˈθɔːrəti/", meaning: "Chống lại / Đứng lên đối mặt với quyền lực", example: "The main character was praised for standing up to authority." },
+            { category: "World Book Day", word: "challenge normal views", ipa: "/ˈtʃælɪndʒ ˈnɔːrml vjuːz/", meaning: "Thách thức những quan điểm thông thường", example: "Good literature should challenge normal views." },
+            { category: "World Book Day", word: "be close to someone's heart", ipa: "/bɪ kloʊs tuː ˈsʌmwʌnz hɑːrt/", meaning: "Quan trọng với ai đó, được ai quan tâm sâu sắc", example: "These are subjects close to teenage readers' hearts." },
+            { category: "World Book Day", word: "in actual fact", ipa: "/ɪn ˈæktʃuəl fækt/", meaning: "Thực tế là (= in fact)", example: "In actual fact, half of all Harry Potter readers are over 35." },
+            { category: "World Book Day", word: "go back to", ipa: "/ɡoʊ bæk tuː/", meaning: "Có từ / Quay trở lại từ (thời điểm)", example: "The list goes right back to the nineteenth century." },
+            { category: "World Book Day", word: "get through something", ipa: "/ɡet θruː ˈsʌmθɪŋ/", meaning: "Đọc/xem/hoàn thành cái gì (dù khó khăn)", example: "I find it hard to get through without shedding tears." },
+            { category: "World Book Day", word: "shed tears", ipa: "/ʃed tɪrz/", meaning: "Rơi nước mắt, khóc", example: "The emotional story made me shed tears." },
+            { category: "World Book Day", word: "swap A for B", ipa: "/swɑːp ... fɔːr .../", meaning: "Thay A bằng B (bỏ A lấy B)", example: "They swapped The Lord of the Rings for Lord of the Flies." },
+            { category: "World Book Day", word: "make the final selection", ipa: "/meɪk ðə ˈfaɪnl sɪˈlekʃn/", meaning: "Lọt vào sự lựa chọn cuối cùng", example: "The book didn't make the final selection." },
+            { category: "World Book Day", word: "evaluate", ipa: "/ɪˈvæljueɪt/", meaning: "Đánh giá", example: "The committee will evaluate the list tomorrow." },
+            { category: "World Book Day", word: "stimulate someone to do something", ipa: "/ˈstɪmjuleɪt/", meaning: "Khuyến khích / Thúc đẩy ai làm gì", example: "It stimulates them to try out new writers." },
+            { category: "World Book Day", word: "try out", ipa: "/traɪ aʊt/", meaning: "Thử (tác giả/phong cách mới)", example: "You should try out a new style of reading." },
+            { category: "World Book Day", word: "come across", ipa: "/kʌm əˈkrɔːs/", meaning: "Tình cờ gặp / bắt gặp", example: "These are writers they haven't come across before." },
+            { category: "World Book Day", word: "be introduced to", ipa: "/bɪ ˌɪntrəˈduːst tuː/", meaning: "Được làm quen / tiếp xúc với", example: "Students were introduced to new styles of writing." },
+            { category: "World Book Day", word: "make a lasting difference", ipa: "/meɪk ə ˈlæstɪŋ ˈdɪfrəns/", meaning: "Tạo ra sự khác biệt lâu dài", example: "Education can make a lasting difference to people's lives." }
+        ];
+
+        // LOCAL STORAGE / STATE MANAGEMENT
+        let state = {
+            activeTab: 'learn',
+            selectedCategory: 'Tất cả',
+            cardIdx: 0,
+            quizIdx: 0,
+            fillIdx: 0
+        };
+
+        function loadSavedState() {
+            const saved = localStorage.getItem('vocab_app_state');
+            if (saved) {
+                try {
+                    state = JSON.parse(saved);
+                } catch(e) {
+                    console.error("Lỗi đọc bộ nhớ", e);
+                }
+            }
+        }
+
+        function saveState() {
+            localStorage.setItem('vocab_app_state', JSON.stringify(state));
+        }
+
+        function resetProgress() {
+            if(confirm("Bạn có chắc chắn muốn xóa lịch sử học và làm lại từ đầu?")) {
+                localStorage.removeItem('vocab_app_state');
+                state = { activeTab: 'learn', selectedCategory: 'Tất cả', cardIdx: 0, quizIdx: 0, fillIdx: 0 };
+                initCategoryFilter();
+                updateCard();
+                alert("Đã làm mới lịch sử thành công!");
+            }
+        }
+
+        let filteredVocab = [...vocabulary];
+
+        // INIT CATEGORY FILTERS
+        function initCategoryFilter() {
+            const categories = ["Tất cả", ...new Set(vocabulary.map(item => item.category))];
+            const filterContainer = document.getElementById('cat-filter');
+            filterContainer.innerHTML = '';
+
+            categories.forEach((cat) => {
+                const btn = document.createElement('button');
+                btn.className = `cat-btn ${cat === state.selectedCategory ? 'active' : ''}`;
+                btn.innerText = cat;
+                btn.onclick = () => filterByCategory(cat, btn);
+                filterContainer.appendChild(btn);
+            });
+
+            applyCategoryFilter(state.selectedCategory);
+        }
+
+        function filterByCategory(cat, btnEl) {
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            if(btnEl) btnEl.classList.add('active');
+
+            state.selectedCategory = cat;
+            state.cardIdx = 0; // Reset card index on filter change
+            applyCategoryFilter(cat);
+            saveState();
+        }
+
+        function applyCategoryFilter(cat) {
+            if (cat === "Tất cả") {
+                filteredVocab = [...vocabulary];
+            } else {
+                filteredVocab = vocabulary.filter(item => item.category === cat);
+            }
+            if (state.cardIdx >= filteredVocab.length) state.cardIdx = 0;
+            updateCard();
+        }
+
+        // TAB NAVIGATION
+        function switchTab(tabId, event) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            
+            const btnMap = { 'learn': 'btn-tab-learn', 'game1': 'btn-tab-game1', 'game2': 'btn-tab-game2', 'game3': 'btn-tab-game3' };
+            if (btnMap[tabId]) document.getElementById(btnMap[tabId]).classList.add('active');
+
+            state.activeTab = tabId;
+            saveState();
+
+            if (tabId === 'game1') initMatchingGame();
+            if (tabId === 'game2') loadQuizQuestion();
+            if (tabId === 'game3') loadFillQuestion();
+        }
+
+        /* --- 1. FLASHCARD LOGIC --- */
+        function updateCard() {
+            if (filteredVocab.length === 0) return;
+            const cardData = filteredVocab[state.cardIdx];
+            document.getElementById('fc-tag').innerText = cardData.category;
+            document.getElementById('fc-word').innerText = cardData.word;
+            document.getElementById('fc-ipa').innerText = cardData.ipa;
+            document.getElementById('fc-meaning').innerText = cardData.meaning;
+            document.getElementById('fc-example').innerText = `"${cardData.example}"`;
+            document.getElementById('card-indicator').innerText = `${state.cardIdx + 1} / ${filteredVocab.length}`;
+            document.getElementById('flashcard').classList.remove('flipped');
+        }
+
+        function flipCard() {
+            document.getElementById('flashcard').classList.toggle('flipped');
+        }
+
+        function nextCard() {
+            state.cardIdx = (state.cardIdx + 1) % filteredVocab.length;
+            saveState();
+            updateCard();
+        }
+
+        function prevCard() {
+            state.cardIdx = (state.cardIdx - 1 + filteredVocab.length) % filteredVocab.length;
+            saveState();
+            updateCard();
+        }
+
+        /* --- 2. GAME 1: MATCHING LOGIC --- */
+        let selectedCards = [];
+        function initMatchingGame() {
+            const grid = document.getElementById('match-grid');
+            grid.innerHTML = '';
+            selectedCards = [];
+
+            const shuffled = [...vocabulary].sort(() => 0.5 - Math.random()).slice(0, 5);
+            let cards = [];
+            shuffled.forEach((item, index) => {
+                cards.push({ id: index, text: item.word, type: 'word' });
+                cards.push({ id: index, text: item.meaning, type: 'meaning' });
+            });
+            cards.sort(() => 0.5 - Math.random());
+
+            cards.forEach(c => {
+                const cardEl = document.createElement('div');
+                cardEl.className = 'match-card';
+                cardEl.innerText = c.text;
+                cardEl.dataset.id = c.id;
+                cardEl.onclick = () => handleMatchClick(cardEl);
+                grid.appendChild(cardEl);
+            });
+        }
+
+        function handleMatchClick(cardEl) {
+            if (cardEl.classList.contains('selected') || cardEl.classList.contains('matched')) return;
+
+            cardEl.classList.add('selected');
+            selectedCards.push(cardEl);
+
+            if (selectedCards.length === 2) {
+                const [c1, c2] = selectedCards;
+                if (c1.dataset.id === c2.dataset.id) {
+                    setTimeout(() => {
+                        c1.classList.add('matched');
+                        c2.classList.add('matched');
+                        selectedCards = [];
+                    }, 250);
+                } else {
+                    setTimeout(() => {
+                        c1.classList.remove('selected');
+                        c2.classList.remove('selected');
+                        selectedCards = [];
+                    }, 500);
+                }
+            }
+        }
+
+        /* --- 3. GAME 2: QUIZ LOGIC --- */
+        let currentQuizItem = null;
+        function loadQuizQuestion() {
+            document.getElementById('quiz-feedback').innerText = '';
+            document.getElementById('quiz-next-btn').style.display = 'none';
+
+            if (state.quizIdx >= vocabulary.length) state.quizIdx = 0;
+            currentQuizItem = vocabulary[state.quizIdx];
+
+            document.getElementById('quiz-progress').innerText = `Câu ${state.quizIdx + 1} / ${vocabulary.length}`;
+            document.getElementById('quiz-tag').innerText = currentQuizItem.category;
+            document.getElementById('quiz-question').innerText = `Từ/Cụm từ "${currentQuizItem.word}" nghĩa là gì?`;
+
+            let options = [currentQuizItem.meaning];
+            while(options.length < 4) {
+                let randWord = vocabulary[Math.floor(Math.random() * vocabulary.length)].meaning;
+                if(!options.includes(randWord)) options.push(randWord);
+            }
+            options.sort(() => 0.5 - Math.random());
+
+            const container = document.getElementById('quiz-options');
+            container.innerHTML = '';
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option';
+                btn.innerText = opt;
+                btn.onclick = () => checkQuizAnswer(opt);
+                container.appendChild(btn);
+            });
+        }
+
+        function checkQuizAnswer(selected) {
+            const feedback = document.getElementById('quiz-feedback');
+            if(selected === currentQuizItem.meaning) {
+                feedback.innerText = "Chính xác! 🎉";
+                feedback.className = "feedback correct";
+            } else {
+                feedback.innerText = `Chưa đúng! Đáp án chính xác là: "${currentQuizItem.meaning}"`;
+                feedback.className = "feedback wrong";
+            }
+            document.getElementById('quiz-next-btn').style.display = 'inline-block';
+        }
+
+        function nextQuizQuestion() {
+            state.quizIdx = (state.quizIdx + 1) % vocabulary.length;
+            saveState();
+            loadQuizQuestion();
+        }
+
+        /* --- 4. GAME 3: FILL IN THE BLANK LOGIC --- */
+        let currentFillItem = null;
+        let missingAnswers = [];
+
+        function loadFillQuestion() {
+            document.getElementById('fill-feedback').innerText = '';
+            document.getElementById('fill-input').value = '';
+            document.getElementById('fill-input').disabled = false;
+            document.getElementById('fill-submit-btn').style.display = 'inline-block';
+            document.getElementById('fill-next-btn').style.display = 'none';
+
+            if (state.fillIdx >= vocabulary.length) state.fillIdx = 0;
+            currentFillItem = vocabulary[state.fillIdx];
+
+            document.getElementById('fill-progress').innerText = `Câu ${state.fillIdx + 1} / ${vocabulary.length}`;
+            document.getElementById('fill-meaning').innerText = `💡 Nghĩa tiếng Việt: ${currentFillItem.meaning}`;
+
+            let ex = currentFillItem.example;
+            let targetWord = currentFillItem.word;
+
+            let searchKey = targetWord.split(' ')[0].replace(/[^a-zA-Z]/g, ''); 
+            let regex = new RegExp(`\\b${searchKey}\\w*`, 'i');
+            let match = ex.match(regex);
+
+            if (match && match.index !== undefined) {
+                let words = ex.split(' ');
+                let wordIdx = words.findIndex(w => w.toLowerCase().includes(searchKey.toLowerCase()));
+                if (wordIdx !== -1) {
+                    let numToBlank = Math.min(3, words.length - wordIdx);
+                    missingAnswers = words.slice(wordIdx, wordIdx + numToBlank).map(w => w.replace(/[^a-zA-Z']/g, ''));
+                    
+                    let displayWords = [...words];
+                    for(let i = wordIdx; i < wordIdx + numToBlank; i++) {
+                        let punct = words[i].replace(/[a-zA-Z']/g, '');
+                        displayWords[i] = "__________" + punct;
+                    }
+                    document.getElementById('fill-sentence').innerText = displayWords.join(' ');
+                } else {
+                    useFallbackFill(ex, targetWord);
+                }
+            } else {
+                useFallbackFill(ex, targetWord);
+            }
+        }
+
+        function useFallbackFill(ex, targetWord) {
+            let words = ex.split(' ');
+            let startIdx = Math.floor(words.length / 2);
+            missingAnswers = [words[startIdx].replace(/[^a-zA-Z']/g, '')];
+            let punct = words[startIdx].replace(/[a-zA-Z']/g, '');
+            words[startIdx] = "__________" + punct;
+            document.getElementById('fill-sentence').innerText = words.join(' ');
+        }
+
+        function checkFillAnswer() {
+            const input = document.getElementById('fill-input').value.trim().toLowerCase().replace(/[^a-zA-Z' ]/g, '');
+            const expectedStr = missingAnswers.join(' ').toLowerCase();
+            const fullTarget = currentFillItem.word.toLowerCase();
+            const feedback = document.getElementById('fill-feedback');
+
+            if(input === expectedStr || input === fullTarget || (expectedStr.includes(input) && input.length > 2)) {
+                feedback.innerText = `Chính xác! 🎉 (Đáp án đúng: "${expectedStr}")`;
+                feedback.className = "feedback correct";
+            } else {
+                feedback.innerText = `Chưa đúng! Đáp án gợi ý: "${expectedStr}" (Cụm từ gốc: "${currentFillItem.word}")`;
+                feedback.className = "feedback wrong";
+            }
+            
+            document.getElementById('fill-input').disabled = true;
+            document.getElementById('fill-submit-btn').style.display = 'none';
+            document.getElementById('fill-next-btn').style.display = 'inline-block';
+        }
+
+        function nextFillQuestion() {
+            state.fillIdx = (state.fillIdx + 1) % vocabulary.length;
+            saveState();
+            loadFillQuestion();
+        }
+
+        // INITIALIZE APP WITH SAVED STATE
+        loadSavedState();
+        initCategoryFilter();
+        switchTab(state.activeTab);
+    </script>
+</body>
+</html>
